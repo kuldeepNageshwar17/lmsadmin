@@ -1,0 +1,11 @@
+{
+    "public": "_site",
+    "redirects": [{
+        "source": "/",
+        "destination": ""
+    }],
+    "rewrites": [{
+        "source": "/**",
+        "destination": "/index.html"
+    }]
+}
