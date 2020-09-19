@@ -17,6 +17,7 @@ import "socicon/css/socicon.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./_metronic/_assets/plugins/flaticon/flaticon.css";
 import "./_metronic/_assets/plugins/flaticon2/flaticon.css";
+import "./_metronic/_assets/GlobalStyle.css";
 // Datepicker
 import "react-datepicker/dist/react-datepicker.css";
 import {

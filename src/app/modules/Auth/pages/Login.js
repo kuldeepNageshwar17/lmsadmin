@@ -106,7 +106,7 @@ function Login(props) {
       {/*begin::Form*/}
       <form
         onSubmit={formik.handleSubmit}
-        className="form fv-plugins-bootstrap fv-plugins-framework"
+        className="form fv-plugins-bootstrap fv-plugins-framework loginInput"
       >
         {formik.status ? (
           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">

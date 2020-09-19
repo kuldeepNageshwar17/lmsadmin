@@ -1,0 +1,9 @@
+.LoginBg{background: url(images/login_bg.jpg);}
+.loginAside{background: #dcdcda;}
+.loginAsideFooter{background: #a1a1a1;}
+.LgnMsg{}
+.loginSgnUp{background: #a1a1a1; color: #fff;}
+.loginSgnUp .text-dark-50{color: #313131 !important;}
+.loginSgnUp a{color: #fff;text-decoration: none;}
+.loginInput .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
+.loginInput .btn-primary{background-color: #A1A1A1;border-color: #A1A1A1;}
