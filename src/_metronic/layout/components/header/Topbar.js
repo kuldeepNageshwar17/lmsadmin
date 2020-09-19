@@ -10,6 +10,7 @@ import { QuickActionsDropdown } from "../extras/dropdowns/QuickActionsDropdown";
 import { MyCartDropdown } from "../extras/dropdowns/MyCartDropdown";
 import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDropdown";
 import  BranchesSelectorDropdown  from "../extras/dropdowns/BranchesSelectorDropdown";
+import  ControlPanelButton  from "../extras/dropdowns/ControlPanelButton";
 
 import { QuickUserToggler } from "../extras/QuiclUserToggler";
 
@@ -43,6 +44,10 @@ export function Topbar() {
       viewBranchesDisplay: objectPath.get(
         uiService.config,
         "extras.branches.display"
+      ),
+      viewControlPanelLogin: objectPath.get(
+        uiService.config,
+        "extras.ControlPanelButton.display"
       ),
       viewUserDisplay: objectPath.get(uiService.config, "extras.user.display"),
     };
@@ -87,6 +92,8 @@ export function Topbar() {
 
       {layoutProps.viewLanguagesDisplay && <LanguageSelectorDropdown />}
       {layoutProps.viewBranchesDisplay && <BranchesSelectorDropdown />}
+      {layoutProps.viewControlPanelLogin && <ControlPanelButton />}
+
 
       {layoutProps.viewUserDisplay && <QuickUserToggler />}
     </div>

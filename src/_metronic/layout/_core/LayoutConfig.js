@@ -200,6 +200,9 @@ export function getInitLayoutConfig() {
       branches: {
         display: true
       },
+      ControlPanelButton: {
+        display: true
+      },
       cart: {
         display: false,
         dropdown: {

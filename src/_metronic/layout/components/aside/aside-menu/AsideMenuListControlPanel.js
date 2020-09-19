@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 import { toAbsoluteUrl, checkIsActive } from '../../../../_helpers'
 
-export function AsideMenuList ({ layoutProps }) {
+export function AsideMenuListControlPanel ({ layoutProps }) {
   const location = useLocation()
   const getMenuItemActive = (url, hasSubmenu = false) => {
     return checkIsActive(location, url)
@@ -135,19 +135,7 @@ export function AsideMenuList ({ layoutProps }) {
                     <span className='menu-text'>Class</span>
                   </NavLink>
                 </li>
-                <li
-                  className={`menu-item ${getMenuItemActive(
-                    '/setting/Batch'
-                  )}`}
-                  aria-haspopup='true'
-                >
-                  <NavLink className='menu-link' to='/setting/Batch'>
-                    <i className='menu-bullet menu-bullet-dot'>
-                      <span />
-                    </i>
-                    <span className='menu-text'>Batch</span>
-                  </NavLink>
-                </li>
+             
 
 
 
@@ -156,8 +144,12 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li>
-       
-     
+        {/* Components */}
+        {/* begin::section */}
+        <li className='menu-section '>
+          <h4 className='menu-text'>Components</h4>
+          <i className='menu-icon flaticon-more-v2'></i>
+        </li>
        
       </ul>
 

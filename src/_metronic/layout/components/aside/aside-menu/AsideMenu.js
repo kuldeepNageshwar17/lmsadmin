@@ -1,8 +1,11 @@
 import React, {useMemo} from "react";
 import {AsideMenuList} from "./AsideMenuList";
+import {AsideMenuListControlPanel} from "./AsideMenuListControlPanel";
 import {useHtmlClassService} from "../../../_core/MetronicLayout";
+import { connect } from 'react-redux'
 
-export function AsideMenu({disableScroll}) {
+
+function AsideMenu({disableScroll,controlPanel}) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -22,9 +25,16 @@ export function AsideMenu({disableScroll}) {
         className={`aside-menu my-4 ${layoutProps.asideClassesFromConfig}`}
         {...layoutProps.asideMenuAttr}
       >
-        <AsideMenuList layoutProps={layoutProps} />
+          {!controlPanel &&<AsideMenuList layoutProps={layoutProps} />}
+          {controlPanel &&<AsideMenuListControlPanel layoutProps={layoutProps} /> }
+
       </div>
       {/* end::Menu Container */}
     </>
   );
 }
+function mapStateToProps(state ){
+  return {controlPanel:state.auth.controlPanelStatus}
+}
+export default connect(mapStateToProps)(AsideMenu);
+
