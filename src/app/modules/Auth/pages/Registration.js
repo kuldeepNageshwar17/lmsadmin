@@ -12,8 +12,10 @@ const initialValues = {
   email: "",
   username: "",
   password: "",
-  changepassword: "",
+  confirmpassword: "",
   acceptTerms: false,
+  mobile:"",
+  institute:""
 };
 
 function Registration(props) {
@@ -37,14 +39,7 @@ function Registration(props) {
           id: "AUTH.VALIDATION.REQUIRED_FIELD",
         })
       ),
-    username: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
+   
     password: Yup.string()
       .min(3, "Minimum 3 symbols")
       .max(50, "Maximum 50 symbols")
@@ -53,7 +48,7 @@ function Registration(props) {
           id: "AUTH.VALIDATION.REQUIRED_FIELD",
         })
       ),
-    changepassword: Yup.string()
+      confirmpassword: Yup.string()
       .required(
         intl.formatMessage({
           id: "AUTH.VALIDATION.REQUIRED_FIELD",
@@ -69,6 +64,12 @@ function Registration(props) {
     acceptTerms: Yup.bool().required(
       "You must accept the terms and conditions"
     ),
+    mobile:Yup.number().required( intl.formatMessage({
+      id: "AUTH.VALIDATION.REQUIRED_FIELD",
+    })),
+    institute:Yup.string().required( intl.formatMessage({
+      id: "AUTH.VALIDATION.REQUIRED_FIELD",
+    }))
   });
 
   const enableLoading = () => {
@@ -96,9 +97,10 @@ function Registration(props) {
     validationSchema: RegistrationSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {
       enableLoading();
-      register(values.email, values.fullname, values.username, values.password)
-        .then(({ data: { accessToken } }) => {
-          props.register(accessToken);
+      register(values.email, values.fullname,  values.password,values.mobile,values.institute)
+        .then(({ data: { token } }) => {
+          debugger;
+          props.register(token);
           disableLoading();
         })
         .catch(() => {
@@ -175,8 +177,45 @@ function Registration(props) {
         </div>
         {/* end: Email */}
 
-        {/* begin: Username */}
+
         <div className="form-group fv-plugins-icon-container">
+          <input
+            placeholder="mobile"
+            type="phone"
+            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+              "mobile"
+            )}`}
+            name="mobile"
+            {...formik.getFieldProps("mobile")}
+          />
+          {formik.touched.mobile && formik.errors.mobile ? (
+            <div className="fv-plugins-message-container">
+              <div className="fv-help-block">{formik.errors.mobile}</div>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="form-group fv-plugins-icon-container">
+          <input
+            placeholder="institute"
+            type="text"
+            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+              "institute"
+            )}`}
+            name="institute"
+            {...formik.getFieldProps("institute")}
+          />
+          {formik.touched.institute && formik.errors.institute ? (
+            <div className="fv-plugins-message-container">
+              <div className="fv-help-block">{formik.errors.institute}</div>
+            </div>
+          ) : null}
+        </div>
+
+
+
+        {/* begin: Username */}
+        {/* <div className="form-group fv-plugins-icon-container">
           <input
             placeholder="User name"
             type="text"
@@ -191,7 +230,7 @@ function Registration(props) {
               <div className="fv-help-block">{formik.errors.username}</div>
             </div>
           ) : null}
-        </div>
+        </div> */}
         {/* end: Username */}
 
         {/* begin: Password */}
@@ -221,13 +260,13 @@ function Registration(props) {
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
               "changepassword"
             )}`}
-            name="changepassword"
-            {...formik.getFieldProps("changepassword")}
+            name="confirmpassword"
+            {...formik.getFieldProps("confirmpassword")}
           />
-          {formik.touched.changepassword && formik.errors.changepassword ? (
+          {formik.touched.confirmpassword && formik.errors.confirmpassword ? (
             <div className="fv-plugins-message-container">
               <div className="fv-help-block">
-                {formik.errors.changepassword}
+                {formik.errors.confirmpassword}
               </div>
             </div>
           ) : null}

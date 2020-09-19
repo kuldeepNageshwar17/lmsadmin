@@ -14,7 +14,7 @@ import {
 } from "../widgets";
 export function Dashboard() {
     return (<>
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-lg-6 col-xxl-4">
                     <MixedWidget1 className="card-stretch gutter-b"/>
                 </div>
@@ -42,14 +42,14 @@ export function Dashboard() {
                 <div className="col-lg-12 col-xxl-4 order-1 order-xxl-2">
                     <ListsWidget8 className="card-stretch gutter-b"/>
                 </div>
-            </div>
-            <div className="row">
+            </div> */}
+            {/* <div className="row">
                 <div className="col-lg-4">
                     <MixedWidget14 className="card-stretch gutter-b" />
                 </div>
                 <div className="col-lg-8">
                     <AdvanceTablesWidget4 className="card-stretch gutter-b" />
                 </div>
-            </div>
+            </div> */}
     </>);
 }

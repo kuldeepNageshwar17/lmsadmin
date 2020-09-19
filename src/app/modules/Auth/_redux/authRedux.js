@@ -11,13 +11,15 @@ export const actionTypes = {
   UserLoaded: "[Load User] Auth API",
   LogoutRequested:"[Logout User] Auth API",
   ChangeBranch:"[Change Current Branch] Auth API",
+  ChangeControlPanelStatus:"[Change Control panel status]"
 };
 
 const initialAuthState = {
   user: undefined,
   authToken: undefined,
   currentBranch:null,
-  branches:[]
+  branches:[],
+  controlPanelStatus:false
 };
 
 export const reducer = persistReducer(
@@ -41,12 +43,17 @@ export const reducer = persistReducer(
 
       case actionTypes.UserLoaded: {
         const { user } = action.payload;
-        return { ...state, user,branches:user.branches,currentBranch:state.branches?user.branches[0]:null};
+        return { ...state, user,branches:user.branches,currentBranch:user.branch};
       }
-      case actionTypes.ChangeBranch: {
-        const { branchId } = action.payload;
-        return { ...state,currentBranch:state.branches?state.branches.filter(m=>m._id===branchId)[0]:null};
+        case actionTypes.ChangeControlPanelStatus: {
+          debugger;
+          const { status } = action.payload;
+        return { ...state,controlPanelStatus:status};
       }
+      // case actionTypes.ChangeBranch: {
+      //   const { branchId } = action.payload;
+      //   return { ...state,currentBranch:state.branches?state.branches.filter(m=>m._id===branchId)[0]:null};
+      // }
       default:
         return state
     }
@@ -63,7 +70,8 @@ export const actions = {
   requestUser: user => ({ type: actionTypes.UserRequested, payload: { user } }),
   fulfillUser: user => ({ type: actionTypes.UserLoaded, payload: { user } }),
   requestLogout: user => ({ type: actionTypes.LogoutRequested}),
-  changeBranch: branchId=>({ type: actionTypes.ChangeBranch,payload:{branchId}})
+  changeBranch: branchId=>({ type: actionTypes.ChangeBranch,payload:{branchId}}),
+  ChangeControlPanelStatus:status=>({type: actionTypes.ChangeControlPanelStatus,payload:{status}})
 
 };
 
