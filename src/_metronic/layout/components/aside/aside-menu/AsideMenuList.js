@@ -100,41 +100,7 @@ export function AsideMenuList ({ layoutProps }) {
           </NavLink>
           <div className='menu-submenu '>
             <ul className='menu-subnav'>
-              <ul className='menu-subnav'>
-                <li
-                  className='menu-item  menu-item-parent'
-                  aria-haspopup='true'
-                >
-                  <span className='menu-link'>
-                    <span className='menu-text'>Branch</span>
-                  </span>
-                </li>
-                <li
-                  className={`menu-item ${getMenuItemActive(
-                    '/setting/branch'
-                  )}`}
-                  aria-haspopup='true'
-                >
-                  <NavLink className='menu-link' to='/setting/branch'>
-                    <i className='menu-bullet menu-bullet-dot'>
-                      <span />
-                    </i>
-                    <span className='menu-text'>Branch</span>
-                  </NavLink>
-                </li>
-                <li
-                  className={`menu-item ${getMenuItemActive(
-                    '/setting/class'
-                  )}`}
-                  aria-haspopup='true'
-                >
-                  <NavLink className='menu-link' to='/setting/class'>
-                    <i className='menu-bullet menu-bullet-dot'>
-                      <span />
-                    </i>
-                    <span className='menu-text'>Class</span>
-                  </NavLink>
-                </li>
+              <ul className='menu-subnav'>               
                 <li
                   className={`menu-item ${getMenuItemActive(
                     '/setting/Batch'
@@ -148,10 +114,6 @@ export function AsideMenuList ({ layoutProps }) {
                     <span className='menu-text'>Batch</span>
                   </NavLink>
                 </li>
-
-
-
-
               </ul>
             </ul>
           </div>
