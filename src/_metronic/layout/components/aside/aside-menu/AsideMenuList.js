@@ -100,11 +100,9 @@ export function AsideMenuList ({ layoutProps }) {
           </NavLink>
           <div className='menu-submenu '>
             <ul className='menu-subnav'>
-              <ul className='menu-subnav'>               
+              <ul className='menu-subnav'>
                 <li
-                  className={`menu-item ${getMenuItemActive(
-                    '/setting/Batch'
-                  )}`}
+                  className={`menu-item ${getMenuItemActive('/setting/Batch')}`}
                   aria-haspopup='true'
                 >
                   <NavLink className='menu-link' to='/setting/Batch'>
@@ -114,15 +112,63 @@ export function AsideMenuList ({ layoutProps }) {
                     <span className='menu-text'>Batch</span>
                   </NavLink>
                 </li>
-              </ul>
+
+             </ul>
+
             </ul>
           </div>
         </li>
-       
      
-       
-      </ul>
+     
+        <li
+                  className={`menu-item ${getMenuItemActive(
+                    '/Student',
+                    false
+                  )}`}
+                  aria-haspopup='true'
+                  data-menu-toggle='hover'
+                >
+                  <NavLink className='menu-link' to='/Student'>
+                    <span className='svg-icon menu-icon'>
+                      <SVG
+                        src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')}
+                      />
+                    </span>
+                    <span className='menu-text'>Student</span>
+                    <i className='menu-arrow' />
+                  </NavLink>
 
+                  <div className='menu-submenu '>
+                    <ul className='menu-subnav'>
+                      <li
+                        className='menu-item  menu-item-parent'
+                        aria-haspopup='true'
+                      >
+                        <span className='menu-link'>
+                          <span className='menu-text'>Students</span>
+                        </span>
+                      </li>
+                      <li
+                        className={`menu-item ${getMenuItemActive(
+                          '/Student/Testprofile'
+                        )}`}
+                        aria-haspopup='true'
+                      >
+                        <NavLink
+                          className='menu-link'
+                          to='/Student/Testprofile'
+                        >
+                          <i className='menu-bullet menu-bullet-dot'>
+                            <span />
+                          </i>
+                          <span className='menu-text'>StudentProfile</span>
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+             
+      </ul>
     </>
   )
 }
