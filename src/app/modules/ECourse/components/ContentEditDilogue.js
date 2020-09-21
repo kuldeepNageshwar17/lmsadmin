@@ -149,7 +149,7 @@ function ContentEditDilogue ({ CourseID, dispatch, Content, Section }) {
                         <ErrorMessage name='title' />
                       </div>
                     </div>
-                    <div className='col-lg-6'>
+                    <div className='col-lg-3'>
                       <div className='form-group'>
                         <label for='type'>Type</label>
 
@@ -168,11 +168,11 @@ function ContentEditDilogue ({ CourseID, dispatch, Content, Section }) {
                         <ErrorMessage name='type' />
                       </div>
                     </div>
-                    <div className='col-lg-6'>
+                    <div className='col-lg-3'>
                       <div className='form-group'>
                         <label for='file'>File</label>
                         <input
-                          id='file'
+                          id='file' 
                           name='file'
                           type='file'
                           onChange={event => {
@@ -193,7 +193,7 @@ function ContentEditDilogue ({ CourseID, dispatch, Content, Section }) {
                   <button
                     type='button'
                     onClick={onHide}
-                    className='btn btn-light btn-elevate'
+                    className='btn btn-light btn-elevate mr-2'
                   >
                     Cancel
                   </button>
