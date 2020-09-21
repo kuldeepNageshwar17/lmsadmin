@@ -73,11 +73,12 @@ export default class NewCourse extends Component {
     return (
       <div>
         <div className='row'>
-          <div className='col-md-6'>
-            <Card>
+          <div className='col-md-12'>
+            <Card><Form onSubmit={this.submitCourse} className='form'>
               <Card.Body>
-                <Form onSubmit={this.submitCourse}>
-                  <Form.Group controlId='formTitle'>
+                
+                  <Form.Group className='row'>
+                    <div className='col-md-6' controlId='formTitle'>
                     <Form.Label>Course Title</Form.Label>
                     <Form.Control
                       type='text'
@@ -89,45 +90,34 @@ export default class NewCourse extends Component {
                     />
                     <Form.Text className='text-muted'>
                       new course title.
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group controlId='formDesc'>
+                    </Form.Text> </div>
+                    <div controlId='formDesc' className='col-md-6'>
+                
                     <Form.Label>Course Description</Form.Label>
-                    <Form.Control
+                    <Form.Control 
                       type='text'
                       placeholder='Course Description'
                       value={this.state.Description}
                       onChange={event =>
                         this.setState({ Description: event.target.value })
                       }
-                    />
+                    /></div>
                   </Form.Group>
-                  <Form.Group controlId='formOverview'>
-                    <Form.Label>Course Overview</Form.Label>
-                    {/* <Form.Control type='text' placeholder='Course Overview' /> */}
-                    <JoditEditor
-                      ref={this.editor}
-                      value={this.state.overview}
-                      config={config}
-                      tabIndex={1} // tabIndex of textarea
-                      onBlur={this.onChangeOverView.bind(this)} // preferred to use only this option to update the content for performance reasons
-                      //    onChange={newContent=>{ this.setState(state=>({overview: newContent.target.textContent}))}}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId='formThr'>
-                    <Form.Label>Course Time(hours)</Form.Label>
-                    <Form.Control
+                  
+                  <Form.Group controlId='formThr' className='row'>
+                    <div className='col-md-6'>
+                    <Form.Label>Course Time (hr)</Form.Label>
+                    <Form.Control 
                       type='number'
                       placeholder='Time in hours'
                       value={this.state.timeInHours}
                       onChange={event =>
                         this.setState({ timeInHours: event.target.value })
                       }
-                    />
-                  </Form.Group>
-                  <Form.Group controlId='formTmin'>
-                    <Form.Label>Course Time( minutes)</Form.Label>
+                    /></div>
+                 
+                  <div className='col-md-6' controlId='formTmin'>
+                    <Form.Label>Course Time (min)</Form.Label>
                     <Form.Control
                       type='number'
                       placeholder='Time in Minutes'
@@ -135,8 +125,21 @@ export default class NewCourse extends Component {
                       onChange={event =>
                         this.setState({ timeInMinutes: event.target.value })
                       }
-                    />
+                    /></div>
                   </Form.Group>
+                  <Form.Group controlId='formOverview' className='row'>
+                    <Form.Label className='col-md-12 text-left mb-5'>Course Overview</Form.Label>
+                    {/* <Form.Control type='text' placeholder='Course Overview' /> */}
+                   <div className='col-md-12 mb-5'><JoditEditor
+                      ref={this.editor}
+                      value={this.state.overview}
+                      config={config}
+                      tabIndex={1} // tabIndex of textarea
+                      onBlur={this.onChangeOverView.bind(this)} // preferred to use only this option to update the content for performance reasons
+                      //    onChange={newContent=>{ this.setState(state=>({overview: newContent.target.textContent}))}}
+                    /></div> 
+                  </Form.Group>
+
 
                   <Form.Group controlId='Image'>
                     <Form.Label>Course Description</Form.Label>
@@ -149,11 +152,15 @@ export default class NewCourse extends Component {
                     />
                   </Form.Group>
 
-                  <Button variant='primary' type='submit'>
+                 
+              
+              </Card.Body>
+              <Card.Footer>
+              <Button variant='primary' type='submit'>
                     Submit
                   </Button>
-                </Form>
-              </Card.Body>
+              </Card.Footer>
+              </Form>
             </Card>
           </div>
         </div>
