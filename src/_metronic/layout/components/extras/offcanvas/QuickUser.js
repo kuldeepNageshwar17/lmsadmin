@@ -170,7 +170,7 @@ export function QuickUser() {
 
           <div className="separator separator-dashed my-7"></div>
 
-          <div>
+          <div style={{ display:'none'}}>
             <h5 className="mb-5">Recent Notifications</h5>
 
             <div className="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
