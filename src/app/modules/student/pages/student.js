@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React,{useState} from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import {
@@ -13,10 +13,9 @@ import BootstrapTable from 'react-bootstrap-table-next'
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-//   import BranchActionFormatter from '../components/branchActionFormatter'
 
-function UserList (props) {
-  const [Users, setUsers] = useState([])
+export default function Student () {
+  const [Students, setstudents] = useState([])
   let history = useHistory()
 
   const EditUser = id => {
@@ -64,27 +63,27 @@ function UserList (props) {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title='Users'>
+            <CardHeader title='Student'>
               <CardHeaderToolbar>
                 <button
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                    props.history.push('/user/UserForm')
+                    history.push('/Student/studentForm')
                   }}
                 >
-                  New User
+                  New Student
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-              {Users ? (
+              {Students ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Users}
+                        data={Students}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'
@@ -107,5 +106,3 @@ function UserList (props) {
     </div>
   )
 }
-
-export default UserList
