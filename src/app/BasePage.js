@@ -17,6 +17,14 @@ const ECourse = lazy(() =>
 const Settings = lazy(() =>
   import("./modules/Setting")
 );
+const User = lazy(() =>
+  import("./modules/Usermanagement")
+);
+
+const Student = lazy(() =>
+  import("./modules/student")
+);
+
 
 
 export default function BasePage() {
@@ -38,6 +46,9 @@ export default function BasePage() {
                 <ContentRoute path="/my-page" component={MyPage}/>   
                 <ContentRoute path="/ecourse" component={ECourse}/>        
                 <ContentRoute path="/setting" component={Settings}/>    
+                <ContentRoute path="/user" component={User}/>   
+                <ContentRoute path="/Student" component={Student}/>    
+ 
                 <Redirect to="/error/error-v1"/>
             </Switch>
         </Suspense>

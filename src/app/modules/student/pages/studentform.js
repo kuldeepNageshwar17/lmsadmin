@@ -4,18 +4,19 @@ import { useParams } from 'react-router-dom'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-function Userform() {
-    const [User, setUser] = useState({
+function StudentForm() {
+    const [Student, setStudent] = useState({
         _id: null,
-        name: '',
-        roles: [],
+        name: '',        
         password:"",
         email:"",
         mobile:"",        
-        confirmPasswors:""
+        confirmPasswors:"",
+        currentBatch:"",
+
 
       })
-      const [Roles, RolesClasses] = useState([])
+      const [Batches, setBatches] = useState([])
     
       let { id } = useParams()
       let history = useHistory()
@@ -45,7 +46,7 @@ function Userform() {
         }
       }, [id])
     
-      const saveUser = event => {
+      const saveStudent = event => {
         event.preventDefault()
         debugger
         // axios
@@ -57,49 +58,39 @@ function Userform() {
         //     console.log(err)
         //   })
       }
-
-
-
-
-
-
-
-
-
-
     return (
         <div>
       <div className='row'>
         <div className='col-md-6'>
           <Card>
             <Card.Body>
-              <Form onSubmit={saveUser}>
-                <Form.Group controlId='formTitle'>
-                  <Form.Label>User Name</Form.Label>
+              <Form onSubmit={saveStudent}>
+                <Form.Group controlId='fromName '>
+                  <Form.Label>Student Name</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder=' Full  Name'
-                    value={User.name}
+                    value={Student.name}
                     onChange={event =>
-                        setUser({ ...User, name: event.target.value })
+                        setStudent({ ...Student, name: event.target.value })
                     }
                   />
-                  <Form.Text className='text-muted'>User Name</Form.Text>
+                  <Form.Text className='text-muted'>Student Name</Form.Text>
                 </Form.Group>
 
-                <Form.Group controlId='formRoles'>
-                  <Form.Label>User Role </Form.Label>
+                <Form.Group controlId='formBatch'>
+                  <Form.Label>Student Batch </Form.Label>
                   <Form.Control
                     as='select'
                     placeholder=''
-                    // disabled={setUser._id?"true":"false"}
-                    value={User.Roles}
+                    // disabled={setStudent._id?"true":"false"}
+                    value={Student.Roles}
                     onChange={event =>
-                      setUser({ ...User, Roles : event.target.value })
+                      setStudent({ ...Student, currentBatch : event.target.value })
                     }
                   >
-                    <option>select Role</option>
-                    {Roles.map(item => (
+                    <option>select Batch</option>
+                    {Batches.map(item => (
                       <option value={item._id} key={item._id}>
                         {item.name}
                       </option>
@@ -113,9 +104,9 @@ function Userform() {
                   <Form.Control
                     type='text'
                     placeholder='user email'
-                    value={User.email}
+                    value={Student.email}
                     onChange={event =>
-                        setUser({ ...User, email: event.target.value })
+                        setStudent({ ...Student, email: event.target.value })
                     }
                   />                  
                   <Form.Text className='text-muted'>Email</Form.Text>
@@ -126,11 +117,11 @@ function Userform() {
                 <Form.Group controlId='formmobile'>
                   <Form.Label> Mobile </Form.Label>
                   <Form.Control
-                    type='text'
+                    type='phone'
                     placeholder='user mobile'
-                    value={User.mobile}
+                    value={Student.mobile}
                     onChange={event =>
-                        setUser({ ...User, mobile: event.target.value })
+                        setStudent({ ...Student, mobile: event.target.value })
                     }
                   />                  
                   <Form.Text className='text-muted'>Mobile</Form.Text>
@@ -143,9 +134,9 @@ function Userform() {
                   <Form.Control
                     type='password'
                     placeholder='user pasword'
-                    value={User.pasword}
+                    value={Student.pasword}
                     onChange={event =>
-                        setUser({ ...User, password: event.target.value })
+                        setStudent({ ...Student, password: event.target.value })
                     }
                   />                  
                   <Form.Text className='text-muted'>password</Form.Text>
@@ -155,9 +146,9 @@ function Userform() {
                   <Form.Control
                     type='password'
                     placeholder='Confirm  pasword'
-                    value={User.confirmPassword}
+                    value={Student.confirmPassword}
                     onChange={event =>
-                        setUser({ ...User, confirmPassword: event.target.value })
+                        setStudent({ ...Student, confirmPassword: event.target.value })
                     }
                   />                  
                   <Form.Text className='text-muted'>password</Form.Text>
@@ -174,4 +165,4 @@ function Userform() {
     </div>
     )
 }
-export default Userform
+export default StudentForm
