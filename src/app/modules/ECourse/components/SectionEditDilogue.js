@@ -96,12 +96,11 @@ function SectionEditDilogue ({
                   <Form className='form form-label-right'>
                     <div className='form-group row'>
                       <div className='col-lg-12'>
-                        <Field
-                        
+                        <Field                        
                           name='name'
                           component={Input}
                           placeholder='title'
-                          label='section title'
+                          label='Section Title'
                         />
                       </div>
                       <div className='col-lg-12'>
@@ -139,7 +138,7 @@ function SectionEditDilogue ({
                   <button
                     type='button'
                     onClick={onHide}
-                    className='btn btn-light btn-elevate'
+                    className='btn btn-light btn-elevate mr-2'
                   >
                     Cancel
                   </button>

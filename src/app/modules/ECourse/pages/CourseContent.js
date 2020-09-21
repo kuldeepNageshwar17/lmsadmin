@@ -136,9 +136,8 @@ class CourseContent extends Component {
               <Card>
                 <Card.Header as='h5'>
                   {this.state.title}
-                  <button
-                    style={{ float: 'right' }}
-                    className='btn btn-primary'
+                  <button                   
+                    className='btn btn-primary float-right'
                     onClick={this.CreateSection}
                   >
                     add New section
