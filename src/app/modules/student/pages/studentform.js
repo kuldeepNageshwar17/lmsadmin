@@ -61,11 +61,11 @@ function StudentForm() {
     return (
         <div>
       <div className='row'>
-        <div className='col-md-6'>
-          <Card>
+        <div className='col-md-12'>
+          <Card>  <Form onSubmit={saveStudent} className="form"> 
             <Card.Body>
-              <Form onSubmit={saveStudent}>
-                <Form.Group controlId='fromName '>
+                <Form.Group className='row'>
+                    <div className='col-md-4' controlId='fromName'>
                   <Form.Label>Student Name</Form.Label>
                   <Form.Control
                     type='text'
@@ -74,11 +74,10 @@ function StudentForm() {
                     onChange={event =>
                         setStudent({ ...Student, name: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Student Name</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formBatch'>
+                  /> 
+               </div>
+                <div className='col-md-4' controlId='formBatch'>
+                 
                   <Form.Label>Student Batch </Form.Label>
                   <Form.Control
                     as='select'
@@ -96,10 +95,9 @@ function StudentForm() {
                       </option>
                     ))}
                   </Form.Control>
-                  <Form.Text className='text-muted'>Roles</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formEmail'>
+                   
+                  </div>
+                  <div className='col-md-4' controlId='formEmail'>
                   <Form.Label> Email </Form.Label>
                   <Form.Control
                     type='text'
@@ -109,12 +107,11 @@ function StudentForm() {
                         setStudent({ ...Student, email: event.target.value })
                     }
                   />                  
-                  <Form.Text className='text-muted'>Email</Form.Text>
+                  
+                </div>
                 </Form.Group>
-
-
-                
-                <Form.Group controlId='formmobile'>
+                <Form.Group className='row'> 
+                <div className='col-md-4' controlId='formmobile'>
                   <Form.Label> Mobile </Form.Label>
                   <Form.Control
                     type='phone'
@@ -124,12 +121,10 @@ function StudentForm() {
                         setStudent({ ...Student, mobile: event.target.value })
                     }
                   />                  
-                  <Form.Text className='text-muted'>Mobile</Form.Text>
-                </Form.Group>
-
-
-                  
-                <Form.Group controlId='form'>
+                   
+                  </div>
+                 
+                <div className='col-md-4' controlId='form'>
                   <Form.Label> Password </Form.Label>
                   <Form.Control
                     type='password'
@@ -139,9 +134,10 @@ function StudentForm() {
                         setStudent({ ...Student, password: event.target.value })
                     }
                   />                  
-                  <Form.Text className='text-muted'>password</Form.Text>
-                </Form.Group>
-                <Form.Group controlId='form'>
+                   
+                </div>
+                 
+                <div className='col-md-4' controlId='form'>
                   <Form.Label> Confirm Password </Form.Label>
                   <Form.Control
                     type='password'
@@ -151,14 +147,15 @@ function StudentForm() {
                         setStudent({ ...Student, confirmPassword: event.target.value })
                     }
                   />                  
-                  <Form.Text className='text-muted'>password</Form.Text>
+                   
+                  </div>
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>
                   Submit
                 </Button>
-              </Form>
-            </Card.Body>
+              
+            </Card.Body></Form>
           </Card>
         </div>
       </div>

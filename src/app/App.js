@@ -10,6 +10,7 @@ import { Routes } from "../app/Routes";
 import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
 import axios from "axios";
+import "../_metronic/_assets/GlobalStyle.css";
 
 
 axios.defaults.baseURL="http://localhost:3001"
