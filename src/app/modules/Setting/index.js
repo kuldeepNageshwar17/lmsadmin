@@ -24,7 +24,7 @@ export default function ECourse () {
       <Route path='/setting/classForm/:id'>
         <ClassForm />
       </Route>
-      <Route path='/setting/BatchForm/:id'>
+      <Route exact  path='/setting/BatchForm/:id'>
         <BatchForm />
       </Route>
      

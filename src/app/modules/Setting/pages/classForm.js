@@ -36,7 +36,8 @@ export default function ClassForm () {
     await axios
       .post('/api/branch/class', Class)
       .then(res => {
-        history.push('/setting/class')
+        debugger;
+        history.push('/setting/class');
       })
       .catch(err => {
         console.log(err)

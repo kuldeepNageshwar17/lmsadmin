@@ -9,12 +9,11 @@ import {
 } from '../../../../_metronic/_partials/controls'
 import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
 import BootstrapTable from 'react-bootstrap-table-next'
+import userActionFormatter from  "../components/userActionFormatter"
 
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import userActionFormatter from  "../components/userActionFormatter"
-
 //   import BranchActionFormatter from '../components/branchActionFormatter'
 
 function UserList (props) {
@@ -23,7 +22,7 @@ function UserList (props) {
   useEffect(() => {
     debugger;
     axios
-      .get('/api/staff/InstituteUser')
+      .get('/api/staff/User')
       .then(res => {
         setUsers(res.data)
       })
@@ -32,9 +31,8 @@ function UserList (props) {
       })
   },[])
 
-
   const EditUser = id => {
-    history.push('/user/userForm/' + id)
+    history.push('/user/BranchUserForm/' + id)
   }
   const DeleteUser = id => {
 
@@ -44,6 +42,10 @@ function UserList (props) {
         alert("deleted");
 
       })
+    }
+  }
+  const InactiveteUser = id => {
+    if (window.confirm('do you really  want to delete')) {
     }
   }
 
@@ -114,7 +116,7 @@ function UserList (props) {
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                    props.history.push('/user/UserForm')
+                    props.history.push('/user/BranchUserForm')
                   }}
                 >
                   New User
