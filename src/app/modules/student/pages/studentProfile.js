@@ -1,10 +1,14 @@
 import React from 'react'
+ 
 import {
   Card,
   CardBody,
   CardHeader,
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
+import {toAbsoluteUrl} from "../../../../_metronic/_helpers";
+import { Tabs, Tab, Button, Form, ProgressBar,Alert} from 'react-bootstrap';
+
 import { useParams } from 'react-router-dom'
 
 function StudentProfile ({ history }) {
@@ -14,6 +18,7 @@ function StudentProfile ({ history }) {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
+          <form method="post">
             <CardHeader title='Profile'>
               <CardHeaderToolbar>
                 <button
@@ -27,7 +32,118 @@ function StudentProfile ({ history }) {
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
-            <CardBody></CardBody>
+            <CardBody>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src={toAbsoluteUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog")} alt=""/>
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                        <Form.Label readOnly>Study Progress</Form.Label>
+                            <ProgressBar variant="success" now={60} label='60%' />
+                            </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="profile-head">
+                                    <h5>
+                                        Kshiti Ghelani
+                                    </h5>
+                                    <h6>
+                                        Web Developer and Designer
+                                    </h6> 
+                            
+                        </div>
+                        <div class="col-md-12"><div className="row">
+                        <input type="submit" class="btn btn-primary col-md-3" name="btnAddMore" value="Edit Profile"/>
+                    </div></div>
+                    <div className="separator separator-dashed mt-8 mb-5"></div>
+                    <Form.Group className='row'>
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Student Name</Form.Label>
+</div>
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Email</Form.Label> 
+</div>
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Phone No</Form.Label> 
+</div>
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Subjects</Form.Label> 
+</div>
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Join Date</Form.Label> 
+</div>
+       </Form.Group>
+        
+      </div>
+      <div className="col-md-12"><div className="row">
+        <div className="col-md-4">
+        <Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p> 
+</Alert>
+        </div>
+        <div className="col-md-4">
+        <Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p> 
+</Alert>
+        </div>
+        <div className="col-md-4">
+        <Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p> 
+</Alert>
+        </div>
+      </div></div>
+          <div className="col-md-12" style={{display: 'none' }}>
+
+            <Tabs defaultActiveKey="profile">
+              <Tab eventKey="home" title="Home">
+                <div className="tab-item-wrapper">
+                  <h5>Home Dashbord</h5>
+                  <p>At vero eos et accusamus et iusto odio dignissimos</p>
+                </div>
+              </Tab>
+
+              <Tab eventKey="profile" title="Profile">
+                <div className="tab-item-wrapper">
+                  <h5>Profile Details</h5>
+                  <p>At vero eos et accusamus et iusto odio dignissimos</p>
+                </div>
+              </Tab>
+
+              <Tab eventKey="contact" title="Contact">
+                <div className="tab-item-wrapper">
+                  <h5>Contact Info</h5>
+                  <p>At vero eos et accusamus et iusto odio dignissimos</p>
+                </div>
+              </Tab>
+            </Tabs>
+ 
+        </div>
+    </div>
+                        
+                
+                    
+     
+            </CardBody></form>   
           </Card>
         </div>
       </div>
