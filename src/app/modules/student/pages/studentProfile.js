@@ -7,7 +7,7 @@ import {
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 import {toAbsoluteUrl} from "../../../../_metronic/_helpers";
-import { Tabs, Tab, Button, Form, } from 'react-bootstrap';
+import { Tabs, Tab, Button, Form, ProgressBar,Alert} from 'react-bootstrap';
 
 import { useParams } from 'react-router-dom'
 
@@ -42,7 +42,10 @@ function StudentProfile ({ history }) {
                                 <input type="file" name="file"/>
                             </div>
                         </div>
-                        
+                        <div className="col-md-12">
+                        <Form.Label readOnly>Study Progress</Form.Label>
+                            <ProgressBar variant="success" now={60} label='60%' />
+                            </div>
                     </div>
                     <div class="col-md-8">
                         <div class="profile-head">
@@ -77,7 +80,38 @@ function StudentProfile ({ history }) {
        </Form.Group>
         
       </div>
-      
+      <div className="col-md-12"><div className="row">
+        <div className="col-md-4">
+        <Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p> 
+</Alert>
+        </div>
+        <div className="col-md-4">
+        <Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p> 
+</Alert>
+        </div>
+        <div className="col-md-4">
+        <Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p> 
+</Alert>
+        </div>
+      </div></div>
           <div className="col-md-12" style={{display: 'none' }}>
 
             <Tabs defaultActiveKey="profile">
