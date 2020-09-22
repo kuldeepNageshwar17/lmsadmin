@@ -55,48 +55,24 @@ function StudentProfile ({ history }) {
                             
                         </div>
                         <div class="col-md-12"><div className="row">
-                        <input type="submit" class="btn btn-primary col-md-3 mb-5" name="btnAddMore" value="Edit Profile"/>
+                        <input type="submit" class="btn btn-primary col-md-3" name="btnAddMore" value="Edit Profile"/>
                     </div></div>
+                    <div className="separator separator-dashed mt-8 mb-5"></div>
                     <Form.Group className='row'>
-<div className='col-md-4'>
-<Form.Label>Student Name</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder=' Full  Name'
-                      
-                  /> 
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Student Name</Form.Label>
 </div>
-<div className='col-md-4'>
-<Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder=' Full  Name'
-                      
-                  /> 
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Email</Form.Label> 
 </div>
-<div className='col-md-4'>
-<Form.Label>Phone No</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder=' Full  Name'
-                      
-                  /> 
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Phone No</Form.Label> 
 </div>
-<div className='col-md-4'>
-<Form.Label>Subjects</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder=' Full  Name'
-                      
-                  /> 
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Subjects</Form.Label> 
 </div>
-<div className='col-md-4'>
-<Form.Label>Join Date</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder=' Full  Name'
-                      
-                  /> 
+<div className='col-md-6 StdPrfl'>
+<Form.Label readOnly>Join Date</Form.Label> 
 </div>
        </Form.Group>
         

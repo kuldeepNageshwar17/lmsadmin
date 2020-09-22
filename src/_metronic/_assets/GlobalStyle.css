@@ -7,9 +7,7 @@
 .loginSgnUp a{color: #fff;text-decoration: none;}
 .loginInput .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
 .loginInput .btn-primary{background-color: #A1A1A1;border-color: #A1A1A1;}
-body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-}
+.StdPrfl label.form-label{border-left: solid 2px #3699FF;font-size: 14px; display: block;line-height: 2.5; padding-left: 10px;margin-bottom: 20px;}
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
