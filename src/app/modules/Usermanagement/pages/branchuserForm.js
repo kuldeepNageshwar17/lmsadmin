@@ -4,7 +4,11 @@ import { useParams } from 'react-router-dom'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-function Userform () {
+export default  function BranchUserform () {
+
+  let { id } = useParams()
+
+
   const [User, setUser] = useState({   
     name: '',
     role:"",
@@ -12,80 +16,68 @@ function Userform () {
     email: '',
     mobile: '',
     confirmPassword: '',
-    branch: ''
+   
   })
   const [Roles, setRoles] = useState([])
-  const [ShowBranch, setShowBranch] = useState(false)
-  const [Branches, setBranches] = useState([])
+  const [RoleState, setRoleState] = useState(false)
+ 
 
-  let { id } = useParams()
-  let history = useHistory()
+  console.log(id);
+    let history = useHistory()
+  
   useEffect(() => {
-
+    debugger;    
     if(id){
       axios
       .get('/api/staff/User/'+id)
-      .then(res => {
+      .then(res => {        
         if(res.data.roles.length){
           setUser({...res.data,"role" :res.data.roles[0]})
         }else{
           setUser(res.data)
         }
+        
+       
       })
       .catch(err => {
         console.log(err)
       })
     }
     axios
-      .get('/api/staff/UserRolesIstitute')
+      .get('/api/staff/UserRolesBranch')
       .then(res => {
         setRoles(res.data)
       })
       .catch(err => {
         console.log(err)
       })
-    axios
-      .get('/api/branch/Branch')
-      .then(res => {
-        setBranches(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    // if (id) {
-    //     axios
-    //     .get('/api/setting/ge/' + id)
-    //     .then(res => {
-    //       debugger;
-    //       setUser(res.data)
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // }
+    
   }, [id])
-  useEffect(() => {
-    debugger;
 
-  //   for (let i = 0; i < Roles.length; i++) {
-  //     if (cities[i].population > 3000000) {
-  //         bigCities.push(cities[i]);
-  //     }
-  // }
-    var role = Roles.filter(m => m.id === User.role)
-    if (role.length) {
-      role[0].type === 1 ? setShowBranch(true) : setShowBranch(false)
+  useEffect(()=>{
+    debugger;
+    if(User.roles&&User.roles.length){
+      // Roles.forEach(item=>{
+      //   debugger;
+      //   if(item.id===User.role && item.type === 1){
+      //     setRoleState(true);
+      //   }
+      // })
+     if(! Roles.filter(m=>m.id===User.role).length){
+      setRoleState(true);
+     }
+     
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [User])
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ },[ User.roles,Roles])
 
   const saveUser = event => {
     event.preventDefault()
     debugger
     axios
-      .post('/api/staff/UserFormInstitute', User)
+      .post('/api/staff/UserForm', User)
       .then(res => {
-        history.push('/user')
+        history.push('/user/BranchUser')
       })
       .catch(err => {
         console.log(err)
@@ -117,7 +109,7 @@ function Userform () {
                   <Form.Control
                     as='select'
                     placeholder=''
-                    // disabled={setUser._id?"true":"false"}
+                    disabled={RoleState}
                     value={User.role}
                     onChange={event =>
                       setUser({ ...User, role: event.target.value })
@@ -133,27 +125,7 @@ function Userform () {
                   <Form.Text className='text-muted'>Roles</Form.Text>
                 </Form.Group>
 
-                <Form.Group controlId='formBranch'>
-                  <Form.Label>User Branch </Form.Label>
-                  <Form.Control
-                    as='select'
-                    placeholder=''
-                    disabled={ShowBranch}
-                    value={User.branch}
-                    onChange={event =>
-                      setUser({ ...User, branch: event.target.value })
-                    }
-                  >
-                    <option>select Branch</option>
-                    {Branches.map(item => (
-                      <option value={item._id} key={item._id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </Form.Control>
-                  <Form.Text className='text-muted'>branch</Form.Text>
-                </Form.Group>
-                <Form.Group controlId='formEmail'>
+                  <Form.Group controlId='formEmail'>
                   <Form.Label> Email </Form.Label>
                   <Form.Control
                     type='text'
@@ -215,4 +187,3 @@ function Userform () {
     </div>
   )
 }
-export default Userform

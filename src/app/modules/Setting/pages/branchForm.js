@@ -5,7 +5,7 @@ import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default function BranchForm () {
-  const [Branch, setBranch] = useState( { id:null,name: '', code: '', address: { address: '', city: '', state: '' } }
+  const [Branch, setBranch] = useState( { id:null,name: '',  address: { address: '', city: '', state: '' } }
   )
 
   let { id } = useParams()
@@ -58,20 +58,7 @@ export default function BranchForm () {
                     }
                   />
                   <Form.Text className='text-muted'>branch Name</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formcode'>
-                  <Form.Label>Branch code</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Branch code'
-                    value={Branch.code}
-                    onChange={event =>
-                      setBranch({ ...Branch, code: event.target.value })
-                    }
-                  />
-                  <Form.Text className='text-muted'>branch Name</Form.Text>
-                </Form.Group>
+                </Form.Group>             
 
                 <Form.Group controlId='address'>
                   <Form.Label>Address</Form.Label>

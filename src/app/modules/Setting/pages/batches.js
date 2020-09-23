@@ -53,14 +53,21 @@ export default function Batches (props) {
     },
     {
       dataField: 'name',
-      text: 'Class',
+      text: 'Title',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'year',
-      text: 'Year',
+      dataField: 'description',
+      text: 'Description',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'c.name',
+      text: 'Class',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
@@ -87,11 +94,11 @@ export default function Batches (props) {
     axios.get('/api/setting/getBatch')
       .then(res => {
       debugger;
-          let ClassBatches= res.data.classes.reduce((batchlist,obj)=>
-          {       debugger;
-               return batchlist.concat(obj.batches)
-          },[])
-          setBatches(ClassBatches)
+          // let ClassBatches= res.data.classes.reduce((batchlist,obj)=>
+          // {       debugger;
+          //      return batchlist.concat(obj.batches)
+          // },[])
+          setBatches(res.data)
       })
       .catch(err => {
         console.log(err)

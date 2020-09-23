@@ -5,36 +5,27 @@ import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default function BatchForm () {
-  const [Batch, setBatch] = useState({
-    _id: null,
+  const [Batch, setBatch] = useState({   
     name: '',
-    year: '',
-    classId: ''
+    description: '',
+    class:"",
   })
   const [Classes, setClasses] = useState([])
-  const [Years, setYears] = useState([])
+  // const [Years, setYears] = useState([])
 
   let { id } = useParams()
   let history = useHistory()
   useEffect(() => {
     debugger
     axios
-      .get('/api/setting/getBranchClassddr')
+      .get('/api/setting/getClassesDdr')
       .then(res => {
         setClasses(res.data.classes)
       })
       .catch(err => {
         console.log(err)
       })
-    axios
-      .get('/api/setting/getBranchYearDdr')
-      .then(res => {
-        setYears(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
+   
     debugger;
     if(id)
     {
@@ -42,7 +33,8 @@ export default function BatchForm () {
       .get('/api/setting/getBatch/' + id)
       .then(res => {
         debugger;
-        setBatch(res.data)
+        if(res.data.length)
+        setBatch(res.data[0])
       })
       .catch(err => {
         console.log(err)
@@ -89,10 +81,10 @@ export default function BatchForm () {
                   <Form.Control
                     as='select'
                     placeholder=''
-                    disabled={Batch._id?"true":"false"}
-                    value={Batch.classId}
+                    // disabled={Batch._id?"true":"false"}
+                    value={Batch.class}
                     onChange={event =>
-                      setBatch({ ...Batch, classId: event.target.value })
+                      setBatch({ ...Batch, class: event.target.value })
                     }
                   >
                     <option>select class</option>
@@ -103,26 +95,18 @@ export default function BatchForm () {
                     ))}
                   </Form.Control>
                   <Form.Text className='text-muted'>Class</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formYear'>
-                  <Form.Label>Select Year </Form.Label>
+                </Form.Group>             
+                <Form.Group controlId='formTitle'>
+                  <Form.Label>Batch description</Form.Label>
                   <Form.Control
-                    as='select'
-                    placeholder=''
-                    value={Batch.year}
+                    type='text'
+                    placeholder='Batch description'
+                    value={Batch.description}
                     onChange={event =>
-                      setBatch({ ...Batch, year: event.target.value })
+                      setBatch({ ...Batch, description: event.target.value })
                     }
-                  >
-                    <option>select Years</option>
-                    {Years.map(item => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </Form.Control>
-                  <Form.Text className='text-muted'>Year</Form.Text>
+                  />
+                  <Form.Text className='text-muted'>Batch description</Form.Text>
                 </Form.Group>
 
               
