@@ -70,7 +70,7 @@ function ForgotPassword(props) {
           </div>
           <form
             onSubmit={formik.handleSubmit}
-            className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
+            className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp" id="frgtps"
           >
             {formik.status && (
               <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
@@ -98,7 +98,7 @@ function ForgotPassword(props) {
               <button
                 id="kt_login_forgot_submit"
                 type="submit"
-                className="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4"
+                className="btn btn-primary btnSub font-weight-bold px-9 py-4 my-3 mx-4"
                 disabled={formik.isSubmitting}
               >
                 Submit
@@ -107,7 +107,7 @@ function ForgotPassword(props) {
                 <button
                   type="button"
                   id="kt_login_forgot_cancel"
-                  className="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-4"
+                  className="btn btn-light-primary btnCan font-weight-bold px-9 py-4 my-3 mx-4"
                 >
                   Cancel
                 </button>

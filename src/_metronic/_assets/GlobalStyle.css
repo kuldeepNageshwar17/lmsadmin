@@ -1,12 +1,20 @@
 .LoginBg{background: url(images/login_bg.jpg);}
 .loginAside{background: #dcdcda;}
 .loginAsideFooter{background: #a1a1a1;}
+.login-signin .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
+.login-signin .checkbox > span {background-color: #e6e6e6; border: 1px solid  #A1A1A1;}
+.login-signin .checkbox > input:checked ~ span:after{border: 1px solid  #000;}
+.login-signin .btnCan {background: #fff;border-color: #a1a1a1;color: #000;}
+.login-signin .btnSub {background: #a6a6a6; border-color: #a1a1a1;color: #000;}
 .LgnMsg{}
 .loginSgnUp{background: #a1a1a1; color: #fff;}
 .loginSgnUp .text-dark-50{color: #313131 !important;}
 .loginSgnUp a{color: #fff;text-decoration: none;}
 .loginInput .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
 .loginInput .btn-primary{background-color: #A1A1A1;border-color: #A1A1A1;}
+.login-forgot .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
+#kt_login_forgot_cancel.btnCan {background: #fff;border-color: #a1a1a1;color: #000;}
+#kt_login_forgot_submit.btnSub {background: #a6a6a6; border-color: #a1a1a1;color: #000;}
 .StdPrfl label.form-label{border-left: solid 2px #3699FF;font-size: 14px; display: block;line-height: 2.5; padding-left: 10px;margin-bottom: 20px;}
 .emp-profile{
     padding: 3%;

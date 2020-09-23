@@ -298,7 +298,7 @@ function Registration(props) {
           <button
             type="submit"
             disabled={formik.isSubmitting || !formik.values.acceptTerms}
-            className="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4"
+            className="btn btn-primary btnSub font-weight-bold px-9 py-4 my-3 mx-4"
           >
             <span>Submit</span>
             {loading && <span className="ml-3 spinner spinner-white"></span>}
@@ -307,7 +307,7 @@ function Registration(props) {
           <Link to="/auth/login">
             <button
               type="button"
-              className="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-4"
+              className="btn btn-light-primary btnCan font-weight-bold px-9 py-4 my-3 mx-4"
             >
               Cancel
             </button>
