@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card, Col } from 'react-bootstrap'
+import { Button, Form, Card, CardHeader, Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default function BranchForm () {
@@ -45,6 +45,9 @@ export default function BranchForm () {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
+          <Card.Header>
+            Add Branch
+         </Card.Header>
             <Card.Body>
               <Form onSubmit={saveBranchData}>
                 <Form.Group controlId='formTitle' className="row">
