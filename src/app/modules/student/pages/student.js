@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import {
@@ -13,22 +13,37 @@ import BootstrapTable from 'react-bootstrap-table-next'
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
+import actionFormatter from '../components/StudentActionFormatter'
 
 export default function Student () {
   const [Students, setstudents] = useState([])
   let history = useHistory()
 
-  const EditUser = id => {
-    history.push('/user/userForm/' + id)
+  const EditHandler = id => {
+    history.push('/Student/studentForm/' + id)
   }
-  const DeleteUser = id => {
+  const DeleteHandler = id => {
     if (window.confirm('do you really  want to delete')) {
     }
   }
-  const InactiveteUser = id => {
-    if (window.confirm('do you really  want to delete')) {
-    }
+  const showProfile=(id)=>{
+    history.push('/student/studentProfile/' + id)
   }
+  const ChagePassword=(id)=>{
+    history.push('/student/SPasswordReset/' + id);
+  
+  }
+ 
+  useEffect(()=>{
+    axios.get("/api/student/student").then(res=>{
+      debugger;
+      setstudents(res.data)
+    }).catch(
+      err=>{
+        console.log(err);
+      }
+    )
+  },[])
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -55,7 +70,37 @@ export default function Student () {
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
+    },
+    {
+      dataField: 'email',
+      text: 'Email',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'mobile',
+      text: 'Mobile',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'action',
+      text: 'Actions',
+      formatter: actionFormatter,
+      formatExtraData: {
+        EditAction: EditHandler,
+        DeleteAction: DeleteHandler,showProfile,
+        ChagePassword
+      },
+      classes: 'text-right pr-0',
+      headerClasses: 'text-right pr-3',
+      style: {
+        minWidth: '100px'
+      }
     }
+
   ]
 
   return (
