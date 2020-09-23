@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card, Col, Row } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 function Userform () {
@@ -95,12 +95,13 @@ function Userform () {
   return (
     <div>
       <div className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12'>
           <Card>
             <Card.Body>
               <Form onSubmit={saveUser}>
-                <Form.Group controlId='formTitle'>
-                  <Form.Label>User Name</Form.Label>
+              <Form.Group className='row'>
+                <Col>
+                <Form.Label>User Name</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder=' Full  Name'
@@ -109,11 +110,9 @@ function Userform () {
                       setUser({ ...User, name: event.target.value })
                     }
                   />
-                  <Form.Text className='text-muted'>User Name</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formRoles'>
-                  <Form.Label>User Role </Form.Label>
+                </Col>
+                <Col>
+                <Form.Label>User Role </Form.Label>
                   <Form.Control
                     as='select'
                     placeholder=''
@@ -130,11 +129,9 @@ function Userform () {
                       </option>
                     ))}
                   </Form.Control>
-                  <Form.Text className='text-muted'>Roles</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formBranch'>
-                  <Form.Label>User Branch </Form.Label>
+                </Col>
+                <Col>
+                <Form.Label>User Branch </Form.Label>
                   <Form.Control
                     as='select'
                     placeholder=''
@@ -151,9 +148,11 @@ function Userform () {
                       </option>
                     ))}
                   </Form.Control>
-                  <Form.Text className='text-muted'>branch</Form.Text>
-                </Form.Group>
-                <Form.Group controlId='formEmail'>
+                </Col>
+              </Form.Group>
+
+                <Form.Group controlId='formEmail'  className='row'>
+                  <Col>
                   <Form.Label> Email </Form.Label>
                   <Form.Control
                     type='text'
@@ -163,11 +162,8 @@ function Userform () {
                       setUser({ ...User, email: event.target.value })
                     }
                   />
-                  <Form.Text className='text-muted'>Email</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formmobile'>
-                  <Form.Label> Mobile </Form.Label>
+                  </Col>
+                  <Col>  <Form.Label> Mobile </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='user mobile'
@@ -175,12 +171,8 @@ function Userform () {
                     onChange={event =>
                       setUser({ ...User, mobile: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Mobile</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='form'>
-                  <Form.Label> Password </Form.Label>
+                  /></Col>
+                  <Col><Form.Label> Password </Form.Label>
                   <Form.Control
                     type='password'
                     placeholder='user pasword'
@@ -188,11 +180,8 @@ function Userform () {
                     onChange={event =>
                       setUser({ ...User, password: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>password</Form.Text>
-                </Form.Group>
-                <Form.Group controlId='form'>
-                  <Form.Label> Confirm Password </Form.Label>
+                  /></Col>
+                  <Col><Form.Label> Confirm Password </Form.Label>
                   <Form.Control
                     type='password'
                     placeholder='Confirm  pasword'
@@ -200,8 +189,7 @@ function Userform () {
                     onChange={event =>
                       setUser({ ...User, confirmPassword: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>password</Form.Text>
+                  /></Col>
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

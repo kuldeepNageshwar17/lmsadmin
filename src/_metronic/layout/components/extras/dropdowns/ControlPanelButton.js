@@ -12,9 +12,9 @@ function ControlPanelButton({changeStatus,controlPanel}) {
     
     return (
         < >
-            {controlPanel&&<button className="btn btn-primary" onClick={ActiveControlPanel}> Dashboard</button>} 
+            {controlPanel&&<button className="btn btn-primary mt-3 mb-3" onClick={ActiveControlPanel}> Dashboard</button>} 
             
-            {!controlPanel&&<button className="btn btn-primary" onClick={ActiveControlPanel}>  Control Panel</button>} </>
+            {!controlPanel&&<button className="btn btn-primary mt-3 mb-3" onClick={ActiveControlPanel}>  Control Panel</button>} </>
 
             
           

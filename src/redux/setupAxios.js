@@ -13,7 +13,7 @@ export default function setupAxios(axios, store) {
       }
 
       // config.baseURL = 'http://192.168.1.12:4000';
-      config.baseURL = 'http://127.0.0.1:4000';
+      config.baseURL = 'http://192.168.1.12:4000';
 
       return config;
     },

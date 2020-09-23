@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card, Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default  function BranchUserform () {
@@ -92,7 +92,7 @@ export default  function BranchUserform () {
             <Card.Body>
               <Form onSubmit={saveUser}>
                 <Form.Group controlId='formTitle'>
-                  <Form.Label>User Name</Form.Label>
+                  <Col><Form.Label>User Name</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder=' Full  Name'
@@ -100,12 +100,8 @@ export default  function BranchUserform () {
                     onChange={event =>
                       setUser({ ...User, name: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>User Name</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formRoles'>
-                  <Form.Label>User Role </Form.Label>
+                  /></Col>
+                  <Col><Form.Label>User Role </Form.Label>
                   <Form.Control
                     as='select'
                     placeholder=''
@@ -121,12 +117,8 @@ export default  function BranchUserform () {
                         {item.name}
                       </option>
                     ))}
-                  </Form.Control>
-                  <Form.Text className='text-muted'>Roles</Form.Text>
-                </Form.Group>
-
-                  <Form.Group controlId='formEmail'>
-                  <Form.Label> Email </Form.Label>
+                  </Form.Control></Col>
+                  <Col><Form.Label> Email </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='user email'
@@ -134,12 +126,11 @@ export default  function BranchUserform () {
                     onChange={event =>
                       setUser({ ...User, email: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Email</Form.Text>
+                  /></Col>
                 </Form.Group>
 
                 <Form.Group controlId='formmobile'>
-                  <Form.Label> Mobile </Form.Label>
+                <Col><Form.Label> Mobile </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='user mobile'
@@ -147,12 +138,8 @@ export default  function BranchUserform () {
                     onChange={event =>
                       setUser({ ...User, mobile: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Mobile</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='form'>
-                  <Form.Label> Password </Form.Label>
+                  /></Col>
+                  <Col><Form.Label> Password </Form.Label>
                   <Form.Control
                     type='password'
                     placeholder='user pasword'
@@ -160,11 +147,8 @@ export default  function BranchUserform () {
                     onChange={event =>
                       setUser({ ...User, password: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>password</Form.Text>
-                </Form.Group>
-                <Form.Group controlId='form'>
-                  <Form.Label> Confirm Password </Form.Label>
+                  /></Col>
+                  <Col><Form.Label> Confirm Password </Form.Label>
                   <Form.Control
                     type='password'
                     placeholder='Confirm  pasword'
@@ -172,8 +156,7 @@ export default  function BranchUserform () {
                     onChange={event =>
                       setUser({ ...User, confirmPassword: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>password</Form.Text>
+                  /></Col> 
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

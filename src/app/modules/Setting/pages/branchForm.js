@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card, Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default function BranchForm () {
@@ -43,12 +43,12 @@ export default function BranchForm () {
   return (
     <div>
       <div className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12'>
           <Card>
             <Card.Body>
               <Form onSubmit={saveBranchData}>
-                <Form.Group controlId='formTitle'>
-                  <Form.Label>Branch Name</Form.Label>
+                <Form.Group controlId='formTitle' className="row">
+                  <Col><Form.Label>Branch Name</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='Branch Name'
@@ -56,12 +56,8 @@ export default function BranchForm () {
                     onChange={event =>
                       setBranch({ ...Branch, name: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>branch Name</Form.Text>
-                </Form.Group>             
-
-                <Form.Group controlId='address'>
-                  <Form.Label>Address</Form.Label>
+                  /></Col>
+                  <Col><Form.Label>Address</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder=' street  address  / house number /shop number /'
@@ -75,12 +71,11 @@ export default function BranchForm () {
                         }
                       })
                     }
-                  />
-                  <Form.Text className='text-muted'>address</Form.Text>
+                  /></Col>
                 </Form.Group>
 
-                <Form.Group controlId='city'>
-                  <Form.Label>city </Form.Label>
+                <Form.Group controlId='city' className="row">
+                  <Col><Form.Label>city </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='city'
@@ -91,12 +86,8 @@ export default function BranchForm () {
                         address: { ...Branch.address, city: event.target.value }
                       })
                     }
-                  />
-                  <Form.Text className='text-muted'>city</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='state'>
-                  <Form.Label>state </Form.Label>
+                  /></Col>
+                  <Col><Form.Label>state </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='state'
@@ -110,8 +101,7 @@ export default function BranchForm () {
                         }
                       })
                     }
-                  />
-                  <Form.Text className='text-muted'>city</Form.Text>
+                  /></Col>
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

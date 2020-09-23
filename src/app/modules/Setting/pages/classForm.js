@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams ,useHistory} from 'react-router-dom'
-import { Button, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card, Col } from 'react-bootstrap'
 
 
 
@@ -53,12 +53,12 @@ export default function ClassForm () {
   return (
     <div>
       <div className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12'>
           <Card>
             <Card.Body>
               <Form onSubmit={saveClassFormData}>
-                <Form.Group controlId='formTitle'>
-                  <Form.Label>Class</Form.Label>
+                <Form.Group controlId='formTitle' className="row">
+                <Col><Form.Label>Class</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='Class Title'
@@ -66,11 +66,8 @@ export default function ClassForm () {
                     onChange={event =>
                       setClass({ ...Class, name: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>class Name</Form.Text>
-                </Form.Group>
-                <Form.Group controlId='formTitle'>
-                  <Form.Label>Description</Form.Label>
+                  /></Col>
+                  <Col> <Form.Label>Description</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='Class description'
@@ -78,8 +75,7 @@ export default function ClassForm () {
                     onChange={event =>
                       setClass({ ...Class, description: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Description</Form.Text>
+                  /></Col> 
                 </Form.Group>
                 <Button variant='primary' type='submit'>
                   Submit

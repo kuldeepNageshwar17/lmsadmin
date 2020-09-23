@@ -7,7 +7,6 @@ import UserForm from "./pages/Userform"
 import BranchUserList from "./pages/branchUserList"
 
 
-
 export default function  UserManagement() {
   return (
     <Switch>

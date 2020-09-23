@@ -6,7 +6,7 @@ import {OverlayTrigger, Tooltip} from "react-bootstrap";
 export function StickyToolbar() {
   return (
     <>
-      <ul className="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4">
+      <ul className="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4" style={{display:'none'}}>
         <OverlayTrigger
           placement="left"
           overlay={<Tooltip id="layout-tooltip">Layout Builder</Tooltip>}
