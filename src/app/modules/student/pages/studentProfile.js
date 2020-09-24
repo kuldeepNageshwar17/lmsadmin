@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import { Tabs, Tab,Form, ProgressBar, Alert } from 'react-bootstrap'
 import {
   Card,
   CardBody,
@@ -8,7 +9,7 @@ import {
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 import { toAbsoluteUrl } from '../../../../_metronic/_helpers'
-import { Tabs, Tab,Form, ProgressBar, Alert } from 'react-bootstrap'
+
 
 import { useParams } from 'react-router-dom'
 const { API_URL } = process.env;
@@ -66,7 +67,7 @@ function StudentProfile () {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <form method='post'>
+           
               <CardHeader title='Profile'>
                 <CardHeaderToolbar>
                   <button
@@ -80,7 +81,7 @@ function StudentProfile () {
                   </button>
                 </CardHeaderToolbar>
               </CardHeader>
-              <CardBody>
+              <CardBody> <form method='post'>
                 <div class='row'>
                   <div class='col-md-4'>
                     <div class='profile-img'>
@@ -233,9 +234,9 @@ function StudentProfile () {
                           </p>
                         </Alert>
                       </div>
-                    </div> 
+                    </div>  </form>
               </CardBody>
-            </form>
+           
           </Card>
         </div>
       </div>

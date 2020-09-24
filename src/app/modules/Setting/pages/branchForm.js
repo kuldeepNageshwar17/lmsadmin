@@ -1,7 +1,13 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card, CardHeader, Col } from 'react-bootstrap'
+import { Button, Form, Col } from 'react-bootstrap'
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardHeaderToolbar
+} from '../../../../_metronic/_partials/controls'
 import { useHistory } from 'react-router-dom'
 
 export default function BranchForm () {
@@ -45,10 +51,10 @@ export default function BranchForm () {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-          <Card.Header>
-            Add Branch
-         </Card.Header>
-            <Card.Body>
+          <CardHeader title='Add Branch'>
+            
+         </CardHeader>
+            <CardBody>
               <Form onSubmit={saveBranchData}>
                 <Form.Group controlId='formTitle' className="row">
                   <Col><Form.Label>Branch Name</Form.Label>
@@ -111,7 +117,7 @@ export default function BranchForm () {
                   Submit
                 </Button>
               </Form>
-            </Card.Body>
+            </CardBody>
           </Card>
         </div>
       </div>
