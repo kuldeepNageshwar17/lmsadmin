@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Accordion, Card } from 'react-bootstrap'
+import { Button, Form, Accordion, Card, Col, Nav, Row } from 'react-bootstrap'
 import axios from 'axios'
 import { Typography, Grid, Paper } from '@material-ui/core'
 import { ExpansionPanel } from '@material-ui/core'
@@ -140,23 +140,50 @@ class CourseContent extends Component {
                     className='btn btn-primary float-right'
                     onClick={this.CreateSection}
                   >
-                    add New section
+                    Add New Section
                   </button>
                 </Card.Header>
                 <Card.Body>
-                  <Card.Text>{this.state.Description}</Card.Text>
+                  <Row>
+                    <Col><Card.Text>{this.state.Description}</Card.Text></Col>
+                    <Col md="auto">
+                    <Nav variant="pills"  className="justify-content-end mb-5" defaultActiveKey="#first">
+      <Nav.Item>
+        <Nav.Link href="#first">Video</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#link">Audio</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#disabled">PDF</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#disabled">Text</Nav.Link>
+      </Nav.Item>
+    </Nav></Col>
+                    </Row>
+                  
                   <Accordion>
                     {this.state.sections.map(item => (
                       <Card key={item._id}>
                         <Card.Header>
+                          <div className="row"><div className="col ANewSec">
+                        <Accordion.Toggle
+                            as={Button}
+                            variant='text'
+                            eventKey={item._id}
+                          >
+                            <h5>{item.name}</h5>
+                          </Accordion.Toggle>
+                          </div> 
+                          <Col md="auto">
                           <div
                             className='btn-group'
                             role='group'
-                            aria-label=''
-                            style={{ marginLeft: 'auto', float: 'right' }}
+                            aria-label='' 
                           >
                             <button
-                              className=' btn btn-primary pull-right'
+                              className='btn btn-primary pull-right'
                               style={{ marginLeft: 'auto' }}
                               onClick={e => {
                                 this.addSectionContent(item, e)
@@ -182,32 +209,22 @@ class CourseContent extends Component {
                               delete
                             </button>
                           </div>
-
-                          <Accordion.Toggle
-                            as={Button}
-                            variant='text'
-                            eventKey={item._id}
-                          >
-                            <h5>{item.name}</h5>
-                          </Accordion.Toggle>
+                          </Col>
+                          </div>
                         </Card.Header>
                         <Accordion.Collapse eventKey={item._id}>
                           <Card.Body>
                             {item.contents.map(c => {
                               return (
                                 <div className='row' key={c._id} style={{ margin: '10px' }}>
-                                  <div className='col-md-3'>{c.title}</div>
+                                  <Col>{c.title}</Col>
 
-                                  <div className='col-md-1'>{c.type}</div>
-                                  <div className='col-md-1'>
+                                  <Col>{c.type}</Col>
+                                  <Col xs md="2">
                                     <div
                                       className='btn-group'
                                       role='group'
-                                      aria-label=''
-                                      style={{
-                                        marginLeft: '20px',
-                                        // float: 'right'
-                                      }}
+                                      aria-label='' 
                                     >
                                       <button
                                         className='btn btn-primary pull-right'
@@ -232,7 +249,7 @@ class CourseContent extends Component {
                                         delete
                                       </button>
                                     </div>
-                                  </div>
+                                  </Col>
                                 </div>
                               )
                             })}

@@ -19,6 +19,7 @@
 #kt_login_forgot_cancel.btnCan {background: #fff;border-color: #a1a1a1;color: #000;}
 #kt_login_forgot_submit.btnSub {background: #a6a6a6; border-color: #a1a1a1;color: #000;}
 .StdPrfl label.form-label{border-left: solid 2px #3699FF;font-size: 14px; display: block;line-height: 2.5; padding-left: 10px;margin-bottom: 20px;}
+.ANewSec button{width: 100%; text-align: left;} 
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
