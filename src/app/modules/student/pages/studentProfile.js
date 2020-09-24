@@ -108,29 +108,42 @@ function StudentProfile () {
                         />
                       </div>
                     </div>
-                    <div className='col-md-12'>
-                      <Form.Label readOnly>Study Progress</Form.Label>
-                      <ProgressBar variant='success' now={60} label='60%' />
-                    </div>
-                  </div>
-                  <div class='col-md-8'>
-                    <div class='profile-head'>
-                      <h5>{student.name}</h5>
-                      <h6>Web Developer and Designer</h6>
-                    </div>
-                    <div class='col-md-12'>
-                      <div className='row'>
-                        <button
+                    <div className='col-md-12 text-center proBtn'>
+                    <button
                           type='button'
                           onClick={e => {
                             history.push('/Student/StudentForm/' + id)
                           }}
-                          class='btn btn-primary col-md-3'
+                          class='btn btn-text EBtn mr-3'
                           name='btnAddMore'
                           value='Edit Profile'
                         >
-                          edit profile
+                          Edit Profile
                         </button>
+                        <button
+                          type='button'
+                          onClick={e => {
+                            history.push('/student/SPasswordReset/' + id)
+                          }}
+                          class='btn btn-text CPass'
+                          name='btnAddMore'
+                          value='Edit Profile'
+                        >
+                          Change Password
+                        </button>
+                    </div> 
+                    <div className='col-md-8 mt-5 offset-md-2'>
+                      <Form.Label readOnly>Study Progress</Form.Label>
+                      <ProgressBar variant='success' now={60} label='60%' />
+                    </div> 
+                  </div>
+                  <div class='col-md-8'>
+                    <div class='profile-head'>
+                      <h5>{student.name}</h5>
+                    </div>
+                    <div class='col-md-12'>
+                      <div className='row'>
+                        
                       </div>
                     </div>
                     <div className='separator separator-dashed mt-8 mb-5'></div>
@@ -152,43 +165,8 @@ function StudentProfile () {
                       </div>
                     </Form.Group>
                   </div>
-                  <div className='col-md-12'>
-                    <div className='row'>
-                      <div className='col-md-4'>
-                        <Alert variant='success'>
-                          <Alert.Heading>Hey, nice to see you</Alert.Heading>
-                          <p>
-                            Aww yeah, you successfully read this important alert
-                            message. This example text is going to run a bit
-                            longer so that you can see how spacing within an
-                            alert works with this kind of content.
-                          </p>
-                        </Alert>
-                      </div>
-                      <div className='col-md-4'>
-                        <Alert variant='success'>
-                          <Alert.Heading>Hey, nice to see you</Alert.Heading>
-                          <p>
-                            Aww yeah, you successfully read this important alert
-                            message. This example text is going to run a bit
-                            longer so that you can see how spacing within an
-                            alert works with this kind of content.
-                          </p>
-                        </Alert>
-                      </div>
-                      <div className='col-md-4'>
-                        <Alert variant='success'>
-                          <Alert.Heading>Hey, nice to see you</Alert.Heading>
-                          <p>
-                            Aww yeah, you successfully read this important alert
-                            message. This example text is going to run a bit
-                            longer so that you can see how spacing within an
-                            alert works with this kind of content.
-                          </p>
-                        </Alert>
-                      </div>
-                    </div>
-                  </div>
+                  
+                  
                   <div className='col-md-12' style={{ display: 'none' }}>
                     <Tabs defaultActiveKey='profile'>
                       <Tab eventKey='home' title='Home'>
@@ -219,7 +197,43 @@ function StudentProfile () {
                       </Tab>
                     </Tabs>
                   </div>
-                </div>
+                </div> 
+                    <div className='row'>
+                    <div className='separator separator-dashed mt-10 mb-10'></div> 
+                      <div className='col-md-4 mt-10 mb-10'>
+                        <Alert variant='success'>
+                          <Alert.Heading>Hey, nice to see you</Alert.Heading>
+                          <p>
+                            Aww yeah, you successfully read this important alert
+                            message. This example text is going to run a bit
+                            longer so that you can see how spacing within an
+                            alert works with this kind of content.
+                          </p>
+                        </Alert>
+                      </div>
+                      <div className='col-md-4 mt-10 mb-10'>
+                        <Alert variant='success'>
+                          <Alert.Heading>Hey, nice to see you</Alert.Heading>
+                          <p>
+                            Aww yeah, you successfully read this important alert
+                            message. This example text is going to run a bit
+                            longer so that you can see how spacing within an
+                            alert works with this kind of content.
+                          </p>
+                        </Alert>
+                      </div>
+                      <div className='col-md-4 mt-10 mb-10'>
+                        <Alert variant='success'>
+                          <Alert.Heading>Hey, nice to see you</Alert.Heading>
+                          <p>
+                            Aww yeah, you successfully read this important alert
+                            message. This example text is going to run a bit
+                            longer so that you can see how spacing within an
+                            alert works with this kind of content.
+                          </p>
+                        </Alert>
+                      </div>
+                    </div> 
               </CardBody>
             </form>
           </Card>
