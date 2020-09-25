@@ -69,7 +69,10 @@ export default function Batches (props) {
       dataField: 'c.name',
       text: 'Class',
       sort: true,
-      sortCaret: sortCaret,
+      //cellClasses: 'bg-primary',
+      //headerClasses: 'bg-primary',
+      
+      sortCaret: sortCaret, 
       headerSortingClasses
     },
     {
@@ -138,7 +141,7 @@ export default function Batches (props) {
                         remote
                         bordered={false}
                         pagination={paginationFactory(options)}
-                        {...paginationTableProps}
+                        {...paginationTableProps} 
                       />
                     )
                   }}
