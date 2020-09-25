@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { Button, Form, Card } from 'react-bootstrap'
 import JoditEditor from 'jodit-react'
 import axios from 'axios'
-import { useLocation } from 'react-router-dom';
 
 
 export default class NewCourse extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      _id: null,
+      // _id: null,
       categories: null,
       rating: 0,
       numberOfRatings: 0,
@@ -25,6 +24,8 @@ export default class NewCourse extends Component {
     this.editor = React.createRef(null)
     this.uploadFile = this.uploadFile.bind(this)
     this.submitCourse = this.submitCourse.bind(this)
+    const {id}=this.props.match.params;
+
   }
   onChangeOverView = e => {
     debugger
@@ -38,10 +39,11 @@ export default class NewCourse extends Component {
   }
   submitCourse = event => {
     console.log('uploding File')
+    console.log(this.id)
     axios
-      .post('/api/course/course', this.state)
+      .post('/api/course/course'+this.id)
       .then(result => {
-        this.props.history.push('/ecourse/courses')
+        this.props.history.push('/setting/courses/'+this.id)
       })
       .catch(err => {
         console.log(err)
@@ -55,7 +57,7 @@ export default class NewCourse extends Component {
 
     const search = this.props.location.search;
     console.log(search);
-    const id = new URLSearchParams(search).get("id");
+    const id = new URLSearchParams(search).get("cid");
     console.log("id", id);
     if (id) {
       axios.get("/api/course/course/"+id).then(response=>{
@@ -74,7 +76,8 @@ export default class NewCourse extends Component {
       <div>
         <div className='row'>
           <div className='col-md-12'>
-            <Card><Form onSubmit={this.submitCourse} className='form'>
+            <Card>
+              <Form onSubmit={this.submitCourse} className='form'>
               <Card.Body>
                 
                   <Form.Group className='row'>

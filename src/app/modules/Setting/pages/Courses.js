@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -8,29 +9,38 @@ import {
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
-
 import BootstrapTable from 'react-bootstrap-table-next'
 
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import ClassActionFormatter from '../components/classActionFormatter'
+import CourseActionFormatter from '../components/CourseActionFormatter'
+import CourseProfileFormater from '../components/CourseProfileFormater'
 
-export default function Classes (props) {
-  const EditClassHandler = id => {
-    props.history.push('/setting/classForm/' + id)
+
+import { useHistory } from 'react-router-dom'
+
+
+export default function Courses (props) {
+  const { id } = useParams()
+  const history = useHistory()
+  const EditHandler = cid => {
+    history.push('/setting/CourseForm/' + id + '?cid/' + cid)
   }
 
-  const DeleteClassHandler = id => {
+  const DeleteHandler = cid => {
     if (window.confirm('do you really  want to delete')) {
-      axios
-        .delete('/branch/class', { id: id })
-        .then(res => {})
-        .catch(() => {})
+      //   axios
+      //     .delete('/branch/class', { id: id })
+      //     .then(res => {})
+      //     .catch(() => {})
     }
   }
- const getCoursesHandler=id=>{
-  props.history.push('/setting/Courses/' + id)
+
+  const CourseContenHandler = id =>{
+    debugger;
+    history.push("/setting/course/"+id+"/sections")
+
   }
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -51,28 +61,37 @@ export default function Classes (props) {
       hidden: true
     },
     {
-      dataField: 'name',
-      text: 'Class',
+      dataField: 'title',
+      text: 'Course',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'description',
+      dataField: 'Description',
       text: 'Description',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
-
+    {
+      dataField: 'posterImageUrl',
+      text: 'Image',
+      formatter: CourseProfileFormater,     
+      classes: 'text-right pr-0',
+      headerClasses: 'text-right pr-3',
+      style: {
+        minWidth: '100px'
+      }
+    },
     {
       dataField: 'action',
       text: 'Actions',
-      formatter: ClassActionFormatter,
+      formatter: CourseActionFormatter,
       formatExtraData: {
-        EditClassAction: EditClassHandler,
-        DeleteClassAction: DeleteClassHandler,
-        getCoursesAction:getCoursesHandler
+        EditClassAction: EditHandler,
+        DeleteClassAction: DeleteHandler,
+        GetSectionsAction:CourseContenHandler
       },
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
@@ -82,18 +101,19 @@ export default function Classes (props) {
     }
   ]
 
-  const [Classes, setClasses] = useState(null)
+  const [Courses, setCourse] = useState([])
   useEffect(() => {
     debugger
     axios
-      .get('/api/Branch/classes')
+      .get('/api/course/courseList/' + id)
       .then(res => {
-        setClasses(res.data)
+        debugger
+        setCourse(res.data)
       })
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [id])
 
   return (
     <div>
@@ -106,21 +126,21 @@ export default function Classes (props) {
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                    props.history.push('/setting/classForm')
+                    history.push('/setting/CourseForm/' + id)
                   }}
                 >
-                  New Class
+                  New course
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-              {Classes ? (
+            {Courses ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Classes}
+                        data={Courses}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'
@@ -136,6 +156,30 @@ export default function Classes (props) {
               ) : (
                 <div>loading</div>
               )}
+
+{/* 
+              {Courses ? (
+                <PaginationProvider pagination={paginationFactory(options)}>
+                  {({ paginationProps, paginationTableProps }) => {
+                    return (
+                      <BootstrapTable
+                        keyField='_id'
+                        data={Courses}
+                        columns={columns}
+                        // classes='table table-head-custom table-vertical-center overflow-hidden'
+                        // wrapperClasses='table-responsive'
+                        // bootstrap4
+                        // remote
+                        // bordered={false}
+                        // pagination={paginationFactory(options)}
+                        // {...paginationTableProps}
+                      />
+                    )
+                  }}
+                </PaginationProvider>
+              ) : (
+                <div>No data Available</div>
+              )} */}
             </CardBody>
           </Card>
         </div>

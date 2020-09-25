@@ -9,8 +9,7 @@ import ContentEditDilogue from './components/ContentEditDilogue'
 export default function ECourse () {
   return (
     <Switch>
-      {
-        /* Redirect from root URL to /dashboard. */
+      {       
         <Redirect exact from='/ecourse' to='/ecourse/courses' />
       }
       <Route exact path='/Ecourse/CourseContent/section'>

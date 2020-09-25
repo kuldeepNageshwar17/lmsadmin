@@ -6,16 +6,27 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 
 
+
 export default function ClassActionFormatter(
   cellContent,
   row,
   rowIndex,
-  { EditClassAction, DeleteClassAction }
+  { EditClassAction, DeleteClassAction ,getCoursesAction}
 ) {
   return (
 
 <>
-     
+<a
+        title="AddCourses"
+        className="btn btn-icon btn-light btn-hover-danger btn-sm  mx-3"
+        onClick={()=>getCoursesAction(row._id)}
+      >
+          <span className="svg-icon svg-icon-md svg-icon-primary">
+          <SVG
+            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+          />
+        </span>
+      </a>
       <a
         title="Edit Branch details"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
