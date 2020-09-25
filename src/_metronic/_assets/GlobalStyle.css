@@ -9,7 +9,7 @@
 #kt_login_signin_form .btnSub {background: #a6a6a6; border-color: #a1a1a1;color: #000;}
 .loginSgnUp .text-dark-50{color: #000 !important;}
 .loginSgnUp a{color: #fff;text-decoration: none;}
-
+.sortable span.svg-icon-sort{display:none ;}
 .LgnMsg{}
 .loginSgnUp{background: #a1a1a1; color: #fff;}
 
