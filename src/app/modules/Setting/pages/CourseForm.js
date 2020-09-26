@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Button, Form, Card } from 'react-bootstrap'
 import JoditEditor from 'jodit-react'
 import axios from 'axios'
@@ -6,6 +6,9 @@ import { useHistory, useParams } from 'react-router-dom'
 
 export default function CourseForm () {
   const config = {
+    defaultActionOnPaste: 'insert_as_html',
+    askBeforePasteFromWord: false,
+    askBeforePasteHTML: false,
     readonly: false // all options from https://xdsoft.net/jodit/doc/
   }
   const editor = useRef(null)
@@ -20,6 +23,7 @@ export default function CourseForm () {
     file: ''
   })
   const { id } = useParams()
+  const { cid } = useParams()
   const history = useHistory()
   const onChangeOverView = e => {
     debugger
@@ -32,8 +36,9 @@ export default function CourseForm () {
   // const uploadFile = async () => {}
   const SaveCourse = async event => {
     event.preventDefault()
-
-    var ImageUrl="";
+    debugger
+    var ImageUrl = ''
+    let courseObject =Course;
     if (Course.file) {
       let formData = new FormData()
       formData.append('file', Course.file)
@@ -46,7 +51,7 @@ export default function CourseForm () {
         })
         .then(res => {
           debugger
-          ImageUrl=res.data.name
+          ImageUrl = res.data.name
           // setCourse({ ...Course, posterImageUrl: res.data.name })
         })
         .catch(() => {
@@ -54,9 +59,13 @@ export default function CourseForm () {
         })
     }
 
-    console.log(ImageUrl)
+    if (ImageUrl) {
+      courseObject.posterImageUrl=ImageUrl
+    }
+    // console.log(ImageUrl)
+    debugger
     await axios
-      .post('/api/course/course/' + id, {...Course,posterImageUrl:ImageUrl})
+      .post('/api/course/course/' + id, courseObject)
       .then(result => {
         debugger
         history.push('/setting/courses/' + id)
@@ -66,6 +75,19 @@ export default function CourseForm () {
       })
     debugger
   }
+  useEffect(() => {
+    debugger
+    if (cid) {
+      axios
+        .get('/api/Course/course/' + cid)
+        .then(res => {
+          setCourse(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }, [cid])
   return (
     <div>
       <div className='row'>
@@ -130,6 +152,14 @@ export default function CourseForm () {
                     }
                   />
                 </Form.Group>
+                {Course.posterImageUrl && (
+                  <img                     src={
+                      'http://localhost:4000/uploads/CourseProfile/' +
+                      Course.posterImageUrl
+                    }
+                    width='200px'
+                  />
+                )}
               </Card.Body>
               <Card.Footer>
                 <Button variant='primary' type='submit'>

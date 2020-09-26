@@ -4,14 +4,13 @@ import axios from 'axios'
 
 import { useParams, useHistory } from 'react-router-dom'
 
-
-import AddContentButton from "../components/ContentAddButton"
+import AddContentButton from '../components/ContentAddButton'
 
 export default function CourseSections () {
   //id of Course
   const { id } = useParams()
-  console.log(id);
-  const  history  = useHistory()
+  console.log(id)
+  const history = useHistory()
   const [sections, setSections] = useState([])
   const [expanded, setExpanded] = useState('panel1')
   const [course, setCourse] = useState(null)
@@ -19,28 +18,29 @@ export default function CourseSections () {
   const handleChange = panel => () => {
     if (expanded != panel) setExpanded(panel)
   }
-  const CreateSection =()  => {
+  const CreateSection = () => {
     history.push('/Setting/Course/' + id + '/sectionForm')
   }
 
-  const EditSection = (secId)=> {
-    history.push('/Setting/Course/'+id+'/sectionForm/' + secId)
+  const EditSection = secId => {
+    history.push('/Setting/Course/' + id + '/sectionForm/' + secId)
   }
   const DeleteSection = id => {
     debugger
     if (window.confirm('Do you realy Want to delete Compelete Section ?')) {
       debugger
       axios
-        .delete('/api/course/courseSection/', {
-          data: { id }
-        })
+        .delete('/api/course/courseSection/' + id)
         .then(response => {
           loaddata()
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
   }
   const loaddata = () => {
-    console.log(id);
+    console.log(id)
     axios
       .get('/api/course/course/' + id)
       .then(response => {
@@ -50,28 +50,27 @@ export default function CourseSections () {
         console.log(error)
       })
   }
-  const addSectionContent = (id, typeId) => {
-    history.push('/setting/Course/section/' + id + '/type/' + typeId)
+  const editContent = (id, sectionId) => {
+    history.push('/setting/course/section/' + sectionId + '/content/' + id)
   }
-  const EditContent = id => {
-    history.push('/setting/Course/section/content' + id)
-  }
-  const DeleteContent = id => {
-    if (window.confirm('Do you realy Want to delete this Content ?')) {
-      debugger
+
+  const deleteContent = id => {
+    debugger
+    if (window.confirm('Do you realy Want to delete Compelete Section ?')) {
       axios
-        .delete('/api/course/courseSectionContent', {
-          data: { id: id }
+        .delete('/api/Course/sectionContent/' + id)
+        .then(res => {
+          loaddata()
         })
-        .then(response => {
-          this.loaddata()
+        .catch(err => {
+          console.log(err)
         })
     }
   }
   useEffect(() => {
-    loaddata();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+    loaddata()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <div>
       <div>
@@ -80,6 +79,18 @@ export default function CourseSections () {
             <Card>
               <Card.Header as='h5'>
                 {course ? course.title : ''}
+                <Button
+                  variant='primary'
+                  type='button'
+                  onClick={() => {
+                    if (history.length > 1) {
+                      // this will take you back if there is history
+                      history.goBack()
+                    }
+                  }}
+                >
+                  back
+                </Button>
                 <button
                   className='btn btn-primary float-right'
                   onClick={CreateSection}
@@ -88,8 +99,6 @@ export default function CourseSections () {
                 </button>
               </Card.Header>
               <Card.Body>
-             
-
                 <Accordion>
                   {course &&
                     course.sections.map(item => (
@@ -111,7 +120,10 @@ export default function CourseSections () {
                                 role='group'
                                 aria-label=''
                               >
-                               <AddContentButton  sectionId= {item._id} courseId={id}/>
+                                <AddContentButton
+                                  sectionId={item._id}
+                                  courseId={id}
+                                />
                                 <button
                                   className=' btn btn-primary pull-right'
                                   style={{ marginLeft: 'auto' }}
@@ -145,6 +157,7 @@ export default function CourseSections () {
                                   <Col>{c.title}</Col>
 
                                   <Col>{c.type}</Col>
+                                  <Col>{c.contentUrl ? 'true' : 'false'}</Col>
                                   <Col xs md='2'>
                                     <div
                                       className='btn-group'
@@ -154,11 +167,7 @@ export default function CourseSections () {
                                       <button
                                         className='btn btn-primary pull-right'
                                         onClick={event => {
-                                          this.EditSectionContent(
-                                            item,
-                                            c,
-                                            event
-                                          )
+                                          editContent(c._id, item._id)
                                         }}
                                       >
                                         Edit
@@ -166,7 +175,7 @@ export default function CourseSections () {
                                       <button
                                         className='btn btn-danger pull-right'
                                         onClick={event => {
-                                          this.DeleteSectionContent(c._id)
+                                          deleteContent(c._id)
                                         }}
                                       >
                                         delete

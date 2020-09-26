@@ -8,6 +8,7 @@ import { Button, Form, Card, Col } from 'react-bootstrap'
 
 export default function ClassForm () {
   let { id } = useParams()
+  let { cid } = useParams()
   const [Class, setClass] = useState({ id: null, name: '', description: '' })
   let history = useHistory()
 

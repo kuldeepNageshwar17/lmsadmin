@@ -15,13 +15,14 @@ export default function CourseActionFormatter (
     <>
       <a
         title='Content'
-        className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
+        className='btn  btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => GetSectionsAction(row._id)}
       >
-        <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG
+        <span>
+          Content
+          {/* <SVG
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
-          />
+          /> */}
         </span>
       </a>
 

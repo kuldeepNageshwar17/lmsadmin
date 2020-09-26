@@ -25,15 +25,13 @@ export default function Courses (props) {
   const { id } = useParams()
   const history = useHistory()
   const EditHandler = cid => {
-    history.push('/setting/CourseForm/' + id + '?cid/' + cid)
+    history.push('/setting/CourseForm/' + id + '/' + cid)
   }
 
-  const DeleteHandler = cid => {
+  const DeleteHandler = id => {
+    debugger;
     if (window.confirm('do you really  want to delete')) {
-      //   axios
-      //     .delete('/branch/class', { id: id })
-      //     .then(res => {})
-      //     .catch(() => {})
+        axios.delete('/api/course/course/'+ id).then(res => {}).catch(() => {})
     }
   }
 
@@ -89,8 +87,8 @@ export default function Courses (props) {
       text: 'Actions',
       formatter: CourseActionFormatter,
       formatExtraData: {
-        EditClassAction: EditHandler,
-        DeleteClassAction: DeleteHandler,
+        EditAction: EditHandler,
+        DeleteAction: DeleteHandler,
         GetSectionsAction:CourseContenHandler
       },
       classes: 'text-right pr-0',
@@ -156,30 +154,6 @@ export default function Courses (props) {
               ) : (
                 <div>loading</div>
               )}
-
-{/* 
-              {Courses ? (
-                <PaginationProvider pagination={paginationFactory(options)}>
-                  {({ paginationProps, paginationTableProps }) => {
-                    return (
-                      <BootstrapTable
-                        keyField='_id'
-                        data={Courses}
-                        columns={columns}
-                        // classes='table table-head-custom table-vertical-center overflow-hidden'
-                        // wrapperClasses='table-responsive'
-                        // bootstrap4
-                        // remote
-                        // bordered={false}
-                        // pagination={paginationFactory(options)}
-                        // {...paginationTableProps}
-                      />
-                    )
-                  }}
-                </PaginationProvider>
-              ) : (
-                <div>No data Available</div>
-              )} */}
             </CardBody>
           </Card>
         </div>

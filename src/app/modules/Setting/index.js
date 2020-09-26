@@ -68,6 +68,10 @@ export default function ECourse () {
       <Route exact path='/setting/course/section/:id/content/pdf'>
         < ContentPdf />
       </Route>
+      <Route exact path='/setting/course/section/:id/content/:cid'>
+        <ContentVideo/>
+      </Route>
+      
 {/* 
       <Redirect to='/error/error-v1' /> */}
     </Switch>
