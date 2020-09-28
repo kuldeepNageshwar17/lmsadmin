@@ -17,7 +17,7 @@ export default function ClassActionFormatter(
 
 <>
 <a
-        title="AddCourses"
+        title="Add Courses"
         className="btn  btn-light btn-hover-success btn-sm  mx-3"
         onClick={()=>getCoursesAction(row._id)}
       >
@@ -25,15 +25,15 @@ export default function ClassActionFormatter(
           <SVG
             src={toAbsoluteUrl("/media/svg/icons/Navigation/Plus.svg")}
           />
-        </span> Content
+        </span> Course
       </a>
       <a
-        title="Edit Branch details"
+        title="Edit Class Details"
         className="btn  btn-light btn-hover-primary btn-sm mx-3"
         onClick={() => EditClassAction(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG
+          <SVG 
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
@@ -41,12 +41,12 @@ export default function ClassActionFormatter(
       <> </>
 
       <a
-        title="Delete Branch"
+        title="Delete Class"
         className="btn btn-light btn-hover-danger btn-sm"
         onClick={() => DeleteClassAction(row._id)}
       >
        <span className="svg-icon svg-icon-md svg-icon-danger">   
-         <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} /> 
+         <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} x/> 
         </span>
       </a>
     </>
