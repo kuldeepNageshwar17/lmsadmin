@@ -77,7 +77,7 @@ export default function Classes (props) {
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
       style: {
-        minWidth: '100px'
+        minWidth: '200px'
       }
     }
   ]

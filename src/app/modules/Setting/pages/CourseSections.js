@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Accordion, Card, Col, Nav, Row } from 'react-bootstrap'
 import axios from 'axios'
-
+import SVG from 'react-inlinesvg'
+import { toAbsoluteUrl } from '../../../../_metronic/_helpers'
 import { useParams, useHistory } from 'react-router-dom'
 
 import AddContentButton from '../components/ContentAddButton'
@@ -80,7 +81,7 @@ export default function CourseSections () {
               <Card.Header as='h5'>
                 {course ? course.title : ''}
                 <Button
-                  variant='primary'
+                  variant='primary'className='btn btn-outline-primary ml-2 float-right'
                   type='button'
                   onClick={() => {
                     if (history.length > 1) {
@@ -131,7 +132,11 @@ export default function CourseSections () {
                                     EditSection(item._id)
                                   }}
                                 >
-                                  Edit
+                                  <span className='svg-icon svg-icon-md'>
+          <SVG title='Edit Content'
+            src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
+          />
+        </span>
                                 </button>
                                 <button
                                   className=' btn btn-danger pull-right'
@@ -139,7 +144,9 @@ export default function CourseSections () {
                                     DeleteSection(item._id)
                                   }}
                                 >
-                                  delete
+                                  <span className='svg-icon svg-icon-md'>
+          <SVG src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete Content' />
+        </span> 
                                 </button>
                               </div>
                             </Col>
@@ -150,22 +157,22 @@ export default function CourseSections () {
                             {item.contents.map(c => {
                               return (
                                 <div
-                                  className='row'
+                                  className='row mb-5 brd_b'
                                   key={c._id}
-                                  style={{ margin: '10px' }}
+                                  // style={{ margin: '10px' }}
                                 >
-                                  <Col>{c.title}</Col>
+                                  <Col className='secTitle'>{c.title}</Col>
 
-                                  <Col>{c.type}</Col>
-                                  <Col>{c.contentUrl ? 'true' : 'false'}</Col>
-                                  <Col xs md='2'>
+                                  <Col className='secType'>{c.type}</Col>
+                                  <Col  className='secUrl'>{c.contentUrl ? 'true' : 'false'}</Col>
+                                  <Col xs md='2' className='secAction'>
                                     <div
-                                      className='btn-group'
+                                      className='btn-group float-right'
                                       role='group'
                                       aria-label=''
                                     >
                                       <button
-                                        className='btn btn-primary pull-right'
+                                        className='btn btn-outline-primary pull-right'
                                         onClick={event => {
                                           editContent(c._id, item._id)
                                         }}
@@ -173,12 +180,12 @@ export default function CourseSections () {
                                         Edit
                                       </button>
                                       <button
-                                        className='btn btn-danger pull-right'
+                                        className='btn btn-outline-danger pull-right'
                                         onClick={event => {
                                           deleteContent(c._id)
                                         }}
                                       >
-                                        delete
+                                        Delete
                                       </button>
                                     </div>
                                   </Col>

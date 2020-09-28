@@ -94,7 +94,7 @@ export default function Courses (props) {
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
       style: {
-        minWidth: '100px'
+        minWidth: '220px'
       }
     }
   ]
@@ -118,7 +118,7 @@ export default function Courses (props) {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title='course list'>
+            <CardHeader title='Course list'>
               <CardHeaderToolbar>
                 <button
                   type='button'

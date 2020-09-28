@@ -122,8 +122,12 @@ export default function VideoContent () {
                     />
                   </Col>
                 </Form.Group>
+                
+                <Button variant='primary' type='submit'>
+                  Submit
+                </Button>
                 <Button
-                  variant='primary'
+                  variant='secondary' className='ml-3'
                   type='button'
                   onClick={() => {
                     if (history.length > 1) {
@@ -133,9 +137,6 @@ export default function VideoContent () {
                   }}
                 >
                   cancel
-                </Button>
-                <Button variant='primary' type='submit'>
-                  Submit
                 </Button>
               </Form>
             </CardBody>
