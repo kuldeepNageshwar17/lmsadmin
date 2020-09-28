@@ -34,6 +34,7 @@ import {MetronicI18nProvider} from "./_metronic/i18n";
  */
 const { PUBLIC_URL } = process.env;
 console.log( "public url :" ,PUBLIC_URL);
+window.$apihost = 'http://localhost:4000' //global variable
 
 /**
  * Creates `axios-mock-adapter` instance for provided `axios` instance, add

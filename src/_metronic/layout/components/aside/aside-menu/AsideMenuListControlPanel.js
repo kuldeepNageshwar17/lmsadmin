@@ -32,60 +32,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
         {/*end::1 Level*/}
 
         {/*begin::1 Level*/}
-        <li
-          className={`menu-item ${getMenuItemActive('/ecourse', false)}`}
-          aria-haspopup='true'
-          data-menu-toggle='hover'
-        >
-          <NavLink className='menu-link' to='/ecourse/courses'>
-            <span className='svg-icon menu-icon'>
-              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
-            </span>
-            <span className='menu-text'>Ecourse</span>
-            <i className='menu-arrow' />
-          </NavLink>
-          <div className='menu-submenu '>
-            <ul className='menu-subnav'>
-              <ul className='menu-subnav'>
-                <li
-                  className='menu-item  menu-item-parent'
-                  aria-haspopup='true'
-                >
-                  <span className='menu-link'>
-                    <span className='menu-text'>Ecourse</span>
-                  </span>
-                </li>
-                <li
-                  className={`menu-item ${getMenuItemActive(
-                    '/ecourse/courses'
-                  )}`}
-                  aria-haspopup='true'
-                >
-                  <NavLink className='menu-link' to='/ecourse/courses'>
-                    <i className='menu-bullet menu-bullet-dot'>
-                      <span />
-                    </i>
-                    <span className='menu-text'>Courses</span>
-                  </NavLink>
-                </li>
-                <li
-                  className={`menu-item ${getMenuItemActive(
-                    '/ecourse/newcourse'
-                  )}`}
-                  aria-haspopup='true'
-                >
-                  <NavLink className='menu-link' to='/ecourse/newcourse'>
-                    <i className='menu-bullet menu-bullet-dot'>
-                      <span />
-                    </i>
-                    <span className='menu-text'> New Courses</span>
-                  </NavLink>
-                </li>
-              </ul>
-            </ul>
-          </div>
-        </li>
-        {/*end::1 Level*/}
+          {/*end::1 Level*/}
         <li
           className={`menu-item ${getMenuItemActive('/setting', false)}`}
           aria-haspopup='true'
@@ -169,6 +116,33 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
 
         </li>
          {/* Components */}
+
+
+
+         <li
+          className={`menu-item ${getMenuItemActive('/Exams', false)}`}
+          aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/Exams'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Examination</span>
+            <i className='menu-arrow' />
+          </NavLink>
+
+
+          <div className='menu-submenu '>
+            <ul className='menu-subnav'>
+              <li className='menu-item  menu-item-parent' aria-haspopup='true'>
+                <span className='menu-link'>
+                  <span className='menu-text'>Examination</span>
+                </span>
+              </li>                   
+            </ul>
+          </div>
+        </li>
         {/* begin::section */}
         <li className='menu-section '>
           <h4 className='menu-text'>Components</h4>

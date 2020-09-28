@@ -6,7 +6,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 import JoditEditor from 'jodit-react'
 

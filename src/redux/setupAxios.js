@@ -20,13 +20,12 @@ export default function setupAxios(axios, store) {
     err => Promise.reject(err)
   );
 
-  axios.interceptors.response.use(function (response) {
-    
+  axios.interceptors.response.use(function (response) {    
     return response;
   }, function (error) {
         debugger;
       console.log(error)
-      if(error.response.status === 401)
+      if(error.response  &&error.response.status === 401)
       window.location.href = "/logout";
     return Promise.reject(error);
   });

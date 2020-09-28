@@ -88,7 +88,7 @@ function StudentProfile () {
                       {
                         student.profileImage?(<img
                           src={toAbsoluteUrl(
-                          `http://localhost:4000/uploads/Profiles/${student.profileImage}`
+                          `${window.$apihost }/uploads/Profiles/${student.profileImage}`
                           )}
                           alt=''
                         />):(<img

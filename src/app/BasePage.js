@@ -25,6 +25,10 @@ const Student = lazy(() =>
   import("./modules/student")
 );
 
+const Exams = lazy(() =>
+  import("./modules/Examination")
+);
+
 
 
 export default function BasePage() {
@@ -48,6 +52,7 @@ export default function BasePage() {
                 <ContentRoute path="/setting" component={Settings}/>    
                 <ContentRoute path="/user" component={User}/>   
                 <ContentRoute path="/Student" component={Student}/>    
+                <ContentRoute path="/Exams" component={Exams}/>    
  
                 <Redirect to="/error/error-v1"/>
             </Switch>
