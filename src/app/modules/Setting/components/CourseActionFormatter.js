@@ -14,37 +14,36 @@ export default function CourseActionFormatter (
   return (
     <>
       <a
-        title='Content'
+        title='Add Content'
         className='btn  btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => GetSectionsAction(row._id)}
       >
-        <span>
-          Content
-          {/* <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
-          /> */}
-        </span>
+        <span className="svg-icon svg-icon-md svg-icon-primary">          
+          <SVG
+            src={toAbsoluteUrl("/media/svg/icons/Navigation/Plus.svg")} title='Add Content'
+          />
+        </span> Content
       </a>
 
       <a
-        title='Edit Branch details'
+        title='Edit Branch'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => EditAction(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG
+          <SVG title='Edit Course'
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
       </a>
 
       <a
-        title='Delete Branch '
+        title='Delete Branch'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
         onClick={() => DeleteAction(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-danger'>
-          <SVG src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} />
+          <SVG src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete Course' />
         </span>
       </a>
     </>

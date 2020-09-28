@@ -122,8 +122,12 @@ export default function ContentText() {
                     />
                   </Col>
                 </Form.Group> */}
+                
+                <Button variant='primary' type='submit'>
+                  Submit
+                </Button>
                 <Button
-                  variant='primary'
+                  variant='secondary' className='ml-3'
                   type='button'
                   onClick={() => {
                     if (history.length > 1) {
@@ -132,10 +136,7 @@ export default function ContentText() {
                     }
                   }}
                 >
-                  cancel
-                </Button>
-                <Button variant='primary' type='submit'>
-                  Submit
+                  Cancel
                 </Button>
               </Form>
             </CardBody>
