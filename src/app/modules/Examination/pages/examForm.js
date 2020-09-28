@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-export default function BatchForm () {
+export default function ExamForm () {
   const [Exam, setExam] = useState({   
     name: '',
     description: '',
@@ -18,7 +18,7 @@ export default function BatchForm () {
   useEffect(() => {
     debugger
     axios
-      .get('/api/Exams/getClassesDdr')
+      .get('/api/Examination/getAllClasssesDdr')
       .then(res => {
         setClasses(res.data.classes)
       })
@@ -26,30 +26,30 @@ export default function BatchForm () {
         console.log(err)
       })
    
-    // debugger;
-    // if(id)
-    // {
-    //   axios
-    //   .get('/api/setting/getBatch/' + id)
-    //   .then(res => {
-    //     debugger;
-    //     if(res.data.length)
-    //     setExam(res.data[0])
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
+    debugger;
+    if(id)
+    {
+      axios
+      .get('/api/Examination/getExam/' + id)
+      .then(res => {
+        debugger;
+        if(res.data)
+        setExam(res.data)
+      })
+      .catch(err => {
+        console.log(err)
 
-    //   })
-    // }
+      })
+    }
   }, [id])
 
-  const saveBatch = event => {
+  const saveExam = event => {
     event.preventDefault()
     debugger
     axios
-      .post('/api/setting/createBatch', Exam)
+      .post('/api/Examination/saveExamDetails', Exam)
       .then(res => {
-        history.push('/setting/Exam')
+        history.push('/Exams')
       })
       .catch(err => {
         console.log(err)
@@ -62,10 +62,11 @@ export default function BatchForm () {
         <div className='col-md-6'>
           <Card>
             <Card.Body>
-              <Form onSubmit={saveBatch}>
+              <Form onSubmit={saveExam}>
                 <Form.Group controlId='formTitle'>
                   <Form.Label>Exam Name</Form.Label>
                   <Form.Control
+                  required="true"
                     type='text'
                     placeholder='Exam Name'
                     value={Exam.name}
@@ -79,6 +80,8 @@ export default function BatchForm () {
                 <Form.Group controlId='formClass'>
                   <Form.Label>Select Class </Form.Label>
                   <Form.Control
+                                    required="true"
+
                     as='select'
                     placeholder=''
                     // disabled={Exam._id?"true":"false"}
@@ -99,6 +102,8 @@ export default function BatchForm () {
                 <Form.Group controlId='formTitle'>
                   <Form.Label>Exam description</Form.Label>
                   <Form.Control
+                                    required="true"
+
                     type='text'
                     placeholder='Exam description'
                     value={Exam.description}
