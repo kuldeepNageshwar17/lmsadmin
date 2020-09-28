@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
+import { useHistory,useParams } from "react-router-dom";
 
 import {
   Card,
@@ -18,23 +18,21 @@ import paginationFactory, {
 import ExamActionFormatter from '../components/ExamActionFormatter'
 
 export default function Batches (props) {
-  const [Exams, setExams] = useState([])
+  const {id} = useParams();
+  const [questions, setQuestions] = useState([])
 
   let history = useHistory()
-  const EditHandler = (id) => {
-    history.push('/Exams/ExamForm/' + id)
-  }
-  const DeleteHandler = (id) => {
-    if (window.confirm('do you really  want to delete')) {
-      axios
-        .delete('/Exams/deleteExam', { id })
-        .then(res => {alert("Exam Deleted ")})
-        .catch(() => {})
-    }
-  }
-  const GetQuestionHandler=(id)=>{
-    history.push('/Exams/'+ id+'/ExamQuestion/' )
-  }
+  // const EditHandler = (id) => {
+  //   history.push('/Exams/QuestionForm/' + id)
+  // }
+  // const DeleteHandler = (id) => {
+  //   if (window.confirm('do you really  want to delete')) {
+  //     axios
+  //       .delete('/Exams/deleteQuestion/'+id )
+  //       .then(res => {alert("Question Deleted ")})
+  //       .catch(() => {})
+  //   }
+  // }
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -55,74 +53,57 @@ export default function Batches (props) {
       hidden: true
     },
     {
-      dataField: 'name',
-      text: 'Name',
+      dataField: 'question',
+      text: 'question',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
-    },
-    {
-      dataField: 'description',
-      text: 'Description',
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses
-    },
-    {
-      dataField: 'c.name',
-      text: 'Class',
-      sort: true,
-      //cellClasses: 'bg-primary',
-      //headerClasses: 'bg-primary',
-      
-      sortCaret: sortCaret, 
-      headerSortingClasses
-    },
-    {
-      dataField: 'action',
-      text: 'Actions',
-      formatter: ExamActionFormatter,
-      formatExtraData: {
-        EditAction: EditHandler,
-        DeleteAction: DeleteHandler,
-        ShowQuestions:GetQuestionHandler,
-      },
-      classes: 'text-right pr-0',
-      headerClasses: 'text-right pr-3',
-      style: {
-        minWidth: '100px'
-      }
-    }
+    },    
+   
+    // {
+    //   dataField: 'action',
+    //   text: 'Actions',
+    //   formatter: ExamActionFormatter,
+    //   formatExtraData: {
+    //     EditAction: EditHandler,
+    //     DeleteAction: DeleteHandler
+    //   },
+    //   classes: 'text-right pr-0',
+    //   headerClasses: 'text-right pr-3',
+    //   style: {
+    //     minWidth: '100px'
+    //   }
+    // }
     
   ]
 
-  useEffect(() => {
-    debugger
-    axios.get('/api/Examination/getAllExams')
-      .then(res => {
-      debugger;         
-          setExams(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
+  // useEffect(() => {
+  //   debugger
+  //   axios.get('/api/Examination/getQuestionListExam/'+id)
+  //     .then(res => {
+  //     debugger;         
+  //     setQuestions(res.data)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [id])
 
   return (
     <div>
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title='Examinations'>
+            <CardHeader title='Exam Question'>
               <CardHeaderToolbar>
                 <button
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                  history.push('/Exams/ExamForm')
+                  history.push('/Exams/'+id+'/QuestionForm/')
                   }}
                 >
-                  create Exam
+                  add Question
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
@@ -133,7 +114,7 @@ export default function Batches (props) {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Exams}
+                        data={questions}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'
