@@ -26,14 +26,13 @@ export default function QuestionOptionForm ({
           onChange={event => {
             setOptionvalue(event.target.value, index)
           }}
-        />
-
-        <Form.Label>Right Answer</Form.Label>
-        <Form.Control
-          className='col-md-6'
+        /></div>
+<div className='col-md-2'>
+<Form.Label>Right Answer</Form.Label>
+<Form.Check label="Do not check if it is wrong Answer" checked={option.isRight} 
           type='checkbox'
           placeholder='question'
-          checked= { JSON.parse(option.isRight)}
+           checked= { JSON.parse(option.isRight)}
           onChange={event => {
               debugger;
             setIsRight(event.target.checked, index)
