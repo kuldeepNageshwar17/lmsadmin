@@ -4,6 +4,7 @@ import Exams from './pages/exam'
 import ExamForm from './pages/examForm'
 import ExamQuestionList from './pages/examQuestions'
 import QuestionForm from './pages/questionForm'
+import QuestionProfile from './pages/question'
 
 export default function Student() {
   return (
@@ -25,6 +26,9 @@ export default function Student() {
       </Route>  
       <Route exact path='/Exams/:id/QuestionForm/:qid'>
         <QuestionForm />
+      </Route>       
+      <Route exact path='/Exams/Question/:id'>
+        <QuestionProfile />
       </Route>       
     </Switch>
   )

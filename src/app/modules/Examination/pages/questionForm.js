@@ -31,6 +31,20 @@ export default function QuestionForm () {
         })
     }
   }, [id, qid])
+  useEffect(() => {
+    debugger
+    if(qid){
+      axios
+      .get('/api/Examination/getQuestion/' + qid)
+      .then(res => {
+        setQuestion(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+   
+  }, [qid])
 
   const saveQuestion = event => {
     event.preventDefault()

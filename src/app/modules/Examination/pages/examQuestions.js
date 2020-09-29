@@ -12,27 +12,34 @@ import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
 
 import BootstrapTable from 'react-bootstrap-table-next'
 
+
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import ExamActionFormatter from '../components/ExamActionFormatter'
+import ActionFormatter from '../components/ExamQuestionsActionFormatter'
 
-export default function Batches (props) {
+
+export default function ExamQuestions (props) {
   const {id} = useParams();
   const [questions, setQuestions] = useState([])
 
   let history = useHistory()
-  // const EditHandler = (id) => {
-  //   history.push('/Exams/QuestionForm/' + id)
-  // }
-  // const DeleteHandler = (id) => {
-  //   if (window.confirm('do you really  want to delete')) {
-  //     axios
-  //       .delete('/Exams/deleteQuestion/'+id )
-  //       .then(res => {alert("Question Deleted ")})
-  //       .catch(() => {})
-  //   }
-  // }
+  const EditHandler = (qid) => {
+    debugger;
+    history.push('/Exams/'+id+'/QuestionForm/' + qid)
+  }
+  const DeleteHandler = (id) => {
+    if (window.confirm('do you really  want to delete')) {
+      axios
+        .delete('/Exams/deleteQuestion/'+id )
+        .then(res => {alert("Question Deleted ")})
+        .catch(() => {})
+    }
+  }
+  const ShowHandler=(id)=>{
+    history.push('/Exams/Question/' + id)
+
+  }
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -50,7 +57,7 @@ export default function Batches (props) {
     {
       dataField: '_id',
       text: 'ID',
-      hidden: true
+      hidden: false
     },
     {
       dataField: 'question',
@@ -60,34 +67,35 @@ export default function Batches (props) {
       headerSortingClasses
     },    
    
-    // {
-    //   dataField: 'action',
-    //   text: 'Actions',
-    //   formatter: ExamActionFormatter,
-    //   formatExtraData: {
-    //     EditAction: EditHandler,
-    //     DeleteAction: DeleteHandler
-    //   },
-    //   classes: 'text-right pr-0',
-    //   headerClasses: 'text-right pr-3',
-    //   style: {
-    //     minWidth: '100px'
-    //   }
-    // }
+    {
+      dataField: 'action',
+      text: 'Actions',
+       formatter: ActionFormatter,
+      formatExtraData: {
+        EditAction: EditHandler,
+        DeleteAction: DeleteHandler,
+        ShowQuestion:ShowHandler
+      },
+      classes: 'text-right pr-0',
+      headerClasses: 'text-right pr-3',
+      style: {
+        minWidth: '100px'
+      }
+    }
     
   ]
 
-  // useEffect(() => {
-  //   debugger
-  //   axios.get('/api/Examination/getQuestionListExam/'+id)
-  //     .then(res => {
-  //     debugger;         
-  //     setQuestions(res.data)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }, [id])
+  useEffect(() => {
+    debugger
+    axios.get('/api/Examination/getQuestionListExam/'+id)
+      .then(res => {
+      debugger;         
+      setQuestions(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [id])
 
   return (
     <div>
@@ -108,7 +116,7 @@ export default function Batches (props) {
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-              {Batches ? (
+              {questions ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (

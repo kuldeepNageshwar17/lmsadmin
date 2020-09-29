@@ -17,7 +17,7 @@ import paginationFactory, {
 } from 'react-bootstrap-table2-paginator'
 import ExamActionFormatter from '../components/ExamActionFormatter'
 
-export default function Batches (props) {
+export default function Exams (props) {
   const [Exams, setExams] = useState([])
 
   let history = useHistory()
@@ -127,7 +127,7 @@ export default function Batches (props) {
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-              {Batches ? (
+              {Exams ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
