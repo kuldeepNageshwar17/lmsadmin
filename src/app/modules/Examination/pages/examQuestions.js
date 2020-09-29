@@ -57,7 +57,7 @@ export default function ExamQuestions (props) {
     {
       dataField: '_id',
       text: 'ID',
-      hidden: false
+      hidden: true
     },
     {
       dataField: 'question',

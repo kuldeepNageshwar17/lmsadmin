@@ -33,17 +33,16 @@ export default function QuestionForm () {
   }, [id, qid])
   useEffect(() => {
     debugger
-    if(qid){
+    if (qid) {
       axios
-      .get('/api/Examination/getQuestion/' + qid)
-      .then(res => {
-        setQuestion(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .get('/api/Examination/getQuestion/' + qid)
+        .then(res => {
+          setQuestion(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-   
   }, [qid])
 
   const saveQuestion = event => {
@@ -101,32 +100,37 @@ export default function QuestionForm () {
     <div>
       <div className='row'>
         <div className='col-md-12'>
-          <Card>
-            <Card.Body>
-              <Form onSubmit={saveQuestion} className='form'>
+          <Form onSubmit={saveQuestion} className='form'>
+            <Card>
+              <Card.Body>
                 <Form.Group controlId='formTitle' className='row'>
-                <div className='col-md-6'>
-                  <Form.Label>Question</Form.Label>
-                  <Form.Control
-                    required={true}
-                    type='text'
-                    placeholder='question'
-                    value={Question.question}
-                    onChange={event =>
-                      setQuestion({ ...Question, question: event.target.value })
-                    }
-                  />
-                  {/* <Form.Text className='text-muted'>Question Name</Form.Text> */}
-                 </div><div className='col-md-6'>
-                  <Form.Label>Question Image If Any </Form.Label>
-                  <Form.Control
-                    type='file'
-                    name='question'
-                    onChange={async event => {
-                      var imagepath = await uploadFile(event.target.files)
-                      setQuestion({ ...Question, imagePath: imagepath })
-                    }}
-                  /> </div>
+                  <div className='col-md-6'>
+                    <Form.Label>Question</Form.Label>
+                    <Form.Control
+                      required={true}
+                      type='text'
+                      placeholder='question'
+                      value={Question.question}
+                      onChange={event =>
+                        setQuestion({
+                          ...Question,
+                          question: event.target.value
+                        })
+                      }
+                    />
+                    {/* <Form.Text className='text-muted'>Question Name</Form.Text> */}
+                  </div>
+                  <div className='col-md-6'>
+                    <Form.Label>Question Image If Any </Form.Label>
+                    <Form.Control
+                      type='file'
+                      name='question'
+                      onChange={async event => {
+                        var imagepath = await uploadFile(event.target.files)
+                        setQuestion({ ...Question, imagePath: imagepath })
+                      }}
+                    />
+                  </div>
                 </Form.Group>
                 {Question.options.map((item, index) => {
                   return (
@@ -141,16 +145,25 @@ export default function QuestionForm () {
                   )
                 })}
 
-                <Button variant='info' size="sm" type='button ' onClick={ (event )=>{ event.preventDefault();addNewOption()}}>
+                <Button
+                  variant='info'
+                  size='sm'
+                  type='button '
+                  onClick={event => {
+                    event.preventDefault()
+                    addNewOption()
+                  }}
+                >
                   Add More Option
                 </Button>
-               
-              </Form>
-            </Card.Body>
-            <Card.Footer> <Button variant='primary' type='submit'>
+              </Card.Body>
+              <Card.Footer>
+                <Button variant='primary' type='submit'>
                   Submit
-                </Button></Card.Footer>
-          </Card>
+                </Button>
+              </Card.Footer>
+            </Card>
+          </Form>
         </div>
       </div>
     </div>
