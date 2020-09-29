@@ -96,6 +96,14 @@ export default function QuestionForm () {
       options: option
     })
   }
+  const deleteOptionRow=(index)=>{
+    let option = Question.options
+    option.splice(index,1)
+    setQuestion({
+      ...Question,
+      options: option
+    })
+  }
   return (
     <div>
       <div className='row'>
@@ -141,6 +149,8 @@ export default function QuestionForm () {
                       setOptionvalue={setOptionvalue}
                       setIamgeValue={setIamgeValue}
                       setIsRight={setIsRight}
+                      deleteOptionHandler={deleteOptionRow}
+
                     />
                   )
                 })}
