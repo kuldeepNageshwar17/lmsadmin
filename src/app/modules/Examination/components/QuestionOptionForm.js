@@ -31,8 +31,7 @@ export default function QuestionOptionForm ({
           className='col-md-6'
           type='checkbox'
           placeholder='question'
-          checked={option.isRight}
-        //   value={option.isRight}
+          checked= { JSON.parse(option.isRight)}
           onChange={event => {
               debugger;
             setIsRight(event.target.checked, index)
