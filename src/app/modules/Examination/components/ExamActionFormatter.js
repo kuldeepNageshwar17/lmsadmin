@@ -14,7 +14,7 @@ export default function ExamActionFormatter (
   return (
     <>
     <a
-        title='Edit Branch'
+        title='Add Questions'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => ShowQuestions(row._id)}
       >
@@ -26,7 +26,7 @@ export default function ExamActionFormatter (
       </a>
 
       <a
-        title='Edit Branch'
+        title='Edit Exam'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => EditAction(row._id)}
       >
@@ -38,7 +38,7 @@ export default function ExamActionFormatter (
       </a>
 
       <a
-        title='Delete Branch'
+        title='Delete Question'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
         onClick={() => DeleteAction(row._id)}
       >

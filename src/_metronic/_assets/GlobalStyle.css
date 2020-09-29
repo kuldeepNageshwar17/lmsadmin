@@ -12,7 +12,7 @@
 .sortable span.svg-icon-sort{display:none ;}
 .LgnMsg{}
 .loginSgnUp{background: #a1a1a1; color: #fff;}
-
+.addMoreBrd{border-bottom: solid 1px #efefef; margin-bottom: 20px;}
 .loginInput .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
 .loginInput .btn-primary{background-color: #A1A1A1;border-color: #A1A1A1;}
 .login-forgot .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}

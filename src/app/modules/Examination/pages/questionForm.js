@@ -89,8 +89,9 @@ export default function QuestionForm () {
         <div className='col-md-12'>
           <Card>
             <Card.Body>
-              <Form onSubmit={saveQuestion}>
-                <Form.Group controlId='formTitle'>
+              <Form onSubmit={saveQuestion} className='form'>
+                <Form.Group controlId='formTitle' className='row'>
+                <div className='col-md-6'>
                   <Form.Label>Question</Form.Label>
                   <Form.Control
                     required={true}
@@ -102,9 +103,8 @@ export default function QuestionForm () {
                     }
                   />
                   {/* <Form.Text className='text-muted'>Question Name</Form.Text> */}
-                </Form.Group>
-                <Form.Group controlId='formClass'>
-                  <Form.Label>question Image If Any </Form.Label>
+                 </div><div className='col-md-6'>
+                  <Form.Label>Question Image If Any </Form.Label>
                   <Form.Control
                     type='file'
                     name='question'
@@ -112,9 +112,7 @@ export default function QuestionForm () {
                       var imagepath = await uploadFile(event.target.files)
                       setQuestion({ ...Question, imagePath: imagepath })
                     }}
-                  />
-
-                  <Form.Text className='text-muted'> select File</Form.Text>
+                  /> </div>
                 </Form.Group>
                 {Question.options.map((item, index) => {
                   return (
@@ -129,14 +127,15 @@ export default function QuestionForm () {
                   )
                 })}
 
-                <Button variant='primary' type='button ' onClick={ (event )=>{ event.preventDefault();addNewOption()}}>
-                  add option
+                <Button variant='info' size="sm" type='button ' onClick={ (event )=>{ event.preventDefault();addNewOption()}}>
+                  Add More Option
                 </Button>
-                <Button variant='primary' type='submit'>
-                  Submit
-                </Button>
+               
               </Form>
             </Card.Body>
+            <Card.Footer> <Button variant='primary' type='submit'>
+                  Submit
+                </Button></Card.Footer>
           </Card>
         </div>
       </div>

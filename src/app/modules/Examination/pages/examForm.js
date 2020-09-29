@@ -59,11 +59,12 @@ export default function ExamForm () {
   return (
     <div>
       <div className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12'>
           <Card>
             <Card.Body>
-              <Form onSubmit={saveExam}>
-                <Form.Group controlId='formTitle'>
+              <Form onSubmit={saveExam} className='form'>
+                <Form.Group controlId='formTitle' className='row'>
+                <div className='col-md-4'>
                   <Form.Label>Exam Name</Form.Label>
                   <Form.Control
                   required="true"
@@ -74,14 +75,11 @@ export default function ExamForm () {
                       setExam({ ...Exam, name: event.target.value })
                     }
                   />
-                  <Form.Text className='text-muted'>Exam Name</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formClass'>
+                  </div>
+                  <div className='col-md-4'>
                   <Form.Label>Select Class </Form.Label>
                   <Form.Control
-                                    required="true"
-
+                   required="true"
                     as='select'
                     placeholder=''
                     // disabled={Exam._id?"true":"false"}
@@ -97,9 +95,9 @@ export default function ExamForm () {
                       </option>
                     ))}
                   </Form.Control>
-                  <Form.Text className='text-muted'>Class</Form.Text>
-                </Form.Group>             
-                <Form.Group controlId='formTitle'>
+                  </div>
+                  <div className='col-md-4'>
+                 
                   <Form.Label>Exam description</Form.Label>
                   <Form.Control
                                     required="true"
@@ -110,8 +108,7 @@ export default function ExamForm () {
                     onChange={event =>
                       setExam({ ...Exam, description: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Exam description</Form.Text>
+                  /></div>
                 </Form.Group>
 
               

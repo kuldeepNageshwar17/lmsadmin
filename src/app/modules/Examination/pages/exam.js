@@ -122,7 +122,7 @@ export default function Batches (props) {
                   history.push('/Exams/ExamForm')
                   }}
                 >
-                  create Exam
+                  Create Exam
                 </button>
               </CardHeaderToolbar>
             </CardHeader>

@@ -103,7 +103,7 @@ export default function Batches (props) {
                   history.push('/Exams/'+id+'/QuestionForm/')
                   }}
                 >
-                  add Question
+                  Add Question
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
