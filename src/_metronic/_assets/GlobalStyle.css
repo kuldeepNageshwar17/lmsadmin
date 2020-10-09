@@ -21,6 +21,10 @@
 .StdPrfl label.form-label{border-left: solid 2px #3699FF;font-size: 14px; display: block;line-height: 2; padding-left: 10px;margin-bottom: 20px;}
 .ANewSec button{width: 100%; text-align: left;} 
 .brd_b{border-bottom: solid 1px #f3f6f9; padding-bottom: 5px; padding-top: 5px;}
+.qstnOpt{}
+.qstnTtl{font-size: 18px; padding-bottom: 5px;border-bottom: solid 1px #afafaf;margin-bottom: 10px;}
+.qstnOpt h3{font-size: 14px;margin-bottom: 10px;}
+/* .qstnOpt .form-check input:disabled{background: red;color: green !important;} */
 .emp-profile{
     padding: 3%;
     margin-top: 3%;

@@ -59,7 +59,7 @@ export default function BatchForm () {
   return (
     <div>
       <div className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-12'>
           <Card>
             <Card.Body>
               <Form onSubmit={saveBatch}>
@@ -72,11 +72,7 @@ export default function BatchForm () {
                     onChange={event =>
                       setBatch({ ...Batch, name: event.target.value })
                     }
-                  />
-                  <Form.Text className='text-muted'>Batch Name</Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId='formClass'>
+                  /> 
                   <Form.Label>Select Class </Form.Label>
                   <Form.Control
                     as='select'
@@ -95,8 +91,7 @@ export default function BatchForm () {
                     ))}
                   </Form.Control>
                   <Form.Text className='text-muted'>Class</Form.Text>
-                </Form.Group>             
-                <Form.Group controlId='formTitle'>
+                
                   <Form.Label>Batch description</Form.Label>
                   <Form.Control
                     type='text'
