@@ -94,22 +94,7 @@ export function AsideMenuList ({ layoutProps }) {
                           <span className='menu-text'>Students</span>
                         </span>
                       </li>
-                      <li
-                        className={`menu-item ${getMenuItemActive(
-                          '/Student/Testprofile'
-                        )}`}
-                        aria-haspopup='true'
-                      >
-                        <NavLink
-                          className='menu-link'
-                          to='/Student/Testprofile'
-                        >
-                          <i className='menu-bullet menu-bullet-dot'>
-                            <span />
-                          </i>
-                          <span className='menu-text'>StudentProfile</span>
-                        </NavLink>
-                      </li>
+                     
                     </ul>
                   </div>
                 </li>
@@ -143,22 +128,7 @@ export function AsideMenuList ({ layoutProps }) {
                           <span className='menu-text'>User</span>
                         </span>
                       </li>
-                      <li
-                        className={`menu-item ${getMenuItemActive(
-                          '/user/Testprofile'
-                        )}`}
-                        aria-haspopup='true'
-                      >
-                        <NavLink
-                          className='menu-link'
-                          to='/user/Testprofile'
-                        >
-                          <i className='menu-bullet menu-bullet-dot'>
-                            <span />
-                          </i>
-                          <span className='menu-text'>UserProfile</span>
-                        </NavLink>
-                      </li>
+                      
                     </ul>
                   </div>
                 </li>

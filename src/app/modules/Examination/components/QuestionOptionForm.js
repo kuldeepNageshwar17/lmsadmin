@@ -21,7 +21,7 @@ export default function QuestionOptionForm ({
           <Form.Control
             required={true}
             type='text'
-            placeholder='question'
+            placeholder='option'
             value={option.option}
             onChange={event => {
               setOptionvalue(event.target.value, index)

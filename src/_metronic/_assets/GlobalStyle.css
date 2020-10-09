@@ -1,40 +1,131 @@
-.LoginBg{background: url(images/login_bg.jpg);}
-.loginAside{background: #dcdcda;}
-.loginAsideFooter{background: #a1a1a1;}
+.LoginBg {
+    background: url(./images/login_bg.jpg);
+}
 
-#kt_login_signin_form .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;color: #000;}
-#kt_login_signin_form .checkbox > span {background-color: #e6e6e6; border: 1px solid  #A1A1A1;}
-#kt_login_signin_form .checkbox > input:checked ~ span:after{border: 1px solid  #000;}
-#kt_login_signin_form .btnCan {background: #fff;border-color: #a1a1a1;color: #000;}
-#kt_login_signin_form .btnSub {background: #a6a6a6; border-color: #a1a1a1;color: #000;}
-.loginSgnUp .text-dark-50{color: #000 !important;}
-.loginSgnUp a{color: #fff;text-decoration: none;}
-.sortable span.svg-icon-sort{display:none ;}
-.LgnMsg{}
-.loginSgnUp{background: #a1a1a1; color: #fff;}
-.addMoreBrd{border-bottom: solid 1px #efefef; margin-bottom: 20px;}
-.loginInput .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
-.loginInput .btn-primary{background-color: #A1A1A1;border-color: #A1A1A1;}
-.login-forgot .form-control.form-control-solid {background-color: #E6E6E6;border-color: #A1A1A1;}
-#kt_login_forgot_cancel.btnCan {background: #fff;border-color: #a1a1a1;color: #000;}
-#kt_login_forgot_submit.btnSub {background: #a6a6a6; border-color: #a1a1a1;color: #000;}
-.StdPrfl label.form-label{border-left: solid 2px #3699FF;font-size: 14px; display: block;line-height: 2; padding-left: 10px;margin-bottom: 20px;}
-.ANewSec button{width: 100%; text-align: left;} 
-.brd_b{border-bottom: solid 1px #f3f6f9; padding-bottom: 5px; padding-top: 5px;}
-.emp-profile{
+.loginAside {
+    background: #dcdcda;
+}
+
+.loginAsideFooter {
+    background: #a1a1a1;
+}
+
+#kt_login_signin_form .form-control.form-control-solid {
+    background-color: #E6E6E6;
+    border-color: #A1A1A1;
+    color: #000;
+}
+
+#kt_login_signin_form .checkbox>span {
+    background-color: #e6e6e6;
+    border: 1px solid #A1A1A1;
+}
+
+#kt_login_signin_form .checkbox>input:checked~span:after {
+    border: 1px solid #000;
+}
+
+#kt_login_signin_form .btnCan {
+    background: #fff;
+    border-color: #a1a1a1;
+    color: #000;
+}
+
+#kt_login_signin_form .btnSub {
+    background: #a6a6a6;
+    border-color: #a1a1a1;
+    color: #000;
+}
+
+.loginSgnUp .text-dark-50 {
+    color: #000 !important;
+}
+
+.loginSgnUp a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sortable span.svg-icon-sort {
+    display: none;
+}
+
+.LgnMsg {}
+
+.loginSgnUp {
+    background: #a1a1a1;
+    color: #fff;
+}
+
+.addMoreBrd {
+    border-bottom: solid 1px #efefef;
+    margin-bottom: 20px;
+}
+
+.loginInput .form-control.form-control-solid {
+    background-color: #E6E6E6;
+    border-color: #A1A1A1;
+}
+
+.loginInput .btn-primary {
+    background-color: #A1A1A1;
+    border-color: #A1A1A1;
+}
+
+.login-forgot .form-control.form-control-solid {
+    background-color: #E6E6E6;
+    border-color: #A1A1A1;
+}
+
+#kt_login_forgot_cancel.btnCan {
+    background: #fff;
+    border-color: #a1a1a1;
+    color: #000;
+}
+
+#kt_login_forgot_submit.btnSub {
+    background: #a6a6a6;
+    border-color: #a1a1a1;
+    color: #000;
+}
+
+.StdPrfl label.form-label {
+    border-left: solid 2px #3699FF;
+    font-size: 14px;
+    display: block;
+    line-height: 2;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.ANewSec button {
+    width: 100%;
+    text-align: left;
+}
+
+.brd_b {
+    border-bottom: solid 1px #f3f6f9;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.emp-profile {
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background: #fff;
 }
-.profile-img{
+
+.profile-img {
     text-align: center;
 }
-.profile-img img{
+
+.profile-img img {
     width: 70%;
     height: 100%;
 }
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -45,16 +136,37 @@
     font-size: 15px;
     background: #212529b8;
 }
-.profile-img .file input {position: absolute;opacity: 0; right: 0; top: 0;}
-.profile-head h5{color: #333;display: inline;}
-.profile-head .btn-text{color:#3699ff;}
-.proBtn .EBtn{color:#3699ff;color: #3699ff;
+
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+
+.profile-head h5 {
+    color: #333;
+    display: inline;
+}
+
+.profile-head .btn-text {
+    color: #3699ff;
+}
+
+.proBtn .EBtn {
+    color: #3699ff;
+    color: #3699ff;
     border-right: solid 1px;
     border-left: solid 1px;
     padding-top: 5px;
-    padding-bottom: 5px}
-.proBtn .CPass{color:#444444;}
-.profile-edit-btn{
+    padding-bottom: 5px
+}
+
+.proBtn .CPass {
+    color: #444444;
+}
+
+.profile-edit-btn {
     border: none;
     border-radius: 1.5rem;
     width: 70%;
@@ -63,50 +175,61 @@
     color: #6c757d;
     cursor: pointer;
 }
-.proile-rating{
+
+.proile-rating {
     font-size: 12px;
     color: #818182;
     margin-top: 5%;
 }
-.proile-rating span{
+
+.proile-rating span {
     color: #495057;
     font-size: 15px;
     font-weight: 600;
 }
-.profile-head .nav-tabs{
-    margin-bottom:5%;
+
+.profile-head .nav-tabs {
+    margin-bottom: 5%;
 }
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
+
+.profile-head .nav-tabs .nav-link {
+    font-weight: 600;
     border: none;
 }
-.profile-head .nav-tabs .nav-link.active{
+
+.profile-head .nav-tabs .nav-link.active {
     border: none;
-    border-bottom:2px solid #0062cc;
+    border-bottom: 2px solid #0062cc;
 }
-.profile-work{
+
+.profile-work {
     padding: 14%;
     margin-top: -15%;
 }
-.profile-work p{
+
+.profile-work p {
     font-size: 12px;
     color: #818182;
     font-weight: 600;
     margin-top: 10%;
 }
-.profile-work a{
+
+.profile-work a {
     text-decoration: none;
     color: #495057;
     font-weight: 600;
     font-size: 14px;
 }
-.profile-work ul{
+
+.profile-work ul {
     list-style: none;
 }
-.profile-tab label{
+
+.profile-tab label {
     font-weight: 600;
 }
-.profile-tab p{
+
+.profile-tab p {
     font-weight: 600;
     color: #0062cc;
 }

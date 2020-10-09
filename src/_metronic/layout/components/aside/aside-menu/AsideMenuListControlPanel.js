@@ -92,27 +92,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
           </NavLink>
 
 
-          <div className='menu-submenu '>
-            <ul className='menu-subnav'>
-              <li className='menu-item  menu-item-parent' aria-haspopup='true'>
-                <span className='menu-link'>
-                  <span className='menu-text'>Users</span>
-                </span>
-              </li>
-              <li
-                className={`menu-item ${getMenuItemActive('/User/Testprofile')}`}
-                aria-haspopup='true'
-              >
-                <NavLink className='menu-link' to='/User/Testprofile'>
-                  <i className='menu-bullet menu-bullet-dot'>
-                    <span />
-                  </i>
-                  <span className='menu-text'>UserProfile</span>
-                </NavLink>
-              </li>         
-            </ul>
-          </div>
-
+         
 
         </li>
          {/* Components */}

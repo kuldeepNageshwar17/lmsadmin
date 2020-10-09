@@ -28,9 +28,6 @@ const Student = lazy(() =>
 const Exams = lazy(() =>
   import("./modules/Examination")
 );
-
-
-
 export default function BasePage() {
     // useEffect(() => {
     //   console.log('Base page');

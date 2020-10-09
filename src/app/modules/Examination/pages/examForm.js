@@ -5,10 +5,14 @@ import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default function ExamForm () {
-  const [Exam, setExam] = useState({   
+  const [Exam, setExam] = useState({
     name: '',
     description: '',
-    class:"",
+    class: '',
+    totalMarks: '',
+    timeInHours: '',
+    timeInMinutes: '',
+    passingMarks: ''
   })
   const [Classes, setClasses] = useState([])
   // const [Years, setYears] = useState([])
@@ -25,21 +29,18 @@ export default function ExamForm () {
       .catch(err => {
         console.log(err)
       })
-   
-    debugger;
-    if(id)
-    {
-      axios
-      .get('/api/Examination/getExam/' + id)
-      .then(res => {
-        debugger;
-        if(res.data)
-        setExam(res.data)
-      })
-      .catch(err => {
-        console.log(err)
 
-      })
+    debugger
+    if (id) {
+      axios
+        .get('/api/Examination/getExam/' + id)
+        .then(res => {
+          debugger
+          if (res.data) setExam(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }, [id])
 
@@ -64,54 +65,102 @@ export default function ExamForm () {
             <Card.Body>
               <Form onSubmit={saveExam} className='form'>
                 <Form.Group controlId='formTitle' className='row'>
-                <div className='col-md-4'>
-                  <Form.Label>Exam Name</Form.Label>
-                  <Form.Control
-                  required="true"
-                    type='text'
-                    placeholder='Exam Name'
-                    value={Exam.name}
-                    onChange={event =>
-                      setExam({ ...Exam, name: event.target.value })
-                    }
-                  />
+                  <div className='col-md-4'>
+                    <Form.Label>Exam Name</Form.Label>
+                    <Form.Control
+                      required='true'
+                      type='text'
+                      placeholder='Exam Name'
+                      value={Exam.name}
+                      onChange={event =>
+                        setExam({ ...Exam, name: event.target.value })
+                      }
+                    />
                   </div>
                   <div className='col-md-4'>
-                  <Form.Label>Select Class </Form.Label>
-                  <Form.Control
-                   required="true"
-                    as='select'
-                    placeholder=''
-                    // disabled={Exam._id?"true":"false"}
-                    value={Exam.class}
-                    onChange={event =>
-                      setExam({ ...Exam, class: event.target.value })
-                    }
-                  >
-                    <option>select class</option>
-                    {Classes.map(item => (
-                      <option value={item._id} key={item._id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </Form.Control>
+                    <Form.Label>Total Marks</Form.Label>
+                    <Form.Control
+                      required='true'
+                      type='number'
+                      placeholder='Total Marks'
+                      value={Exam.totalMarks}
+                      onChange={event =>
+                        setExam({ ...Exam, totalMarks: event.target.value })
+                      }
+                    />
                   </div>
                   <div className='col-md-4'>
-                 
-                  <Form.Label>Exam description</Form.Label>
-                  <Form.Control
-                                    required="true"
+                    <Form.Label>passing  marks</Form.Label>
+                    <Form.Control
+                      required='true'
+                      type='number'
+                      placeholder='passing Marks'
+                      value={Exam.passingMarks}
+                      onChange={event =>
+                        setExam({ ...Exam, passingMarks: event.target.value })
+                      }
+                    />
+                  </div>
+                  <div className='col-md-4'>
+                    <Form.Label>Select Class </Form.Label>
+                    <Form.Control
+                      required='true'
+                      as='select'
+                      placeholder=''
+                      // disabled={Exam._id?"true":"false"}
+                      value={Exam.class}
+                      onChange={event =>
+                        setExam({ ...Exam, class: event.target.value })
+                      }
+                    >
+                      <option>select class</option>
+                      {Classes.map(item => (
+                        <option value={item._id} key={item._id}>
+                          {item.name}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </div>
 
-                    type='text'
-                    placeholder='Exam description'
-                    value={Exam.description}
-                    onChange={event =>
-                      setExam({ ...Exam, description: event.target.value })
-                    }
-                  /></div>
+                  <div className='col-md-4'>
+                    <Form.Label>Time in Hours</Form.Label>
+                    <Form.Control
+                      required='true'
+                      type='text'
+                      placeholder='time in  hours'
+                      value={Exam.timeInHours}
+                      onChange={event =>
+                        setExam({ ...Exam, timeInHours: event.target.value })
+                      }
+                    />
+                  </div>
+                  <div className='col-md-4'>
+                    <Form.Label>Time in Minutes</Form.Label>
+                    <Form.Control
+                      required='true'
+                      type='text'
+                      placeholder='time in  minutes'
+                      value={Exam.timeInMinutes}
+                      onChange={event =>
+                        setExam({ ...Exam, timeInMinutes: event.target.value })
+                      }
+                    />
+                  </div>
+
+                  <div className='col-md-12'>
+                    <Form.Label>Exam description</Form.Label>
+                    <Form.Control
+                      required='true'
+                      type='text'
+                      placeholder='Exam description'
+                      value={Exam.description}
+                      onChange={event =>
+                        setExam({ ...Exam, description: event.target.value })
+                      }
+                    />
+                  </div>
                 </Form.Group>
 
-              
                 <Button variant='primary' type='submit'>
                   Submit
                 </Button>

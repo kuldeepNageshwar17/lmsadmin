@@ -99,14 +99,15 @@ export default function Courses (props) {
     }
   ]
 
-  const [Courses, setCourse] = useState([])
+  // const [Courses, setCourse] = useState([])
+  const [Class, setClass] = useState([])
   useEffect(() => {
     debugger
     axios
       .get('/api/course/courseList/' + id)
       .then(res => {
         debugger
-        setCourse(res.data)
+        setClass(res.data)
       })
       .catch(err => {
         console.log(err)
@@ -118,7 +119,7 @@ export default function Courses (props) {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title='Course list'>
+            <CardHeader title={"Course list -> "+ Class.name}>
               <CardHeaderToolbar>
                 <button
                   type='button'
@@ -132,13 +133,13 @@ export default function Courses (props) {
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-            {Courses ? (
+            {Class.courses ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Courses}
+                        data={Class.courses}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'

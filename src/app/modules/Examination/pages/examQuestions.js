@@ -66,7 +66,13 @@ export default function ExamQuestions (props) {
       sortCaret: sortCaret,
       headerSortingClasses
     },    
-   
+    {
+      dataField: 'marks',
+      text: 'Marks',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    }, 
     {
       dataField: 'action',
       text: 'Actions',

@@ -67,7 +67,8 @@ export default function QuestionForm () {
       options: Question.options.concat({
         option: '',
         imagePath: '',
-        isRight: false
+        isRight: false,
+        marks:""
       })
     })
   }
@@ -128,6 +129,7 @@ export default function QuestionForm () {
                     />
                     {/* <Form.Text className='text-muted'>Question Name</Form.Text> */}
                   </div>
+
                   <div className='col-md-6'>
                     <Form.Label>Question Image If Any </Form.Label>
                     <Form.Control
@@ -139,7 +141,25 @@ export default function QuestionForm () {
                       }}
                     />
                   </div>
+                  <div className='col-md-6'>
+                    <Form.Label>Marks</Form.Label>
+                    <Form.Control
+                      required={true}
+                      type='Number'
+                      placeholder='question'
+                      value={Question.marks}
+                      onChange={event =>
+                        setQuestion({
+                          ...Question,
+                          marks: event.target.value
+                        })
+                      }
+                    />
+                    {/* <Form.Text className='text-muted'>Question Name</Form.Text> */}
+                  </div>
                 </Form.Group>
+
+
                 {Question.options.map((item, index) => {
                   return (
                     <QuestionOptionForm
