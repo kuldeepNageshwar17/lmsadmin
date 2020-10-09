@@ -45,7 +45,9 @@ export default function CourseSections () {
     axios
       .get('/api/course/course/' + id)
       .then(response => {
-        setCourse(response.data)
+        debugger
+        setCourse({...response.data.course,class:response.data.class})
+    
       })
       .catch(error => {
         console.log(error)
@@ -79,9 +81,11 @@ export default function CourseSections () {
           <div className='col-md-12'>
             <Card>
               <Card.Header as='h5'>
-                {course ? course.title : ''}
+                 {course && course.class ? course.class.name + '->' : ''}
+                  {course ? course.title : ''}
                 <Button
-                  variant='primary'className='btn btn-outline-primary ml-2 float-right'
+                  variant='primary'
+                  className='btn btn-outline-primary ml-2 float-right'
                   type='button'
                   onClick={() => {
                     if (history.length > 1) {
@@ -133,10 +137,13 @@ export default function CourseSections () {
                                   }}
                                 >
                                   <span className='svg-icon svg-icon-md'>
-          <SVG title='Edit Content'
-            src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
-          />
-        </span>
+                                    <SVG
+                                      title='Edit Content'
+                                      src={toAbsoluteUrl(
+                                        '/media/svg/icons/Communication/Write.svg'
+                                      )}
+                                    />
+                                  </span>
                                 </button>
                                 <button
                                   className=' btn btn-danger pull-right'
@@ -145,8 +152,13 @@ export default function CourseSections () {
                                   }}
                                 >
                                   <span className='svg-icon svg-icon-md'>
-          <SVG src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete Content' />
-        </span> 
+                                    <SVG
+                                      src={toAbsoluteUrl(
+                                        '/media/svg/icons/General/Trash.svg'
+                                      )}
+                                      title='Delete Content'
+                                    />
+                                  </span>
                                 </button>
                               </div>
                             </Col>
@@ -164,7 +176,9 @@ export default function CourseSections () {
                                   <Col className='secTitle'>{c.title}</Col>
 
                                   <Col className='secType'>{c.type}</Col>
-                                  <Col  className='secUrl'>{c.contentUrl ? 'true' : 'false'}</Col>
+                                  <Col className='secUrl'>
+                                    {c.contentUrl ? 'true' : 'false'}
+                                  </Col>
                                   <Col xs md='2' className='secAction'>
                                     <div
                                       className='btn-group float-right'

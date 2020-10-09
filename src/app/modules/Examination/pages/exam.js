@@ -27,8 +27,8 @@ export default function Exams (props) {
   const DeleteHandler = (id) => {
     if (window.confirm('do you really  want to delete')) {
       axios
-        .delete('/Exams/deleteExam', { id })
-        .then(res => {alert("Exam Deleted ")})
+        .delete('/api/Examination/deleteExam/'+id )
+        .then(res => {alert("Exam Deleted ");updateData() })
         .catch(() => {})
     }
   }
@@ -62,20 +62,42 @@ export default function Exams (props) {
       headerSortingClasses
     },
     {
-      dataField: 'description',
-      text: 'Description',
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses
-    },
-    {
-      dataField: 'c.name',
+      dataField: 'class',
       text: 'Class',
       sort: true,
       //cellClasses: 'bg-primary',
       //headerClasses: 'bg-primary',
       
       sortCaret: sortCaret, 
+      headerSortingClasses
+    },
+    
+    {
+      dataField: 'passingMarks',
+      text: 'passing',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'totalMarks',
+      text: 'Total',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'isComplete',
+      text: 'Status',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'description',
+      text: 'Description',
+      sort: true,
+      sortCaret: sortCaret,
       headerSortingClasses
     },
     {
@@ -95,17 +117,24 @@ export default function Exams (props) {
     }
     
   ]
+const updateData=()=>{
+  debugger
+  axios.get('/api/Examination/getAllExams')
+    .then(res => {
+    debugger;  
+    var exams = res.data.classes.reduce((arr, item)=>{
+      var newitem = item.examinations.map(i=>{ return  {...i,"class":item.name}})
+      return arr.concat(newitem)
+    },[])
 
+        setExams(exams)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
   useEffect(() => {
-    debugger
-    axios.get('/api/Examination/getAllExams')
-      .then(res => {
-      debugger;         
-          setExams(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    updateData()
   }, [])
 
   return (

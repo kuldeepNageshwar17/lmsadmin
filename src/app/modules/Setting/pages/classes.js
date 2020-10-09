@@ -24,8 +24,10 @@ export default function Classes (props) {
   const DeleteClassHandler = id => {
     if (window.confirm('do you really  want to delete')) {
       axios
-        .delete('/branch/class', { id: id })
-        .then(res => {})
+        .delete('/api/branch/class/'+id )
+        .then(res => {
+          updateData()
+        })
         .catch(() => {})
     }
   }
@@ -81,9 +83,7 @@ export default function Classes (props) {
       }
     }
   ]
-
-  const [Classes, setClasses] = useState(null)
-  useEffect(() => {
+  const updateData=()=>{
     debugger
     axios
       .get('/api/Branch/classes')
@@ -93,6 +93,11 @@ export default function Classes (props) {
       .catch(err => {
         console.log(err)
       })
+  }
+
+  const [Classes, setClasses] = useState(null)
+  useEffect(() => {
+    updateData()
   }, [])
 
   return (
