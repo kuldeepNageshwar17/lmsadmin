@@ -43,23 +43,22 @@ export default function Question () {
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-              <div>
-                <h3>Question</h3>
-                <div>{question.question}</div>
-                <h3>options</h3>
-                <div>
+              <div className='qstnOpt'>
+                {/* <h3>Question</h3> */}
+                <div className='qstnTtl'>{question.question}</div>
+                <h3>Options</h3>
+                <div className='row'>
                   {question.options &&
                     question.options.map(item => (
                       <>
-                        <div>{item.option}</div>
-                        <Form.Label></Form.Label>
-                        <Form.Control
-                          className='col-md-6'
-                          type='checkbox'
-                          placeholder='question'
-                          disabled
+                        <div className='mb-3 mt-3 col-4'> 
+                        <Form.Check
+            label={item.option}
+            type='checkbox'
+            placeholder='question'
+            disabled
                           checked={JSON.parse(item.isRight)}
-                        />
+          /></div>
                       </>
                     ))}
                 </div>
