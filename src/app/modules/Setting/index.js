@@ -14,6 +14,7 @@ import ContentText from './pages/ContentText'
 import ContentPdf from './pages/ContentPdf'
 import ContentVideo from './pages/ContentVideo'
 import ContentAudio from './pages/ContentAudio'
+import ContentAll from './pages/ContentAll'
 
 
 
@@ -55,6 +56,9 @@ export default function ECourse () {
       </Route>
       <Route exact path='/setting/course/:cid/sectionForm/:id'>
         < CourseSectionform />
+      </Route>
+      <Route exact path='/setting/course/section/:id/content'>
+        < ContentAll />
       </Route>
       <Route exact path='/setting/course/section/:id/content/text'>
         < ContentText />

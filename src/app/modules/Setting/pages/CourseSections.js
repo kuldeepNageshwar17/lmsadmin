@@ -46,8 +46,7 @@ export default function CourseSections () {
       .get('/api/course/course/' + id)
       .then(response => {
         debugger
-        setCourse({...response.data.course,class:response.data.class})
-    
+        setCourse({ ...response.data.course, class: response.data.class })
       })
       .catch(error => {
         console.log(error)
@@ -81,8 +80,8 @@ export default function CourseSections () {
           <div className='col-md-12'>
             <Card>
               <Card.Header as='h5'>
-                 {course && course.class ? course.class.name + '->' : ''}
-                  {course ? course.title : ''}
+                {course && course.class ? course.class.name + '->' : ''}
+                {course ? course.title : ''}
                 <Button
                   variant='primary'
                   className='btn btn-outline-primary ml-2 float-right'
@@ -125,10 +124,27 @@ export default function CourseSections () {
                                 role='group'
                                 aria-label=''
                               >
-                                <AddContentButton
+                                {/* <AddContentButton
                                   sectionId={item._id}
                                   courseId={id}
-                                />
+                                /> */}
+                                <button
+                                className="btn btn-primary"
+                                  onClick={() => {
+                                    history.push(`/Test/Course/${item._id}/tests`)
+                                  }}
+                                >
+                                  Add Test
+                                </button>
+                                <button
+                                 className="btn btn-primary"
+                                  onClick={() => {
+                                    history.push(`/setting/course/section/${item._id}/content/`)
+                                  }}
+                                >
+                                  Add Content
+                                </button>
+
                                 <button
                                   className=' btn btn-primary pull-right'
                                   style={{ marginLeft: 'auto' }}

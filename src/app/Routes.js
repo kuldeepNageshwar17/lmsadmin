@@ -41,6 +41,6 @@ export function Routes() {
                     <BasePage/>
                 </Layout>
             )} 
-        </Switch>
+        </Switch>   
     );
 }

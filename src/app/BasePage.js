@@ -28,6 +28,10 @@ const Student = lazy(() =>
 const Exams = lazy(() =>
   import("./modules/Examination")
 );
+
+const Tests = lazy(() =>
+  import("./modules/Test")
+);
 export default function BasePage() {
     // useEffect(() => {
     //   console.log('Base page');
@@ -50,8 +54,9 @@ export default function BasePage() {
                 <ContentRoute path="/user" component={User}/>   
                 <ContentRoute path="/Student" component={Student}/>    
                 <ContentRoute path="/Exams" component={Exams}/>    
+                <ContentRoute path="/Test" component={Tests}/>    
  
-                <Redirect to="/error/error-v1"/>
+                {/* <Redirect to="/error/error-v1"/> */}
             </Switch>
         </Suspense>
     );
