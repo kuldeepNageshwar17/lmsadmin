@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-export default function ExamForm () {
+export default function TestForm () {
   const [Test, setTest] = useState({
     name: '',
     description: '',
@@ -17,44 +17,35 @@ export default function ExamForm () {
   const [Class, setClasses] = useState([])
   // const [Years, setYears] = useState([])
 
-  let { id } = useParams()
+  let { id ,  TId } = useParams()
   let history = useHistory()
   useEffect(() => {
+    
     debugger
-    // axios
-    //   .get('/api/Examination/getAllClasssesDdr')
-    //   .then(res => {
-    //     setClasses(res.data.classes)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-
-    // debugger
-    // if (id) {
-    //   axios
-    //     .get('/api/Examination/getExam/' + id)
-    //     .then(res => {
-    //       debugger
-    //       if (res.data) setTest(res.data)
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // }
+    if (id) {
+      console.log(id , TId)
+      axios.get(`/api/Test/getTestById/${TId}`)
+    .then(res => {
+    debugger;
+    console.log("res" , res)
+    setTest(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    }
   }, [id])
 
   const saveTest = event => {
     event.preventDefault()
-    debugger
-    // axios
-    //   .post('/api/Test/:id/saveExamDetails', Test)
-    //   .then(res => {
-    //     history.push('/Exams')
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
+    axios
+      .post(`/api/Test/${id}/saveTestDetails`, Test)
+      .then(res => {
+        history.push(`/Test/Course/${id}/tests`)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   return (
@@ -95,6 +86,7 @@ export default function ExamForm () {
                       required='true'
                       type='number'
                       placeholder='passing Marks'
+                      value={Test.passingMarks}
                       onChange={event =>
                         setTest({ ...Test, passingMarks: event.target.value })
                       }

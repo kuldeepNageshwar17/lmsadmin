@@ -9,31 +9,29 @@ export default function TestActionFormatter (
   cellContent,
   row,
   rowIndex,
-  { EditAction, DeleteAction, ShowQuestions }
+  { EditAction, DeleteAction,ShowQuestion}
 ) {
   return (
     <>
-      <a
-        title='Add Questions'
+    <a
+        title='Show question'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => ShowQuestions(row._id)}
+        onClick={() =>{ debugger; ShowQuestion(row._id)}}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG
-            title='Show'
+          <SVG title='Show Question'
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
       </a>
 
       <a
-        title='Edit Test'
+        title='Edit Question'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => EditAction(row._id)}
+        onClick={() =>EditAction(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG
-            title='Edit Test'
+          <SVG title='Edit Question'
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
@@ -42,13 +40,11 @@ export default function TestActionFormatter (
       <a
         title='Delete Question'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
-        onClick={() => DeleteAction(row._id)}
+        onClick={() =>DeleteAction(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-danger'>
-          <SVG
-            src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')}
-            title='Delete Test'
-          />
+          <SVG  src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete 
+          Question' />
         </span>
       </a>
     </>
