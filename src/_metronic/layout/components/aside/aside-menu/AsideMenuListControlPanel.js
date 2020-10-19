@@ -32,7 +32,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
         {/*end::1 Level*/}
 
         {/*begin::1 Level*/}
-          {/*end::1 Level*/}
+        {/*end::1 Level*/}
         <li
           className={`menu-item ${getMenuItemActive('/setting', false)}`}
           aria-haspopup='true'
@@ -90,16 +90,10 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             <span className='menu-text'>Users</span>
             <i className='menu-arrow' />
           </NavLink>
-
-
-         
-
         </li>
-         {/* Components */}
+        {/* Components */}
 
-
-
-         <li
+        <li
           className={`menu-item ${getMenuItemActive('/Exams', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -112,17 +106,64 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             <i className='menu-arrow' />
           </NavLink>
 
-
           <div className='menu-submenu '>
             <ul className='menu-subnav'>
               <li className='menu-item  menu-item-parent' aria-haspopup='true'>
                 <span className='menu-link'>
                   <span className='menu-text'>Examination</span>
                 </span>
-              </li>                   
+              </li>
+             
             </ul>
           </div>
         </li>
+
+        <li
+          className={`menu-item ${getMenuItemActive('/permission', false)}`}
+          aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/permission'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Permission</span>
+            <i className='menu-arrow' />
+          </NavLink>
+
+          <div className='menu-submenu '>
+            <ul className='menu-subnav'>
+              <li className='menu-item  menu-item-parent' aria-haspopup='true'>
+                <span className='menu-link'>
+                  <span className='menu-text'>Permission</span>
+                </span>
+              </li>
+              <li
+                className={`menu-item ${getMenuItemActive('/permission/menus')}`}
+                aria-haspopup='true'
+              >
+                <NavLink className='menu-link' to='/permission/menus'>
+                  <i className='menu-bullet menu-bullet-dot'>
+                    <span />
+                  </i>
+                  <span className='menu-text'>Menus</span>
+                </NavLink>
+              </li>
+              <li
+                className={`menu-item ${getMenuItemActive('/permission/permissions')}`}
+                aria-haspopup='true'
+              >
+                <NavLink className='menu-link' to='/permission/permissions'>
+                  <i className='menu-bullet menu-bullet-dot'>
+                    <span />
+                  </i>
+                  <span className='menu-text'>Permission</span>
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </li>
+
         {/* begin::section */}
         <li className='menu-section '>
           <h4 className='menu-text'>Components</h4>
