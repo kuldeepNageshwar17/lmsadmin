@@ -14,29 +14,29 @@ import JoditEditor from 'jodit-react'
 
 export default function VideoContent () {
   const [Content, setContent] = useState({
-    description: '',
     title: '',
-    contentUrl: '',
-    type: 'video'
+    videoUrl : '' ,
+    videoDescription : '', 
+    imageUrl : '' , 
+    imageDescription : '',
+    pdfDescription : '',
+    pdfUrl : '',
+    textDescription : ''
   })
   const { id, cid } = useParams()
   const history = useHistory()
 
   const saveData = async event => {
     event.preventDefault()
-    debugger
-    let data = Content
-    let formData = new FormData()
-    for (var key in data) {
-      formData.append(key, data[key])
-    }
+    // debugger
+    // let data = Content
+    // let formData = new FormData()
+    // for (var key in data) {
+    //   formData.append(key, data[key])
+    // }
     debugger
     await axios
-      .post('api/course/SectionContent/' + id, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      .post('api/course/SectionContent/' + id, Content)
       .then(res => {
         history.goBack()
       })
@@ -51,6 +51,74 @@ export default function VideoContent () {
     askBeforePasteHTML: false,
     readonly: false // all options from https://xdsoft.net/jodit/doc/
   }
+  const uploadVideo = async (file) => {
+    let formData = new FormData()
+    formData.append("file"  , file)
+    
+    await axios
+      .post('api/course/savefile/' + id, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        setContent({
+          ...Content,
+          videoUrl : res.data
+        })
+        // history.goBack()
+      })
+      .catch(err => {
+        console.log('error in file upload :' + err)
+      })
+
+  }
+  const uploadImage = async (file) => {
+    let formData = new FormData()
+    formData.append("file"  , file)
+    
+    await axios
+      .post('api/course/savefile/' + id, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        setContent({
+          ...Content,
+          imageUrl : res.data
+        })
+        
+        // history.goBack()
+      })
+      .catch(err => {
+        console.log('error in file upload :' + err)
+      })
+
+  }
+  const uploadpdf = async (file) => {
+    let formData = new FormData()
+    formData.append("file"  , file)
+    
+    await axios
+      .post('api/course/savefile/' + id, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        setContent({
+          ...Content,
+          pdfUrl : res.data
+        })
+        
+        // history.goBack()
+      })
+      .catch(err => {
+        console.log('error in file upload :' + err)
+      })
+
+  }
   useEffect(() => {
     if (cid) {
       axios
@@ -64,12 +132,28 @@ export default function VideoContent () {
     }
   }, [cid, id])
   const editor = useRef(null)
-  const handleChangeDesripiton = e => {
-    debugger
-    // console.log(this.editor.current)
+  const handlePdfDesripiton = e => {
     setContent({
       ...Content,
-      description: e.target.innerHTML
+      pdfDescription : e.target.innerHTML
+    })
+  }
+  const handleVideoDesripiton = e => {
+    setContent({
+      ...Content,
+      videoDescription: e.target.innerHTML
+    })
+  }
+  const handleImageDesripiton = e => {
+    setContent({
+      ...Content,
+      imageDescription : e.target.innerHTML
+    })
+  }
+  const handleTextDesripiton = e => {
+    setContent({
+      ...Content,
+      textDescription : e.target.innerHTML
     })
   }
 
@@ -106,24 +190,25 @@ export default function VideoContent () {
                           type='file'
                           //   value={Content.file}
                           onChange={event =>
-                            setContent({
-                              ...Content,
-                              file: event.target.files[0]
-                            })
+                            uploadVideo(event.target.files[0])
+                            // setContent({
+                            //   ...Content,
+                            //   file: event.target.files[0]
+                            // })
                           }
                         />
                       </Col>
                     </Form.Group>
                     <Form.Group>
                       <Col className=''>
-                        <Form.Label>Dscription</Form.Label>
+                        <Form.Label>Description</Form.Label>
                         <div>
                           <JoditEditor
                             ref={editor}
-                            value={Content.description}
+                            value={Content.videoDescription}
                             config={config}
                             tabIndex={1} // tabIndex of textarea
-                            onBlur={handleChangeDesripiton} // preferred to use only this option to update the content for performance reasons
+                            onBlur={handleVideoDesripiton} // preferred to use only this option to update the content for performance reasons
                           />
                         </div>
                       </Col>
@@ -136,10 +221,10 @@ export default function VideoContent () {
                         <div className=''>
                           <JoditEditor
                             ref={editor}
-                            value={Content.description}
+                            value={Content.textDescription}
                             config={config}
                             tabIndex={1} // tabIndex of textarea
-                            onBlur={handleChangeDesripiton} // preferred to use only this option to update the content for performance reasons
+                            onBlur={handleTextDesripiton} // preferred to use only this option to update the content for performance reasons
                           />
                         </div>
                       </Col>
@@ -153,10 +238,7 @@ export default function VideoContent () {
                           type='file'
                           //   value={Content.file}
                           onChange={event =>
-                            setContent({
-                              ...Content,
-                              file: event.target.files[0]
-                            })
+                            uploadImage(event.target.files[0])
                           }
                         />
                       </Col>
@@ -164,14 +246,14 @@ export default function VideoContent () {
 
                     <Form.Group>
                       <Col className='mt-10'>
-                        <Form.Label>Dscription</Form.Label>
+                        <Form.Label>Description</Form.Label>
                         <div className=''>
                           <JoditEditor
                             ref={editor}
-                            value={Content.description}
+                            value={Content.imageDescription}
                             config={config}
                             tabIndex={1} // tabIndex of textarea
-                            onBlur={handleChangeDesripiton} // preferred to use only this option to update the content for performance reasons
+                            onBlur={handleImageDesripiton} // preferred to use only this option to update the content for performance reasons
                           />
                         </div>
                       </Col>
@@ -185,10 +267,7 @@ export default function VideoContent () {
                           type='file'
                           //   value={Content.file}
                           onChange={event =>
-                            setContent({
-                              ...Content,
-                              file: event.target.files[0]
-                            })
+                            uploadpdf(event.target.files[0])
                           }
                         />
                       </Col>
@@ -196,14 +275,14 @@ export default function VideoContent () {
 
                     <Form.Group>
                       <Col className='mt-10'>
-                        <Form.Label>Dscription</Form.Label>
+                        <Form.Label>Description</Form.Label>
                         <div className=''>
                           <JoditEditor
                             ref={editor}
-                            value={Content.description}
+                            value={Content.pdfDescription}
                             config={config}
                             tabIndex={1} // tabIndex of textarea
-                            onBlur={handleChangeDesripiton} // preferred to use only this option to update the content for performance reasons
+                            onBlur={handlePdfDesripiton} // preferred to use only this option to update the content for performance reasons
                           />
                         </div>
                       </Col>

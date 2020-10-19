@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useHistory,useParams } from "react-router-dom";
 
 import {
   Card,
@@ -9,40 +9,47 @@ import {
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
+
 import BootstrapTable from 'react-bootstrap-table-next'
+
 
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import CourseActionFormatter from '../components/CourseActionFormatter'
-import CourseProfileFormater from '../components/CourseProfileFormater'
+import ActionFormatter from '../components/TestQuestionsActionFormatter'
 
 
-import { useHistory } from 'react-router-dom'
+export default function CourseTestQuestions (props) {
+  const {id} = useParams();
+  const [questions, setQuestions] = useState([])
 
-
-export default function Courses (props) {
-  const { id } = useParams()
-  const history = useHistory()
-  const EditHandler = cid => {
-    history.push('/setting/CourseForm/' + id + '/' + cid)
-  }
-
-  const DeleteHandler = id => {
+  let history = useHistory()
+  const EditHandler = (qid) => {
     debugger;
-    if (window.confirm('do you really  want to delete')) {
-        axios.delete('/api/course/course/'+ id).then(res => {}).catch(() => {})
+    history.push('/Test/CourseTest/' + id + '/QuestionForm/' + qid)
+  }
+  const DeleteHandler = (QId) => {
+    if (window.confirm('do you really  want to delete11')) {
+      axios
+      .get(`/api/Course/getCourseTestQuestionById/${QId}`)
+      .then(res => {
+        console.log(res)
+        axios
+        .post('/api/Course/' + id +  '/deleteQuestion/' ,res.data)
+        .then(res => {alert("Question Deleted ");updateData() })
+        .catch(() => {})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      
     }
   }
-
-  const CourseContenHandler = id =>{
-    debugger;
-    history.push("/setting/course/"+id+"/sections")
+  const ShowHandler=(qid)=>{
+    history.push('/Test/CourseTest/' + id + '/Question/' + qid)
 
   }
-  const AddCourseTestHandler = id =>{
-    history.push("/Test/CourseTest/" + id + "/tests")
-  }
+
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
       console.log('Size per page change!!!')
@@ -62,88 +69,77 @@ export default function Courses (props) {
       hidden: true
     },
     {
-      dataField: 'title',
-      text: 'Course',
+      dataField: 'question',
+      text: 'question',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
-    },
+    },    
     {
-      dataField: 'Description',
-      text: 'Description',
+      dataField: 'marks',
+      text: 'Marks',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
-    },
+    }, 
     {
-      dataField: 'posterImageUrl',
-      text: 'Image',
-      formatter: CourseProfileFormater,     
+      dataField: 'action',
+      text: 'Actions',
+       formatter: ActionFormatter,
+      formatExtraData: {
+        EditAction: EditHandler,
+        DeleteAction: DeleteHandler,
+        ShowQuestion:ShowHandler
+      },
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
       style: {
         minWidth: '100px'
       }
-    },
-    {
-      dataField: 'action',
-      text: 'Actions',
-      formatter: CourseActionFormatter,
-      formatExtraData: {
-        EditAction: EditHandler,
-        DeleteAction: DeleteHandler,
-        GetSectionsAction:CourseContenHandler,
-        AddCourseTestAction : AddCourseTestHandler
-      },
-      classes: 'text-right pr-0',
-      headerClasses: 'text-right pr-3',
-      style: {
-        minWidth: '220px'
-      }
     }
+    
   ]
-
-  // const [Courses, setCourse] = useState([])
-  const [Class, setClass] = useState([])
-  useEffect(() => {
-    debugger
-    axios
-      .get('/api/course/courseList/' + id)
+  const updateData=()=>{
+    debugger;
+    axios.get('/api/Course/'+id + '/getCourseTestQuestionList')
       .then(res => {
-        debugger
-        setClass(res.data)
+      debugger;  
+      setQuestions(res.data)
       })
       .catch(err => {
         console.log(err)
       })
-  }, [id])
+    }
+      useEffect(() => {
+        updateData()
+      }, [])
 
   return (
     <div>
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title={"Course list -> "+ Class.name}>
+            <CardHeader title='Test Question'>
               <CardHeaderToolbar>
                 <button
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                    history.push('/setting/CourseForm/' + id)
+                    history.push('/Test/CourseTest/' + id + '/QuestionForm/')
                   }}
                 >
-                  New course
+                  Add Question
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-            {Class.courses ? (
+              {questions ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Class.courses}
+                        data={questions}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'
@@ -151,7 +147,7 @@ export default function Courses (props) {
                         remote
                         bordered={false}
                         pagination={paginationFactory(options)}
-                        {...paginationTableProps}
+                        {...paginationTableProps} 
                       />
                     )
                   }}

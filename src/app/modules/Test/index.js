@@ -5,6 +5,11 @@ import TestForm from './pages/TestForm'
 import TestQuestion from './pages/testQuestion'
 import QuestionForm from './pages/questionForm'
 import Question from './pages/question'
+import CourseTestForm from './pages/CourseTestForm'
+import CourseTestList from './pages/CourseTestList'
+import CourseTestQuestions from './pages/CourseTestQuestions'
+import CourseTestQuestion from './pages/CourseTestQuestion'
+import CourseQuestionForm from './pages/CourseQuestionForm'
 
 export default function Student() {
   return (
@@ -30,6 +35,29 @@ export default function Student() {
       <Route exact path='/Test/:id/QuestionForm/:qid'>
         <QuestionForm />
       </Route>  
+
+      <Route exact path='/Test/CourseTest/:id/TestForm'>
+        <CourseTestForm/>
+      </Route>
+      <Route exact path='/Test/CourseTest/:id/TestForm/:TId'>
+        <CourseTestForm/>
+      </Route>
+      <Route exact path='/Test/CourseTest/:id/tests'>
+        <CourseTestList/>
+      </Route>
+      <Route exact path='/Test/CourseTest/:id/Questions'>
+        <CourseTestQuestions/>
+      </Route>
+      <Route exact path='/Test/CourseTest/:id/Question/:qid'>
+        <CourseTestQuestion />
+      </Route>
+      <Route exact path='/Test/CourseTest/:id/QuestionForm'>
+        <CourseQuestionForm />
+      </Route>
+      <Route exact path='/Test/CourseTest/:id/QuestionForm/:qid'>
+        <CourseQuestionForm />
+      </Route>
+      
       
       
      

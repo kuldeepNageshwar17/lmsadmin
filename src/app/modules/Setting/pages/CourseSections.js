@@ -10,7 +10,6 @@ import AddContentButton from '../components/ContentAddButton'
 export default function CourseSections () {
   //id of Course
   const { id } = useParams()
-  console.log(id)
   const history = useHistory()
   const [sections, setSections] = useState([])
   const [expanded, setExpanded] = useState('panel1')
@@ -191,10 +190,10 @@ export default function CourseSections () {
                                 >
                                   <Col className='secTitle'>{c.title}</Col>
 
-                                  <Col className='secType'>{c.type}</Col>
-                                  <Col className='secUrl'>
+                                  <Col className='secType'>{`${c.videoUrl? "Video" : ""}  ${c.pdfUrl? "| Pdf" : ""} ${c.imageUrl? "| Image" : ""} `}</Col>
+                                  {/* <Col className='secUrl'>
                                     {c.contentUrl ? 'true' : 'false'}
-                                  </Col>
+                                  </Col> */}
                                   <Col xs md='2' className='secAction'>
                                     <div
                                       className='btn-group float-right'
