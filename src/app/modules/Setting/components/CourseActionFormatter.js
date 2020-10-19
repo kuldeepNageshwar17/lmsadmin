@@ -9,10 +9,21 @@ export default function CourseActionFormatter (
   cellContent,
   row,
   rowIndex,
-  { EditAction, DeleteAction, GetSectionsAction }
+  { EditAction, DeleteAction, GetSectionsAction ,AddCourseTestAction }
 ) {
   return (
     <>
+    <a
+        title='Add Test'
+        className='btn  btn-light btn-hover-primary btn-sm mx-3'
+        onClick={() => AddCourseTestAction(row._id)}
+      >
+        <span className="svg-icon svg-icon-md svg-icon-primary">          
+          <SVG
+            src={toAbsoluteUrl("/media/svg/icons/Navigation/Plus.svg")} title='Add Test'
+          />
+        </span> Test
+      </a>
       <a
         title='Add Content'
         className='btn  btn-light btn-hover-primary btn-sm mx-3'

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useHistory,useParams } from "react-router-dom";
 
 import {
   Card,
@@ -9,40 +9,35 @@ import {
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
+
 import BootstrapTable from 'react-bootstrap-table-next'
 
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import CourseActionFormatter from '../components/CourseActionFormatter'
-import CourseProfileFormater from '../components/CourseProfileFormater'
+import TestActionFormatter from '../components/TestActionFormatter'
 
+export default function CourseTestList (props) {
+  const [Test, setTests] = useState([])
 
-import { useHistory } from 'react-router-dom'
-
-
-export default function Courses (props) {
-  const { id } = useParams()
-  const history = useHistory()
-  const EditHandler = cid => {
-    history.push('/setting/CourseForm/' + id + '/' + cid)
-  }
-
-  const DeleteHandler = id => {
+  let history = useHistory()
+    const {id} = useParams();
+  const EditHandler = (TId) => {
     debugger;
+    history.push(`/Test/CourseTest/${id}/TestForm/${TId}`)
+  }
+  const DeleteHandler = (TId) => {
     if (window.confirm('do you really  want to delete')) {
-        axios.delete('/api/course/course/'+ id).then(res => {}).catch(() => {})
+      axios
+        .delete('/api/Course/' + id + '/deleteTestById/' + TId )
+        .then(res => {alert("Test Deleted ");updateData() })
+        .catch(() => {})
     }
   }
-
-  const CourseContenHandler = id =>{
-    debugger;
-    history.push("/setting/course/"+id+"/sections")
-
+  const GetQuestionHandler=(TId)=>{
+    history.push(`/Test/CourseTest/${TId}/Questions` )
   }
-  const AddCourseTestHandler = id =>{
-    history.push("/Test/CourseTest/" + id + "/tests")
-  }
+
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
       console.log('Size per page change!!!')
@@ -62,88 +57,98 @@ export default function Courses (props) {
       hidden: true
     },
     {
-      dataField: 'title',
-      text: 'Course',
+      dataField: 'name',
+      text: 'Name',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },   
+    {
+      dataField: 'passingMarks',
+      text: 'passing',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'Description',
+      dataField: 'totalMarks',
+      text: 'Total',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'isComplete',
+      text: 'Status',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'description',
       text: 'Description',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'posterImageUrl',
-      text: 'Image',
-      formatter: CourseProfileFormater,     
+      dataField: 'action',
+      text: 'Actions',
+      formatter: TestActionFormatter,
+      formatExtraData: {
+        EditAction: EditHandler,
+        DeleteAction: DeleteHandler,
+        ShowQuestions:GetQuestionHandler,
+      },
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
       style: {
         minWidth: '100px'
       }
-    },
-    {
-      dataField: 'action',
-      text: 'Actions',
-      formatter: CourseActionFormatter,
-      formatExtraData: {
-        EditAction: EditHandler,
-        DeleteAction: DeleteHandler,
-        GetSectionsAction:CourseContenHandler,
-        AddCourseTestAction : AddCourseTestHandler
-      },
-      classes: 'text-right pr-0',
-      headerClasses: 'text-right pr-3',
-      style: {
-        minWidth: '220px'
-      }
     }
+    
   ]
-
-  // const [Courses, setCourse] = useState([])
-  const [Class, setClass] = useState([])
+const updateData=()=>{
+//   debugger
+  axios.get(`/api/Course/${id}/getAllTestsByCourse`)
+    .then(res => {
+    debugger;
+    setTests(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
   useEffect(() => {
-    debugger
-    axios
-      .get('/api/course/courseList/' + id)
-      .then(res => {
-        debugger
-        setClass(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [id])
+    updateData()
+  }, [])
 
   return (
     <div>
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title={"Course list -> "+ Class.name}>
+            <CardHeader title={`Test-`}>
               <CardHeaderToolbar>
                 <button
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                    history.push('/setting/CourseForm/' + id)
+                  history.push(`/Test/CourseTest/${id}/TestForm`)
                   }}
                 >
-                  New course
+                  Create Test
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-            {Class.courses ? (
+              {Test ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Class.courses}
+                        data={Test}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'
@@ -151,7 +156,7 @@ export default function Courses (props) {
                         remote
                         bordered={false}
                         pagination={paginationFactory(options)}
-                        {...paginationTableProps}
+                        {...paginationTableProps} 
                       />
                     )
                   }}
