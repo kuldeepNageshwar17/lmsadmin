@@ -73,7 +73,7 @@ export default function ECourse () {
         < ContentPdf />
       </Route>
       <Route exact path='/setting/course/section/:id/content/:cid'>
-        <ContentVideo/>
+        <ContentAll/>
       </Route>
       
 {/* 

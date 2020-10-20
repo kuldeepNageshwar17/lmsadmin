@@ -21,13 +21,17 @@ export default function VideoContent () {
     imageDescription : '',
     pdfDescription : '',
     pdfUrl : '',
-    textDescription : ''
+    textDescription : '',
+    audioUrl : '',
+    audioDescription : ''
+
   })
   const { id, cid } = useParams()
   const history = useHistory()
 
   const saveData = async event => {
     event.preventDefault()
+
     // debugger
     // let data = Content
     // let formData = new FormData()
@@ -119,11 +123,35 @@ export default function VideoContent () {
       })
 
   }
+  const uploadAudio = async (file) => {
+    let formData = new FormData()
+    formData.append("file"  , file)
+    
+    await axios
+      .post('api/course/savefile/' + id, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        setContent({
+          ...Content,
+          audioUrl : res.data
+        })
+        
+        // history.goBack()
+      })
+      .catch(err => {
+        console.log('error in file upload :' + err)
+      })
+
+  }
   useEffect(() => {
     if (cid) {
       axios
         .get('/api/course/sectionContent/' + cid)
         .then(res => {
+          console.log("here in update" , res.data)
           setContent(res.data)
         })
         .catch(err => {
@@ -154,6 +182,12 @@ export default function VideoContent () {
     setContent({
       ...Content,
       textDescription : e.target.innerHTML
+    })
+  }
+  const handleAudioDesripiton = e => {
+    setContent({
+      ...Content,
+      audioDescription : e.target.innerHTML
     })
   }
 
@@ -254,6 +288,35 @@ export default function VideoContent () {
                             config={config}
                             tabIndex={1} // tabIndex of textarea
                             onBlur={handleImageDesripiton} // preferred to use only this option to update the content for performance reasons
+                          />
+                        </div>
+                      </Col>
+                    </Form.Group>
+                  </Tab>
+                  <Tab eventKey='Audio' title='Audio'>
+                    <Form.Group>
+                      <Col className='mt-10'>
+                        <Form.Label>Audio Upload </Form.Label>
+                        <Form.Control
+                          type='file'
+                          //   value={Content.file}
+                          onChange={event =>
+                            uploadAudio(event.target.files[0])
+                          }
+                        />
+                      </Col>
+                    </Form.Group>
+
+                    <Form.Group>
+                      <Col className='mt-10'>
+                        <Form.Label>Description</Form.Label>
+                        <div className=''>
+                          <JoditEditor
+                            ref={editor}
+                            value={Content.audioDescription}
+                            config={config}
+                            tabIndex={1} // tabIndex of textarea
+                            onBlur={handleAudioDesripiton} // preferred to use only this option to update the content for performance reasons
                           />
                         </div>
                       </Col>

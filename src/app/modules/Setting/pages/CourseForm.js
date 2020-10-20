@@ -79,9 +79,9 @@ export default function CourseForm () {
     debugger
     if (cid) {
       axios
-        .get('/api/Course/course/' + cid)
+        .get('/api/course/course/' + cid)
         .then(res => {
-          setCourse(res.data)
+          setCourse(res.data.course)
         })
         .catch(err => {
           console.log(err)
