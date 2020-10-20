@@ -34,7 +34,7 @@ export default function TestForm () {
       console.log(err)
     })
     }
-  }, [id])
+  }, [TId, id])
 
   const saveTest = event => {
     event.preventDefault()
