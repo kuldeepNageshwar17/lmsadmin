@@ -38,7 +38,7 @@ export function AsideMenuList ({ layoutProps }) {
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
-          <NavLink className='menu-link' to='/setting/Branch'>
+          <NavLink className='menu-link' to='/setting/Batch'>
             <span className='svg-icon menu-icon'>
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>

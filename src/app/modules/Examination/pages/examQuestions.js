@@ -28,12 +28,20 @@ export default function ExamQuestions (props) {
     debugger;
     history.push('/Exams/'+id+'/QuestionForm/' + qid)
   }
-  const DeleteHandler = (id) => {
+  const DeleteHandler = (qid) => {
     if (window.confirm('do you really  want to delete')) {
-      axios
-        .delete('/Exams/deleteQuestion/'+id )
-        .then(res => {alert("Question Deleted ")})
+      axios.get('/api/Examination/getQuestion/'+qid)
+      .then(res => {
+        console.log(res)
+        axios
+        .post('/api/Examination/deleteQuestion/' + id ,res.data)
+        .then(res => {alert("Question Deleted ");updateData() })
         .catch(() => {})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      
     }
   }
   const ShowHandler=(id)=>{
@@ -91,7 +99,7 @@ export default function ExamQuestions (props) {
     
   ]
 
-  useEffect(() => {
+ const  updateData = () => {
     debugger
     axios.get('/api/Examination/getQuestionListExam/'+id)
       .then(res => {
@@ -101,7 +109,11 @@ export default function ExamQuestions (props) {
       .catch(err => {
         console.log(err)
       })
-  }, [id])
+  }
+
+useEffect(() => {
+  updateData()
+}, [id])
 
   return (
     <div>

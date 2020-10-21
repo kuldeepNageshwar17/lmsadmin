@@ -104,7 +104,8 @@ export default function CourseSections () {
               <Card.Body>
                 <Accordion>
                   {course &&
-                    course.sections.map(item => (
+                    course.sections.sort((a, b) => a.order - b.order).map(item => (
+                      
                       <Card key={item._id}>
                         <Card.Header>
                           <div className='row'>
@@ -113,7 +114,7 @@ export default function CourseSections () {
                                 as={Button}
                                 variant='text'
                                 eventKey={item._id}
-                              >
+                              >{console.log("item" , item)}
                                 <h5>{item.name}</h5>
                               </Accordion.Toggle>
                             </div>
