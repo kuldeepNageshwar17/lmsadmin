@@ -16,6 +16,8 @@ export const actionTypes = {
 
 const initialAuthState = {
   user: undefined,
+  isInstituteUser:false,
+  userPermission:[],
   authToken: undefined,
   currentBranch:null,
   branches:[],
@@ -23,7 +25,7 @@ const initialAuthState = {
 };
 
 export const reducer = persistReducer(
-  { storage, key: "v706-demo1-auth", whitelist: ["user", "authToken","currentBranch","branches","controlPanelStatus"] },
+  { storage, key: "v706-demo1-auth", whitelist: ["user", "authToken","currentBranch","branches","controlPanelStatus","isInstituteUser","userPermission"] },
   (state = initialAuthState, action) => {
     switch (action.type) {
       case actionTypes.Login: {
@@ -43,7 +45,10 @@ export const reducer = persistReducer(
 
       case actionTypes.UserLoaded: {
         const { user } = action.payload;
-        return { ...state, user,branches:user.branches,currentBranch:user.branch};
+        debugger;
+      var  instituteAdmin= user.roles.filter(u=> u.type===1)
+      var isInstituteUser=instituteAdmin.length?true:false;
+        return { ...state, user,branches:user.branches,currentBranch:user.branch,isInstituteUser};
       }
         case actionTypes.ChangeControlPanelStatus: {
           debugger;

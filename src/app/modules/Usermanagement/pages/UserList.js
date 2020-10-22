@@ -26,6 +26,7 @@ function UserList (props) {
       .get('/api/staff/InstituteUser')
       .then(res => {
         setUsers(res.data)
+        console.log(res.data.length)
       })
       .catch(err => {
         console.log(err)

@@ -15,13 +15,13 @@ export default function ExamActionFormatter (
     <>
     <a
         title='Show question'
-        className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
+        className='btn btn-light btn-hover-primary btn-sm mx-3'
         onClick={() =>{ debugger; ShowQuestion(row._id)}}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
           <SVG title='Show Question'
-            src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
-          />
+            src={toAbsoluteUrl('/media/svg/icons/Design/adjust.svg')}
+          />show
         </span>
       </a>
 

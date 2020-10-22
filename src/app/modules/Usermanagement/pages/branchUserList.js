@@ -40,7 +40,6 @@ function UserList (props) {
     if (window.confirm('do you really want to delete')) {
       axios.delete("/api/staff/staff/"+id).then((res)=>{
         alert("deleted");
-
       })
     }
   }

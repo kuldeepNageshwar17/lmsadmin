@@ -13,16 +13,19 @@ export default function ExamActionFormatter (
 ) {
   return (
     <>
+
+
+
     <a
         title='Add Questions'
-        className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
+        className='btn  btn-light btn-hover-success btn-sm mx-3'
         onClick={() => ShowQuestions(row._id)}
       >
-        <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG title='Show'
-            src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
+       <span className="svg-icon svg-icon-md svg-icon-primary">          
+          <SVG
+            src={toAbsoluteUrl("/media/svg/icons/Navigation/Plus.svg")}
           />
-        </span>
+        </span>Questions
       </a>
 
       <a
