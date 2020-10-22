@@ -10,6 +10,8 @@ import CourseTestList from './pages/CourseTestList'
 import CourseTestQuestions from './pages/CourseTestQuestions'
 import CourseTestQuestion from './pages/CourseTestQuestion'
 import CourseQuestionForm from './pages/CourseQuestionForm'
+import SectionTestList from './pages/SectionalTestList'
+import SectionalTestForm from './pages/SectionalTestForm'
 
 export default function Student() {
   return (
@@ -58,6 +60,16 @@ export default function Student() {
         <CourseQuestionForm />
       </Route>
       
+
+      <Route exact path='/Test/:id/section/:sid/tests'>
+        < SectionTestList />
+      </Route>
+      <Route exact path='/Test/:id/section/:sid/sectionalTestForm'>
+        < SectionalTestForm />
+      </Route>
+      <Route exact path='/Test/:id/section/:sid/sectionalTestForm/:tid'>
+        < SectionalTestForm />
+      </Route>
       
       
      

@@ -5,7 +5,7 @@ import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import JoditEditor from 'jodit-react'
 
-export default function TestForm () {
+export default function SectionalTestForm () {
   const [Test, setTest] = useState({
     name: '',
     description: '',
@@ -17,48 +17,49 @@ export default function TestForm () {
   })
   const [Class, setClasses] = useState([])
   // const [Years, setYears] = useState([])
-  const editor = React.useRef(null)
-  const config = {
-   defaultActionOnPaste: 'insert_as_html',
-   askBeforePasteFromWord: false,
-   askBeforePasteHTML: false,
-   readonly: false // all options from https://xdsoft.net/jodit/doc/
-}
-const handleDescripiton = e => {
-  debugger;
-  console.log(e.target.innerHTML)
-  setTest({
-    ...Test,
-    description : e.target.innerHTML
-  })
-}
-  let { id ,  TId } = useParams()
+
+  let { id ,  tid ,sid } = useParams()
   let history = useHistory()
   useEffect(() => {
     
     debugger
-    if (id) {
-      axios.get(`/api/Test/getTestById/${TId}`)
+    if (tid) {
+      axios.get(`/api/Test/getTestById/${tid}`)
     .then(res => {
     debugger;
+    console.log("res" , res)
     setTest(res.data)
     })
     .catch(err => {
       console.log(err)
     })
     }
-  }, [id])
+  }, [tid, id])
 
   const saveTest = event => {
     event.preventDefault()
     axios
-      .post(`/api/Course/${id}/saveTestDetails`, Test)
+      .post(`/api/Test/${sid}/saveTestDetails`, Test)
       .then(res => {
-        history.push(`/Test/CourseTest/${id}/tests`)
+        history.push(`/Test/${id}/section/${sid}/tests`)
       })
       .catch(err => {
         console.log(err)
       })
+  }
+  const editor = React.useRef(null)
+  const config = {
+    defaultActionOnPaste: 'insert_as_html',
+    askBeforePasteFromWord: false,
+    askBeforePasteHTML: false,
+    readonly: false // all options from https://xdsoft.net/jodit/doc/
+  }
+  const handleDescripiton = e => {
+    debugger;
+    setTest({
+      ...Test , 
+      description : e.target.innerHTML
+    })
   }
 
   return (
@@ -111,7 +112,7 @@ const handleDescripiton = e => {
                     <Form.Label>Time in Hours</Form.Label>
                     <Form.Control
                       required='true'
-                      type='number'
+                      type='text'
                       placeholder='time in  hours'
                       value={Test.timeInHours}
                       onChange={event =>
@@ -123,7 +124,7 @@ const handleDescripiton = e => {
                     <Form.Label>Time in Minutes</Form.Label>
                     <Form.Control
                       required='true'
-                      type='number'
+                      type='text'
                       placeholder='time in  minutes'
                       value={Test.timeInMinutes}
                       onChange={event =>
@@ -135,14 +136,12 @@ const handleDescripiton = e => {
                   <div className='col-md-12'>
                     <Form.Label>Test description</Form.Label>
                     < JoditEditor
-                        ref={editor}
-                        value={Test.description}
-                        config={config}
-                        tabIndex={1} // tabIndex of textarea
-                        onBlur={event =>
-                          setTest({ ...Test, description : event.target.innerHTML})
-                        }
-                    />
+                    ref={editor}
+                    value={Test.description}
+                    config={config}
+                    tabIndex={1} // tabIndex of textarea
+                    onBlur={handleDescripiton} // preferred to use only this option to update the content for performance reasons
+                  />
                   </div>
                 </Form.Group>
 

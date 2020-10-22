@@ -102,6 +102,7 @@ export default function CourseForm () {
                       type='text'
                       placeholder='Course Title'
                       value={Course.title}
+                      required
                       onChange={event =>
                         setCourse({ ...Course, title: event.target.value })
                       }

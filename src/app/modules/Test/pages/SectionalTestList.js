@@ -17,25 +17,25 @@ import paginationFactory, {
 } from 'react-bootstrap-table2-paginator'
 import TestActionFormatter from '../components/TestActionFormatter'
 
-export default function CourseTestList (props) {
+export default function SectionTest (props) {
   const [Test, setTests] = useState([])
 
   let history = useHistory()
-    const {id} = useParams();
+    const {id , sid} = useParams();
   const EditHandler = (TId) => {
     debugger;
-    history.push(`/Test/CourseTest/${id}/TestForm/${TId}`)
+    history.push(`/Test/${id}/section/${sid}/sectionalTestForm/${TId}`)
   }
   const DeleteHandler = (TId) => {
     if (window.confirm('do you really  want to delete')) {
       axios
-        .delete('/api/Course/' + id + '/deleteTestById/' + TId )
+        .delete('/api/Test/' + sid + '/deleteTestById/' + TId )
         .then(res => {alert("Test Deleted ");updateData() })
         .catch(() => {})
     }
   }
   const GetQuestionHandler=(TId)=>{
-    history.push(`/Test/CourseTest/${TId}/Questions` )
+    history.push(`/Test/${TId}/Questions` )
   }
   const ChangeDescription = (cellContent) => {
     return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
@@ -91,7 +91,7 @@ export default function CourseTestList (props) {
       dataField: 'description',
       text: 'Description',
       sort: true,
-      formatter : ChangeDescription , 
+      formatter : ChangeDescription ,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -114,7 +114,7 @@ export default function CourseTestList (props) {
   ]
 const updateData=()=>{
 //   debugger
-  axios.get(`/api/Course/${id}/getAllTestsByCourse`)
+  axios.get(`/api/Test/${sid}/getAllTestsBySection`)
     .then(res => {
     debugger;
     setTests(res.data)
@@ -128,7 +128,7 @@ const updateData=()=>{
   }, [])
 
   return (
-    <div>
+    <div>{console.log('in the page')}
       <div className='row'>
         <div className='col-md-12'>
           <Card>
@@ -138,7 +138,7 @@ const updateData=()=>{
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                  history.push(`/Test/CourseTest/${id}/TestForm`)
+                  history.push(`/Test/${id}/section/${sid}/sectionalTestForm`)
                   }}
                 >
                   Create Test

@@ -35,6 +35,9 @@ export default function Exams (props) {
   const GetQuestionHandler=(id)=>{
     history.push('/Exams/'+ id+'/ExamQuestion/' )
   }
+  const ChangeDescription = (cellContent) => {
+    return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
+  }
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -97,6 +100,7 @@ export default function Exams (props) {
       dataField: 'description',
       text: 'Description',
       sort: true,
+      formatter : ChangeDescription,
       sortCaret: sortCaret,
       headerSortingClasses
     },

@@ -205,6 +205,7 @@ export default function VideoContent () {
                     <Form.Control
                       type='text'
                       placeholder='Content Name'
+                      required
                       value={Content.title}
                       onChange={event =>
                         setContent({

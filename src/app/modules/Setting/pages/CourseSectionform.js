@@ -51,6 +51,7 @@ console.log(err);
                   <Form.Control
                     type='text'
                     placeholder='Section Title'
+                    required
                     value={section.name}
                     onChange={event =>
                       setSection({ ...section, name: event.target.value })

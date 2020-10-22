@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams ,useHistory} from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { Button, Form, Card, Col } from 'react-bootstrap'
+import JoditEditor from 'jodit-react'
 
 
-
-
-export default function ClassForm () {
-  let { id } = useParams()
-  let { cid } = useParams()
-  const [Class, setClass] = useState({ id: null, name: '', description: '' })
+export default function ClassForm() {
+  let { id, cid } = useParams()
+  const [ClassVar, setClass] = useState({ name: '', description: '' })
   let history = useHistory()
 
   useEffect(() => {
@@ -17,7 +15,6 @@ export default function ClassForm () {
       debugger;
       axios.get('/api/branch/class/' + id).then(res => {
         if (res.data) {
-          console.log("data",res.data);
           setClass({
             id: res.data._id,
             name: res.data.name,
@@ -35,7 +32,7 @@ export default function ClassForm () {
     event.preventDefault()
     debugger
     await axios
-      .post('/api/branch/class', Class)
+      .post('/api/branch/class', ClassVar)
       .then(res => {
         debugger;
         history.push('/setting/class');
@@ -47,10 +44,21 @@ export default function ClassForm () {
   const getData = () => {
     debugger
   }
+  const editor = React.useRef(null)
   const config = {
+    defaultActionOnPaste: 'insert_as_html',
+    askBeforePasteFromWord: false,
+    askBeforePasteHTML: false,
     readonly: false // all options from https://xdsoft.net/jodit/doc/
   }
-  
+  const handleDescripiton = e => {
+    debugger;
+    setClass({
+      ...ClassVar , 
+      description : e.target.innerHTML
+    })
+  }
+
   return (
     <div>
       <div className='row'>
@@ -59,24 +67,42 @@ export default function ClassForm () {
             <Card.Body>
               <Form onSubmit={saveClassFormData}>
                 <Form.Group controlId='formTitle' className="row">
-                <Col><Form.Label>Class</Form.Label>
+                  <Form.Label>Class</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='Class Title'
-                    value={Class.name}
+                    value={ClassVar.name}
                     onChange={event =>
-                      setClass({ ...Class, name: event.target.value })
+                      setClass({ ...ClassVar, name: event.target.value })
                     }
-                  /></Col>
-                  <Col> <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Class description'
-                    value={Class.description}
-                    onChange={event =>
-                      setClass({ ...Class, description: event.target.value })
-                    }
-                  /></Col> 
+                  />
+                </Form.Group>
+                <Form.Group controlId='formTitle' className="row">
+                  {/* <Col>
+                  
+                  <Form.Label>description</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Class description'
+                      value={ClassVar.description}
+                      onChange={event =>
+                        setClass({ ...ClassVar, description: event.target.value })
+                      }
+                    />
+                    </Col> */}
+
+
+
+                  <Form.Label>Description</Form.Label>
+                  < JoditEditor
+                    ref={editor}
+                    value={ClassVar.description}
+                    config={config}
+                    tabIndex={1} // tabIndex of textarea
+                    onBlur={handleDescripiton} // preferred to use only this option to update the content for performance reasons
+                  />
+
+
                 </Form.Group>
                 <Button variant='primary' type='submit'>
                   Submit

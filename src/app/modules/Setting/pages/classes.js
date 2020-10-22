@@ -34,6 +34,10 @@ export default function Classes (props) {
  const getCoursesHandler=id=>{
   props.history.push('/setting/Courses/' + id)
   }
+  const ChangeDescription = (cellContent) => {
+        return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
+  }
+
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
       console.log('Size per page change!!!')
@@ -63,6 +67,7 @@ export default function Classes (props) {
       dataField: 'description',
       text: 'Description',
       sort: true,
+      formatter : ChangeDescription,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -88,6 +93,7 @@ export default function Classes (props) {
     axios
       .get('/api/Branch/classes')
       .then(res => {
+        console.log(res.data)
         setClasses(res.data)
       })
       .catch(err => {

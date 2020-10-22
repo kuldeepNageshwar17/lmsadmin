@@ -131,10 +131,10 @@ export default function CourseSections () {
                                 <button
                                 className="btn btn-primary"
                                   onClick={() => {
-                                    history.push(`/Test/Course/${item._id}/tests`)
+                                    history.push(`/test/${id}/section/${item._id}/tests`)
                                   }}
                                 >
-                                  Add Test
+                                  Tests
                                 </button>
                                 <button
                                  className="btn btn-primary"
@@ -191,7 +191,7 @@ export default function CourseSections () {
                                 >
                                   <Col className='secTitle'>{c.title}</Col>
 
-                                  <Col className='secType'>{`${c.videoUrl? "Video" : ""}  ${c.pdfUrl? "| Pdf" : ""} ${c.imageUrl? "| Image" : ""} `}</Col>
+                                  <Col className='secType'>{`${c.videoUrl || c.videoDescription ? "Video" : ""}  ${c.pdfUrl || c.pdfDescription? "| Pdf" : ""} ${c.imageUrl || c.imageDescription? "| Image" : ""} `}</Col>
                                   {/* <Col className='secUrl'>
                                     {c.contentUrl ? 'true' : 'false'}
                                   </Col> */}
