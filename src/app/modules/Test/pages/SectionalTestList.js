@@ -12,42 +12,34 @@ import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
 
 import BootstrapTable from 'react-bootstrap-table-next'
 
-
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import ActionFormatter from '../components/ExamQuestionsActionFormatter'
+import TestActionFormatter from '../components/TestActionFormatter'
 
-
-export default function ExamQuestions (props) {
-  const {id} = useParams();
-  const [questions, setQuestions] = useState([])
+export default function SectionTest (props) {
+  const [Test, setTests] = useState([])
 
   let history = useHistory()
-  const EditHandler = (qid) => {
+    const {id , sid} = useParams();
+  const EditHandler = (TId) => {
     debugger;
-    history.push('/Exams/'+id+'/QuestionForm/' + qid)
+    history.push(`/Test/${id}/section/${sid}/sectionalTestForm/${TId}`)
   }
-  const DeleteHandler = (qid) => {
+  const DeleteHandler = (TId) => {
     if (window.confirm('do you really  want to delete')) {
-      axios.get('/api/Examination/getQuestion/'+qid)
-      .then(res => {
-        console.log(res)
-        axios
-        .post('/api/Examination/deleteQuestion/' + id ,res.data)
-        .then(res => {alert("Question Deleted ");updateData() })
+      axios
+        .delete('/api/Test/' + sid + '/deleteTestById/' + TId )
+        .then(res => {alert("Test Deleted ");updateData() })
         .catch(() => {})
-      })
-      .catch(err => {
-        console.log(err)
-      })
-      
     }
   }
-  const ShowHandler=(id)=>{
-    history.push('/Exams/Question/' + id)
-
+  const GetQuestionHandler=(TId)=>{
+    history.push(`/Test/${TId}/Questions` )
   }
+  const ChangeDescription = (cellContent) => {
+    return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
+}
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -68,27 +60,49 @@ export default function ExamQuestions (props) {
       hidden: true
     },
     {
-      dataField: 'question',
-      text: 'question',
+      dataField: 'name',
+      text: 'Name',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
-    },    
+    },   
     {
-      dataField: 'marks',
-      text: 'Marks',
+      dataField: 'passingMarks',
+      text: 'passing',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
-    }, 
+    },
+    {
+      dataField: 'totalMarks',
+      text: 'Total',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'isComplete',
+      text: 'Status',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    {
+      dataField: 'description',
+      text: 'Description',
+      sort: true,
+      formatter : ChangeDescription ,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
     {
       dataField: 'action',
       text: 'Actions',
-       formatter: ActionFormatter,
+      formatter: TestActionFormatter,
       formatExtraData: {
         EditAction: EditHandler,
         DeleteAction: DeleteHandler,
-        ShowQuestion:ShowHandler
+        ShowQuestions:GetQuestionHandler,
       },
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
@@ -98,49 +112,47 @@ export default function ExamQuestions (props) {
     }
     
   ]
-
- const  updateData = () => {
-    debugger
-    axios.get('/api/Examination/getQuestionListExam/'+id)
-      .then(res => {
-      debugger;         
-      setQuestions(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-useEffect(() => {
-  updateData()
-}, [id])
+const updateData=()=>{
+//   debugger
+  axios.get(`/api/Test/${sid}/getAllTestsBySection`)
+    .then(res => {
+    debugger;
+    setTests(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+  useEffect(() => {
+    updateData()
+  }, [])
 
   return (
-    <div>
+    <div>{console.log('in the page')}
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title='Exam Question'>
+            <CardHeader title={`Test-`}>
               <CardHeaderToolbar>
                 <button
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                  history.push('/Exams/'+id+'/QuestionForm/')
+                  history.push(`/Test/${id}/section/${sid}/sectionalTestForm`)
                   }}
                 >
-                  Add Question
+                  Create Test
                 </button>
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-              {questions ? (
+              {Test ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={questions}
+                        data={Test}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'

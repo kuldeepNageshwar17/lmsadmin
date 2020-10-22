@@ -26,10 +26,12 @@ export default function Branches (props) {
   }
   const DeleteBranchHandler = (id) => {
     if (window.confirm('do you really  want to delete')) {
-      // axios
-      //   .delete('/branch/class', { id })
-      //   .then(res => {})
-      //   .catch(() => {})
+      debugger;
+      axios
+        .post('/api/Branch/deleteBranch', { id })
+        .then(res => {console.log(res) })
+        .catch(() => {})
+        updateData()
     }
   }
 
@@ -87,8 +89,7 @@ export default function Branches (props) {
       }
     }
   ]
-
-  useEffect(() => {
+ const  updateData  = () => {
     debugger
     axios
       .get('/api/Branch/Branch')
@@ -98,6 +99,10 @@ export default function Branches (props) {
       .catch(err => {
         console.log(err)
       })
+  }
+
+  useEffect(() => {
+    updateData()
   }, [])
 
   return (

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import JoditEditor from 'jodit-react'
 
 export default function ExamForm () {
   const [Exam, setExam] = useState({
@@ -16,6 +17,23 @@ export default function ExamForm () {
   })
   const [Classes, setClasses] = useState([])
   // const [Years, setYears] = useState([])
+  
+  const editor = React.useRef(null)
+   const config = {
+    defaultActionOnPaste: 'insert_as_html',
+    askBeforePasteFromWord: false,
+    askBeforePasteHTML: false,
+    readonly: false // all options from https://xdsoft.net/jodit/doc/
+}
+const handleDescripiton = e => {
+  debugger;
+  console.log(e.target.innerHTML)
+  setExam({
+    ...Exam,
+    description : e.target.innerHTML
+  })
+}
+
 
   let { id } = useParams()
   let history = useHistory()
@@ -56,7 +74,6 @@ export default function ExamForm () {
         console.log(err)
       })
   }
-
   return (
     <div>
       <div className='row'>
@@ -149,7 +166,14 @@ export default function ExamForm () {
 
                   <div className='col-md-12'>
                     <Form.Label>Exam description</Form.Label>
-                    <Form.Control
+                    < JoditEditor
+                        ref={editor}
+                        value={Exam.description}
+                        config={config}
+                        tabIndex={1} // tabIndex of textarea
+                        onBlur={ handleDescripiton}
+                    />
+                    {/* <Form.Control
                       required='true'
                       type='text'
                       placeholder='Exam description'
@@ -157,7 +181,7 @@ export default function ExamForm () {
                       onChange={event =>
                         setExam({ ...Exam, description: event.target.value })
                       }
-                    />
+                    /> */}
                   </div>
                 </Form.Group>
 

@@ -37,6 +37,9 @@ export default function CourseTestList (props) {
   const GetQuestionHandler=(TId)=>{
     history.push(`/Test/CourseTest/${TId}/Questions` )
   }
+  const ChangeDescription = (cellContent) => {
+    return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
+}
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -88,6 +91,7 @@ export default function CourseTestList (props) {
       dataField: 'description',
       text: 'Description',
       sort: true,
+      formatter : ChangeDescription , 
       sortCaret: sortCaret,
       headerSortingClasses
     },

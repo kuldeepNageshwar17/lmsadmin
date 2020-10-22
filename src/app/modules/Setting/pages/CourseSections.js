@@ -104,7 +104,8 @@ export default function CourseSections () {
               <Card.Body>
                 <Accordion>
                   {course &&
-                    course.sections.map(item => (
+                    course.sections.sort((a, b) => a.order - b.order).map(item => (
+                      
                       <Card key={item._id}>
                         <Card.Header>
                           <div className='row'>
@@ -113,7 +114,7 @@ export default function CourseSections () {
                                 as={Button}
                                 variant='text'
                                 eventKey={item._id}
-                              >
+                              >{console.log("item" , item)}
                                 <h5>{item.name}</h5>
                               </Accordion.Toggle>
                             </div>
@@ -130,10 +131,10 @@ export default function CourseSections () {
                                 <button
                                 className="btn btn-primary"
                                   onClick={() => {
-                                    history.push(`/Test/Course/${item._id}/tests`)
+                                    history.push(`/test/${id}/section/${item._id}/tests`)
                                   }}
                                 >
-                                  Add Test
+                                  Tests
                                 </button>
                                 <button
                                  className="btn btn-primary"
@@ -190,7 +191,7 @@ export default function CourseSections () {
                                 >
                                   <Col className='secTitle'>{c.title}</Col>
 
-                                  <Col className='secType'>{`${c.videoUrl? "Video" : ""}  ${c.pdfUrl? "| Pdf" : ""} ${c.imageUrl? "| Image" : ""} `}</Col>
+                                  <Col className='secType'>{`${c.videoUrl || c.videoDescription ? "Video" : ""}  ${c.pdfUrl || c.pdfDescription? "| Pdf" : ""} ${c.imageUrl || c.imageDescription? "| Image" : ""} `}</Col>
                                   {/* <Col className='secUrl'>
                                     {c.contentUrl ? 'true' : 'false'}
                                   </Col> */}

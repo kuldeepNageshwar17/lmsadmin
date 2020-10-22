@@ -32,6 +32,7 @@ export default function Courses (props) {
     debugger;
     if (window.confirm('do you really  want to delete')) {
         axios.delete('/api/course/course/'+ id).then(res => {}).catch(() => {})
+        updateData()
     }
   }
 
@@ -105,7 +106,7 @@ export default function Courses (props) {
 
   // const [Courses, setCourse] = useState([])
   const [Class, setClass] = useState([])
-  useEffect(() => {
+  const updateData = () => {
     debugger
     axios
       .get('/api/course/courseList/' + id)
@@ -116,8 +117,10 @@ export default function Courses (props) {
       .catch(err => {
         console.log(err)
       })
+  }
+  useEffect(() => {
+    updateData()
   }, [id])
-
   return (
     <div>
       <div className='row'>
