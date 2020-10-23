@@ -80,7 +80,7 @@ function StudentForm () {
                       as='select'
                       placeholder=''
                       // disabled={setStudent._id?"true":"false"}
-                      value={Student.Roles}
+                      value={Student.currentBatch}
                       onChange={event =>
                         setStudent({
                           ...Student,
