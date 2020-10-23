@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import JoditEditor from 'jodit-react'
 
 export default function BatchForm () {
   const [Batch, setBatch] = useState({   
@@ -55,7 +56,21 @@ export default function BatchForm () {
         console.log(err)
       })
   }
+  const editor = React.useRef(null)
 
+  const config = {
+    defaultActionOnPaste: 'insert_as_html',
+    askBeforePasteFromWord: false,
+    askBeforePasteHTML: false,
+    readonly: false // all options from https://xdsoft.net/jodit/doc/
+  }
+  
+  const handleBatchDescription = e => {
+    setBatch({
+      ...Batch,
+      description : e.target.innerHTML
+    })
+  }
   return (
     <div>
       <div className='row'>
@@ -93,7 +108,14 @@ export default function BatchForm () {
                   <Form.Text className='text-muted'>Class</Form.Text>
                 
                   <Form.Label>Batch description</Form.Label>
-                  <Form.Control
+                  <JoditEditor
+                    ref={editor}
+                    value={Batch.imageDescription}
+                    config={config}
+                    tabIndex={1} // tabIndex of textarea
+                    onBlur={handleBatchDescription} // preferred to use only this option to update the content for performance reasons
+                  />
+                  {/* <Form.Control
                     type='text'
                     placeholder='Batch description'
                     value={Batch.description}
@@ -101,7 +123,7 @@ export default function BatchForm () {
                       setBatch({ ...Batch, description: event.target.value })
                     }
                   />
-                  <Form.Text className='text-muted'>Batch description</Form.Text>
+                  <Form.Text className='text-muted'>Batch description</Form.Text> */}
                 </Form.Group>
 
               
