@@ -48,7 +48,7 @@ export default function VideoContent () {
         console.log('error in file upload :' + err)
       })
   }
-
+  const editor = useRef(null)
   const config = {
     defaultActionOnPaste: 'insert_as_html',
     askBeforePasteFromWord: false,
@@ -159,7 +159,6 @@ export default function VideoContent () {
         })
     }
   }, [cid, id])
-  const editor = useRef(null)
   const handlePdfDesripiton = e => {
     setContent({
       ...Content,
