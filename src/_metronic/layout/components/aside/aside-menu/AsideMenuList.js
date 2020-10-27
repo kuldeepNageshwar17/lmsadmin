@@ -33,7 +33,7 @@ export function AsideMenuList ({ layoutProps }) {
 
         {/*begin::1 Level*/}
 
-        <li
+        {/* <li
           className={`menu-item ${getMenuItemActive('/setting', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -62,7 +62,38 @@ export function AsideMenuList ({ layoutProps }) {
               </ul>
             </ul>
           </div>
+        </li> */}
+
+
+
+
+
+        <li
+         className={`menu-item ${getMenuItemActive('/setting/Batch')}`}
+         aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/setting/Batch'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Batch</span>
+            <i className='menu-arrow' />
+          </NavLink>
+
+          <div className='menu-submenu '>
+            <ul className='menu-subnav'>
+              <li className='menu-item  menu-item-parent' aria-haspopup='true'>
+                <span className='menu-link'>
+                  <span className='menu-text'>Batch</span>
+                </span>
+              </li>
+            </ul>
+          </div>
         </li>
+
+
+
 
         <li
           className={`menu-item ${getMenuItemActive('/Student', false)}`}

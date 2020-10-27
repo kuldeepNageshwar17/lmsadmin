@@ -7,7 +7,7 @@ import JoditEditor from 'jodit-react'
 
 export default function ClassForm() {
   let { id, cid } = useParams()
-  const [ClassVar, setClass] = useState({ name: '', description: '' })
+  const [ClassVar, setClass] = useState({ name: '', description: '',fees:""})
   let history = useHistory()
 
   useEffect(() => {
@@ -18,7 +18,8 @@ export default function ClassForm() {
           setClass({
             id: res.data._id,
             name: res.data.name,
-            description: res.data.description
+            description: res.data.description,
+            fees: res.data.fees,
           })
           // initial._id = id
           // initial.name = res.data.name
@@ -74,6 +75,17 @@ export default function ClassForm() {
                     value={ClassVar.name}
                     onChange={event =>
                       setClass({ ...ClassVar, name: event.target.value })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group controlId='formTitle' className="row">
+                  <Form.Label>Fees</Form.Label>
+                  <Form.Control
+                    type='number'
+                    placeholder='amount'
+                    value={ClassVar.fees}
+                    onChange={event =>
+                      setClass({ ...ClassVar, fees: event.target.value })
                     }
                   />
                 </Form.Group>

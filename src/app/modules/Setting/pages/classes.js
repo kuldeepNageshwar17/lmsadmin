@@ -71,6 +71,12 @@ export default function Classes (props) {
       sortCaret: sortCaret,
       headerSortingClasses
     },
+    {
+      dataField: 'fees',
+      text: 'fees',
+      sort: true,
+    
+    },
 
     {
       dataField: 'action',

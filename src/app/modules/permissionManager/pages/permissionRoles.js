@@ -2,8 +2,7 @@ import React from 'react'
 import { Card, Table } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-export default function Permissions () {
-  const history = useHistory()
+export default function permissionRoles () {
   return (
     <div>
       <div className='row'>
@@ -15,7 +14,7 @@ export default function Permissions () {
             <Card.Body>
               <Table>
                 <tr>
-                  <td></td>
+                  <td>Roles List</td>
                 </tr>
               </Table>
             </Card.Body>

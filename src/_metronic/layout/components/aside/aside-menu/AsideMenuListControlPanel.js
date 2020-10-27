@@ -33,7 +33,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
 
         {/*begin::1 Level*/}
         {/*end::1 Level*/}
-        <li
+        {/* <li
           className={`menu-item ${getMenuItemActive('/setting', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -76,6 +76,33 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
               </li>
             </ul>
           </div>
+        </li> */}
+
+        <li
+          className={`menu-item ${getMenuItemActive('/setting/Branch', false)}`}
+          aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/setting/Branch'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Branch</span>
+            {/* <i className='menu-arrow' /> */}
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item ${getMenuItemActive('/setting/class', false)}`}
+          aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/setting/class'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Class</span>
+            {/* <i className='menu-arrow' /> */}
+          </NavLink>
         </li>
 
         <li
@@ -88,11 +115,37 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>
             <span className='menu-text'>Users</span>
-            <i className='menu-arrow' />
+            {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
         {/* Components */}
 
+        <li
+          className={`menu-item ${getMenuItemActive('/Courses', false)}`}
+          aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/Courses'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Courses</span>
+            {/* <i className='menu-arrow' /> */}
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item ${getMenuItemActive('/Tests', false)}`}
+          aria-haspopup='true'
+          data-menu-toggle='hover'
+        >
+          <NavLink className='menu-link' to='/Tests'>
+            <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+            </span>
+            <span className='menu-text'>Tests</span>
+            {/* <i className='menu-arrow' /> */}
+          </NavLink>
+        </li>
         <li
           className={`menu-item ${getMenuItemActive('/Exams', false)}`}
           aria-haspopup='true'
@@ -103,32 +156,31 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>
             <span className='menu-text'>Examination</span>
-            <i className='menu-arrow' />
+            {/* <i className='menu-arrow' /> */}
           </NavLink>
 
-          <div className='menu-submenu '>
+          {/* <div className='menu-submenu '>
             <ul className='menu-subnav'>
               <li className='menu-item  menu-item-parent' aria-haspopup='true'>
                 <span className='menu-link'>
                   <span className='menu-text'>Examination</span>
                 </span>
               </li>
-             
             </ul>
-          </div>
+          </div> */}
         </li>
 
         <li
-          className={`menu-item ${getMenuItemActive('/permission', false)}`}
+          className={`menu-item ${getMenuItemActive('/permission/Roles', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
-          <NavLink className='menu-link' to='/permission'>
+          <NavLink className='menu-link' to='/permission/Roles'>
             <span className='svg-icon menu-icon'>
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>
             <span className='menu-text'>Permission</span>
-            <i className='menu-arrow' />
+            {/* <i className='menu-arrow' /> */}
           </NavLink>
 
           <div className='menu-submenu '>
@@ -138,31 +190,11 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
                   <span className='menu-text'>Permission</span>
                 </span>
               </li>
-              <li
-                className={`menu-item ${getMenuItemActive('/permission/menus')}`}
-                aria-haspopup='true'
-              >
-                <NavLink className='menu-link' to='/permission/menus'>
-                  <i className='menu-bullet menu-bullet-dot'>
-                    <span />
-                  </i>
-                  <span className='menu-text'>Menus</span>
-                </NavLink>
-              </li>
-              <li
-                className={`menu-item ${getMenuItemActive('/permission/permissions')}`}
-                aria-haspopup='true'
-              >
-                <NavLink className='menu-link' to='/permission/permissions'>
-                  <i className='menu-bullet menu-bullet-dot'>
-                    <span />
-                  </i>
-                  <span className='menu-text'>Permission</span>
-                </NavLink>
-              </li>
             </ul>
           </div>
         </li>
+
+      
 
         {/* begin::section */}
         <li className='menu-section '>

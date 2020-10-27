@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Menus from './pages/menus'
 
 import Permission from './pages/permissions'
+import PermissionRoles from './pages/permissionRoles'
 
 export default function Student () {
   return (
@@ -16,7 +17,10 @@ export default function Student () {
       <Route exact path='/permission/MenuForm/:id'>
         <MenusForm />
       </Route> */}
-      <Route exact path='/permission/permissions'>
+      <Route exact path='/permission/Roles'>
+        <PermissionRoles />
+      </Route>
+      <Route exact path='/permission/'>
         <Permission />
       </Route>
       {/* <Route exact path='/permission/permissionForm'>
