@@ -1,10 +1,11 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import Courses from './pages/ECourses'
+import Courses from './pages/Courses'
 import NewCourse from './pages/NewCourse'
 import AddCourseContent from './pages/CourseContent'
 import SectionEditDilogue from './components/SectionEditDilogue'
 import ContentEditDilogue from './components/ContentEditDilogue'
+import CourseDetails from './pages/CourseDetails'
 
 export default function ECourse () {
   return (
@@ -35,6 +36,7 @@ export default function ECourse () {
         )}
       </Route>
       <Route path='/ecourse/courses' component={Courses} />
+      <Route path='/ecourse/courseOverview/:courseId' component={CourseDetails} />
       <Route path='/ecourse/newcourse' component={NewCourse} />
       <Route path='/ecourse/CourseContent/' component={AddCourseContent} />
       <Redirect to='/error/error-v1' />

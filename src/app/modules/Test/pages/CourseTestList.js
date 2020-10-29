@@ -88,8 +88,8 @@ export default function CourseTestList (props) {
       headerSortingClasses
     },
     {
-      dataField: 'description',
-      text: 'Description',
+      dataField: 'testLevel',
+      text: 'Test Level',
       sort: true,
       formatter : ChangeDescription , 
       sortCaret: sortCaret,

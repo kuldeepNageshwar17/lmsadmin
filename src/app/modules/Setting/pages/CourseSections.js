@@ -40,7 +40,6 @@ export default function CourseSections () {
     }
   }
   const loaddata = () => {
-    console.log(id)
     axios
       .get('/api/course/course/' + id)
       .then(response => {
@@ -53,6 +52,10 @@ export default function CourseSections () {
   }
   const editContent = (id, sectionId) => {
     history.push('/setting/course/section/' + sectionId + '/content/' + id)
+  }
+  const showContent = (id , sectionId) => {
+    console.log(id , sectionId)
+    history.push(`/setting/course/${id}/showCourse`)
   }
 
   const deleteContent = id => {
@@ -201,6 +204,14 @@ export default function CourseSections () {
                                       role='group'
                                       aria-label=''
                                     >
+                                      <button
+                                        className='btn btn-outline-primary pull-right'
+                                        onClick={event => {
+                                          showContent(c._id, item._id)
+                                        }}
+                                      >
+                                        Show
+                                      </button>
                                       <button
                                         className='btn btn-outline-primary pull-right'
                                         onClick={event => {

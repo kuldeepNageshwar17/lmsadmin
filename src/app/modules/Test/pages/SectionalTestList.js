@@ -114,10 +114,10 @@ export default function SectionTest (props) {
   ]
 const updateData=()=>{
 //   debugger
-  axios.get(`/api/Test/${sid}/getAllTestsBySection`)
+  axios.get(`/api/Test/${sid}/getallTestBySectionIdAdmin`)
     .then(res => {
     debugger;
-    setTests(res.data)
+    setTests(res.data[0].tests)
     })
     .catch(err => {
       console.log(err)
