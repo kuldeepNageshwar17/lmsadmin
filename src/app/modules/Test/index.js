@@ -12,6 +12,7 @@ import CourseTestQuestion from './pages/CourseTestQuestion'
 import CourseQuestionForm from './pages/CourseQuestionForm'
 import SectionTestList from './pages/SectionalTestList'
 import SectionalTestForm from './pages/SectionalTestForm'
+import TestList from './pages/testList'
 
 export default function Student() {
   return (
@@ -69,6 +70,9 @@ export default function Student() {
       </Route>
       <Route exact path='/Test/:id/section/:sid/sectionalTestForm/:tid'>
         < SectionalTestForm />
+      </Route>
+      <Route exact path='/Test/testlist'>
+        < TestList />
       </Route>
       
       

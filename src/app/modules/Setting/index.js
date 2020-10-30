@@ -15,6 +15,7 @@ import ContentPdf from './pages/ContentPdf'
 import ContentVideo from './pages/ContentVideo'
 import ContentAudio from './pages/ContentAudio'
 import ContentAll from './pages/ContentAll'
+import CoursePlayer from './pages/CoursePlayer'
 
 
 
@@ -50,6 +51,9 @@ export default function ECourse () {
       </Route>
       <Route exact path='/setting/course/:id/sections'>
         < CourseSections />
+      </Route>
+      <Route exact path='/setting/course/:id/showCourse'>
+        < CoursePlayer />
       </Route>
       <Route exact path='/setting/course/:cid/sectionForm'>
         < CourseSectionform />

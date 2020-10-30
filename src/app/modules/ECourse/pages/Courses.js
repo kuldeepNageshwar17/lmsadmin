@@ -1,0 +1,68 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { Card , Row } from 'react-bootstrap'
+import CourseBlocks from '../components/courseblocks'
+
+import { useHistory } from 'react-router-dom'
+
+
+export default function Courses (props) {
+  const { id } = useParams()
+  const history = useHistory()
+
+  const CourseContenHandler = id =>{
+    debugger;
+    history.push("/ecourse/courseOverview")
+
+  }
+ 
+  // const [Courses, setCourse] = useState([])
+  const [Class, setClass] = useState([])
+  const [BranchesName , setBranchesName] = useState('')
+  const updateData = () => {
+    debugger
+    axios
+      .get('/api/course/getAllCoursesOfAllClasses')
+      .then(res => {
+        debugger
+        setBranchesName(res.data[0].branches)
+        setClass(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  useEffect(() => {
+    updateData()
+  }, [id])
+  return (
+    
+    <div>
+      {Class &&  (
+      <div className='row'>
+        <div className='col-md-12'>
+          
+            <Row>{console.log("in the page")}
+              <Card className='col-md-12'>
+                <Card.Header as='h5'>Branch :- {BranchesName.name}</Card.Header>
+                <Card.Body>
+                  <Row>
+                    {Class && Class.length &&
+                      Class.map(item => (
+                        // console.log("itemvalue" , item) 
+
+                        <CourseBlocks item={item} key={item.courses._id} />
+                      ))}
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Row>
+            
+        </div>
+      </div>
+        )}
+    </div>
+  
+  )
+}

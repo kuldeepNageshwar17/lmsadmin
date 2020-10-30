@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card , Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import JoditEditor from 'jodit-react'
 
@@ -10,6 +10,7 @@ export default function TestForm () {
     name: '',
     description: '',
     class: '',
+    testLevel : '',
     totalMarks: '',
     timeInHours: '',
     timeInMinutes: '',
@@ -130,6 +131,27 @@ const handleDescripiton = e => {
                         setTest({ ...Test, timeInMinutes: event.target.value})
                       }
                     />
+                  </div>
+                  <div className='col-md-4'>
+                    <Form.Label>Level Of Test</Form.Label>
+                    <Form.Group as={Col} controlId="formGridState">
+                      <Form.Label>State</Form.Label>
+                      <Form.Control as="select" defaultValue="Choose..." onChange={(event) =>
+                        setTest({ ...Test, testLevel: event.target.value})}>
+                        <option>Easy</option>
+                        <option>Intermediate</option>
+                        <option>Hard</option>
+                      </Form.Control>
+                    </Form.Group>
+                    {/* <Form.Control
+                      required='true'
+                      type='number'
+                      placeholder='level of test'
+                      value={Test.testLevel}
+                      onChange={event =>
+                        setTest({ ...Test, testLevel: event.target.value})
+                      }
+                    /> */}
                   </div>
 
                   <div className='col-md-12'>

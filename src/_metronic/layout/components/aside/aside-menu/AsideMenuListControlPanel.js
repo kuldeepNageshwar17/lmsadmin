@@ -121,11 +121,11 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
         {/* Components */}
 
         <li
-          className={`menu-item ${getMenuItemActive('/Courses', false)}`}
+          className={`menu-item ${getMenuItemActive('/ecourse/Courses', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
-          <NavLink className='menu-link' to='/Courses'>
+          <NavLink className='menu-link' to='/ecourse/Courses'>
             <span className='svg-icon menu-icon'>
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>
@@ -134,11 +134,11 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
           </NavLink>
         </li>
         <li
-          className={`menu-item ${getMenuItemActive('/Tests', false)}`}
+          className={`menu-item ${getMenuItemActive('/Test/testlist', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
-          <NavLink className='menu-link' to='/Tests'>
+          <NavLink className='menu-link' to='/Test/testlist'>
             <span className='svg-icon menu-icon'>
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>
