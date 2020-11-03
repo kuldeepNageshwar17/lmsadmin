@@ -12,9 +12,11 @@ export default function TestBlocks({ test , classes ,course }) {
             <Card.Title>Test Name :  { test.name}   <span style={{ float: "right" }} className='badge badge-secondary'>{test.testLevel}</span></Card.Title>
             <Card.Text>Class Name :{classes.name}</Card.Text>
             <Card.Text>Course Name : {course.title}</Card.Text>
+            <span className={"badge badge-danger"}>Complete/Not Complate</span>
+            <hr></hr>
             <Card.Text> <div  dangerouslySetInnerHTML={{    __html: test.description }}></div></Card.Text>
             <div>
-            <p >Total Time : {test.timeInHours} : {test.timeInMinutes} hr</p>
+            <p >Total Time : {test.timeInHours} : {test.timeInMinutes} hr  </p>
             <p style={{ float: "right" }}>passing Marks: {test.passingMarks}</p>
             <p>Total Marks: {test.totalMarks}</p>
             </div>
