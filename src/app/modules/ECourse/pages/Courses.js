@@ -49,7 +49,7 @@ export default function Courses (props) {
                       className='btn btn-primary pull-left'
                       style={{float:"right"}}
                       onClick={() => {
-                        // history.push('/setting/CourseForm/' + id)
+                        history.push('/setting/CourseForm/')
                       }}
                     >
                       New course

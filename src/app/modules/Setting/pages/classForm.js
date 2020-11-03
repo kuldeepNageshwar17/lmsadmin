@@ -72,6 +72,7 @@ export default function ClassForm() {
                   <Form.Control
                     type='text'
                     placeholder='Class Title'
+                    required
                     value={ClassVar.name}
                     onChange={event =>
                       setClass({ ...ClassVar, name: event.target.value })

@@ -22,6 +22,8 @@ export default function CourseForm () {
     posterImageUrl: '',
     file: ''
   })
+  const [ClassList , setClassList] = useState()
+  const [ClassId , setClassId] = useState()
   const { id } = useParams()
   const { cid } = useParams()
   const history = useHistory()
@@ -65,10 +67,17 @@ export default function CourseForm () {
     // console.log(ImageUrl)
     debugger
     await axios
-      .post('/api/course/course/' + id, courseObject)
+      .post('/api/course/course/' + ClassId, courseObject)
       .then(result => {
         debugger
-        history.push('/setting/courses/' + id)
+        if(id == undefined){
+
+          history.push('/ecourse/Courses')
+        }
+        else{
+          history.push('/setting/courses/' + id)
+        }
+        
       })
       .catch(err => {
         console.log(err)
@@ -77,6 +86,14 @@ export default function CourseForm () {
   }
   useEffect(() => {
     debugger
+    setClassId(id)
+    axios.get('/api/course/getAllClassNameForCourseAdd')
+          .then(res => {
+            setClassList(res.data[0].classes)
+          }).catch(err => {
+            console.log(err)
+          })
+
     if (cid) {
       axios
         .get('/api/course/course/' + cid)
@@ -96,6 +113,29 @@ export default function CourseForm () {
             <Form onSubmit={SaveCourse} className='form'>
               <Card.Body>
                 <Form.Group className='row'>
+                  
+               {id == undefined && <div className='col-md-4'>
+                    <Form.Label>Select Class </Form.Label>
+                    <Form.Control
+                      required='true'
+                      as='select'
+                      placeholder=''
+                      // disabled={Exam._id?"true":"false"}
+                      // value={Exam.class}
+                      onChange={event =>
+                        setClassId(event.target.value)
+                      }
+                    >
+                      <option>select class</option>
+                      {ClassList && ClassList.length && ClassList.map(item => (
+                        <option value={item._id} key={item._id}>
+                          {item.name}
+                        </option>
+                      ))
+                      }
+                    </Form.Control>
+                  </div>
+                }
                   <div className='col-md-6' controlId='formTitle'>
                     <Form.Label>Course Title</Form.Label>
                     <Form.Control

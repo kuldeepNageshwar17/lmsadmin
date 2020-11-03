@@ -33,7 +33,7 @@ export default function ECourse () {
       <Route path='/setting/branchForm/:id'>
         <BranchForm />
       </Route>
-      <Route exact path='/setting/CourseForm/:id'>
+      <Route exact path='/setting/CourseForm/:id?'>
         <CourseForm />
       </Route>
       <Route path='/setting/classForm/:id'>
