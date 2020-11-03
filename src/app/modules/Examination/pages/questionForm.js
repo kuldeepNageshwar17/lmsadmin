@@ -146,7 +146,7 @@ export default function QuestionForm () {
                     <Form.Control
                       required={true}
                       type='Number'
-                      placeholder='question'
+                      placeholder='marks'
                       value={Question.marks}
                       onChange={event =>
                         setQuestion({

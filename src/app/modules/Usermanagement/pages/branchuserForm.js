@@ -91,7 +91,7 @@ export default function BranchUserform () {
           <Card>
             <Card.Body>
               <Form onSubmit={saveUser}>
-                <Form.Group controlId='formTitle'>
+                <Form.Group >
                   <Col>
                     <Form.Label>User Name</Form.Label>
                     <Form.Control
@@ -154,7 +154,7 @@ export default function BranchUserform () {
                   </Col>
                 </Form.Group>
 
-                <Form.Group controlId='formmobile'>
+                <Form.Group >
                   <Col>
                     <Form.Label> Mobile </Form.Label>
                     <Form.Control

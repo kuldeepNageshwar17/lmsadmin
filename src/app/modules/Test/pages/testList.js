@@ -7,8 +7,7 @@ import TestBlocks from "../components/coursetestblocks"
 
 export default function TestList() {
   debugger;
-  const [Test, setTest] = useState({
-  })
+  const [Test, setTest] = useState([])
   const { id } = useParams();
   useEffect(() => {
     debugger;
@@ -32,14 +31,31 @@ export default function TestList() {
     <div>
       <Row>{console.log("in the page")}
         <Card className='col-md-12'>
-          <Card.Header as='h5'>Tests</Card.Header>
+          <Card.Header as='h5'>Tests
+          
+          <button
+              type='button'
+              className='btn btn-primary pull-left'
+              style={{ float: 'right' }}
+              onClick={() => {
+                // history.push('/setting/CourseForm/' + id)
+              }}
+            >
+              New Test
+            </button>
+</Card.Header>
           <Card.Body>
-            <Row>{console.log("testdata" ,Test)}
-              {Test && Test.length &&
+            <Row>{console.log("testdata" ,Test.length)}
+              {Test && Test.length != 0 
+              &&
                 Test.map(item => (
 
                   <TestBlocks test={item.test} classes={item.classes} course={item.courses} key={item.test._id} />
-                ))}
+                ))
+              }
+                {Test && Test.length == 0 && (
+                     <p>NO TEST IS AVAILABLE </p>
+                    )}
             </Row>
           </Card.Body>
         </Card>
