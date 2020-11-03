@@ -48,7 +48,7 @@ const handleDescripiton = e => {
       console.log(err)
     })
     }
-  }, [id])
+  }, [TId, id])
 
   const saveTest = event => {
     event.preventDefault()
@@ -92,7 +92,7 @@ const handleDescripiton = e => {
                       onChange={event =>
                         setTest({ ...Test, totalMarks: event.target.value })
                       }
-                    />set
+                    />
                   </div>
                   <div className='col-md-4'>
                     <Form.Label>passing  marks</Form.Label>
@@ -133,9 +133,9 @@ const handleDescripiton = e => {
                     />
                   </div>
                   <div className='col-md-4'>
-                    <Form.Label>Level Of Test</Form.Label>
+                   
                     <Form.Group as={Col} controlId="formGridState">
-                      <Form.Label>State</Form.Label>
+                    <Form.Label>Level Of Test</Form.Label>
                       <Form.Control as="select" defaultValue="Choose..." onChange={(event) =>
                         setTest({ ...Test, testLevel: event.target.value})}>
                         <option>Easy</option>

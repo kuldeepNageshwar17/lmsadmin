@@ -11,7 +11,7 @@ import { Form } from 'react-bootstrap'
 
 export default function CourseTestQuestion () {
   const history = useHistory()
-  const { id , qid } = useParams()
+  const { id, qid } = useParams()
   const [question, setQuestion] = useState({})
   useEffect(() => {
     debugger
@@ -23,7 +23,7 @@ export default function CourseTestQuestion () {
       .catch(err => {
         console.log(err)
       })
-  }, [id])
+  }, [id, qid])
   return (
     <div>
       <div className='row'>
@@ -51,14 +51,15 @@ export default function CourseTestQuestion () {
                   {question.options &&
                     question.options.map(item => (
                       <>
-                        <div className='mb-3 mt-3 col-4'> 
-                        <Form.Check
-            label={item.option}
-            type='checkbox'
-            placeholder='question'
-            disabled
-                          checked={JSON.parse(item.isRight)}
-          /></div>
+                        <div className='mb-3 mt-3 col-4'>
+                          <Form.Check
+                            label={item.option}
+                            type='checkbox'
+                            placeholder='question'
+                            disabled
+                            checked={JSON.parse(item.isRight)}
+                          />
+                        </div>
                       </>
                     ))}
                 </div>
