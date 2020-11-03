@@ -362,9 +362,10 @@
     color: #0062cc;
 }
 
-.active {
+
+/* .active {
     background: #42425f
-}
+} */
 
 .aside-menu .menu-nav>.menu-item.menu-item-active>.menu-heading,
 .aside-menu .menu-nav>.menu-item.menu-item-active>.menu-link {

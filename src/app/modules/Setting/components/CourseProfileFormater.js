@@ -9,6 +9,6 @@ export default function CourseProfileFormatter (cellContent, row, rowIndex) {
     
     
     {/* <img src={"http:/localhost:4000/uploads/CourseProfile/"+cellContent}  /> */}
-    <img src={"http://localhost:4000/uploads/CourseProfile/"+cellContent} width="100px" alt={row.title}/>
+    <img src={`${window.$apihost }/uploads/CourseProfile/`+cellContent} width="100px" alt={row.title}/>
   </div></>
 }
