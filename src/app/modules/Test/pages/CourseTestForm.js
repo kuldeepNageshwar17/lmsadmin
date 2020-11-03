@@ -16,6 +16,8 @@ export default function TestForm () {
     timeInMinutes: '',
     passingMarks: ''
   })
+  const [CourseId , setCourseId] = useState()
+  const [CourseList , setCourseList] = useState()
   const [Class, setClasses] = useState([])
   // const [Years, setYears] = useState([])
   const editor = React.useRef(null)
@@ -36,7 +38,12 @@ const handleDescripiton = e => {
   let { id ,  TId } = useParams()
   let history = useHistory()
   useEffect(() => {
-    
+    setCourseId(id)
+    if(id == undefined){
+      axios.get('/api/course/getAllClassCoursesNameForTestadd').then(res => {
+        setCourseList(res.data)
+      })
+    }
     debugger
     if (id) {
       axios.get(`/api/Test/getTestById/${TId}`)
@@ -53,9 +60,16 @@ const handleDescripiton = e => {
   const saveTest = event => {
     event.preventDefault()
     axios
-      .post(`/api/Course/${id}/saveTestDetails`, Test)
+      .post(`/api/Course/${CourseId}/saveTestDetails`, Test)
       .then(res => {
+        if(id == undefined){
+          history.push(`/Test/testlist`)
+
+        }
+        else{
         history.push(`/Test/CourseTest/${id}/tests`)
+
+        }
       })
       .catch(err => {
         console.log(err)
@@ -69,7 +83,32 @@ const handleDescripiton = e => {
           <Card>
             <Card.Body>
               <Form onSubmit={saveTest} className='form'>
+
                 <Form.Group controlId='formTitle' className='row'>
+
+                {id == undefined && <div className='col-md-4'>
+                    <Form.Label>Select Class </Form.Label>
+                    <Form.Control
+                      required='true'
+                      as='select'
+                      placeholder=''
+                      // disabled={Exam._id?"true":"false"}
+                      // value={Exam.class}
+                      onChange={event =>
+                        setCourseId(event.target.value)
+                      }
+                    >
+                      <option>select class</option>
+                      {CourseList && CourseList.length && CourseList.map(item => (
+                        <option value={item.courses._id} key={item.courses._id}>
+                          {item.courses.title}
+                        </option>
+                      ))
+                      }
+                    </Form.Control>
+                  </div>
+                }
+
                   <div className='col-md-4'>
                     <Form.Label>Test Name</Form.Label>
                     <Form.Control

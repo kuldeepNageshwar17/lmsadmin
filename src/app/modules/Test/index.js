@@ -39,7 +39,7 @@ export default function Student() {
         <QuestionForm />
       </Route>  
 
-      <Route exact path='/Test/CourseTest/:id/TestForm'>
+      <Route exact path='/Test/CourseTest/:id?/TestForm'>
         <CourseTestForm/>
       </Route>
       <Route exact path='/Test/CourseTest/:id/TestForm/:TId'>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
+import { useHistory } from 'react-router-dom'
 import { Row, Col, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -9,6 +10,7 @@ export default function TestList() {
   debugger;
   const [Test, setTest] = useState([])
   const { id } = useParams();
+  let history = useHistory()
   useEffect(() => {
     debugger;
     axios
@@ -38,7 +40,7 @@ export default function TestList() {
               className='btn btn-primary pull-left'
               style={{ float: 'right' }}
               onClick={() => {
-                // history.push('/setting/CourseForm/' + id)
+                history.push('/Test/CourseTest/TestForm')
               }}
             >
               New Test
