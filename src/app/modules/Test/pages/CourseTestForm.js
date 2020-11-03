@@ -40,7 +40,9 @@ const handleDescripiton = e => {
   useEffect(() => {
     setCourseId(id)
     if(id == undefined){
-      
+      axios.get('/api/course/getAllClassCoursesNameForTestadd').then(res => {
+        setCourseList(res.data)
+      })
     }
     debugger
     if (id) {
@@ -98,8 +100,8 @@ const handleDescripiton = e => {
                     >
                       <option>select class</option>
                       {CourseList && CourseList.length && CourseList.map(item => (
-                        <option value={item._id} key={item._id}>
-                          {item.name}
+                        <option value={item.courses._id} key={item.courses._id}>
+                          {item.courses.title}
                         </option>
                       ))
                       }
