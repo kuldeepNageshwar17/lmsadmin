@@ -55,7 +55,7 @@ const handleDescripiton = e => {
       console.log(err)
     })
     }
-  }, [id])
+  }, [TId, id])
 
   const saveTest = event => {
     event.preventDefault()

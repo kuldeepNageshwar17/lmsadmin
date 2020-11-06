@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card } from 'react-bootstrap'
+import { Button, Form, Card ,Col} from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import JoditEditor from 'jodit-react'
 
@@ -13,7 +13,9 @@ export default function SectionalTestForm () {
     totalMarks: '',
     timeInHours: '',
     timeInMinutes: '',
-    passingMarks: ''
+    passingMarks: '',
+    testLevel:""    
+
   })
   const [Class, setClasses] = useState([])
   // const [Years, setYears] = useState([])
@@ -38,6 +40,8 @@ export default function SectionalTestForm () {
 
   const saveTest = event => {
     event.preventDefault()
+    debugger;
+    console.log(Test);
     axios
       .post(`/api/Test/${sid}/saveTestDetails`, Test)
       .then(res => {
@@ -92,7 +96,7 @@ export default function SectionalTestForm () {
                       onChange={event =>
                         setTest({ ...Test, totalMarks: event.target.value })
                       }
-                    />set
+                    />
                   </div>
                   <div className='col-md-4'>
                     <Form.Label>passing  marks</Form.Label>
@@ -131,6 +135,27 @@ export default function SectionalTestForm () {
                         setTest({ ...Test, timeInMinutes: event.target.value})
                       }
                     />
+                  </div>
+                  <div className='col-md-4'>
+                  
+                    <Form.Group as={Col} >
+                    <Form.Label>Level Of Test</Form.Label>
+                      <Form.Control as="select" defaultValue="Choose..." onChange={(event) =>
+                        setTest({ ...Test, testLevel: event.target.value})}>
+                        <option>Easy</option>
+                        <option>Intermediate</option>
+                        <option>Hard</option>
+                      </Form.Control>
+                    </Form.Group>
+                    {/* <Form.Control
+                      required='true'
+                      type='number'
+                      placeholder='level of test'
+                      value={Test.testLevel}
+                      onChange={event =>
+                        setTest({ ...Test, testLevel: event.target.value})
+                      }
+                    /> */}
                   </div>
 
                   <div className='col-md-12'>

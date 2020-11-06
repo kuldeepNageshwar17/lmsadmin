@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Table } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 export default function PermissionRoles () {
   const [Roles, setRoles] = useState()
+  const history = useHistory()
+  const { id } = useParams()
 
   useEffect(() => {
     axios
-      .get('/roles')
+      .get('/api/permission/roles')
       .then(result => {
-        setRoles(result)
+        console.log(result)
+        setRoles(result.data)
       })
       .catch(err => {
         console.log(err)
       })
-  })
+    // axios
+    //   .get(`/api/permission/getRolesPermission/${id}`)
+    //   .then(result => {
+    //     console.log(result)
+    //     setRoles(result.data)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+  }, [id])
   return (
     <div>
       <div className='row'>
@@ -27,16 +39,27 @@ export default function PermissionRoles () {
             <Card.Body>
               <h1>Roles</h1>
               <Table>
+                <tr>
+                
+                </tr>
                 {Roles &&
-                  Roles.length &&
-                  Roles.map(() => (
+                  Roles.length != 0 &&
+                  Roles.map(item => (
                     <tr>
-                      <td>Roles</td>
+                      <td
+                        style={{ cursor: 'pointer' }}
+                        onClick={() =>
+                          history.push(`/permission/Role/${item.id}`)
+                        }
+                      >
+                        <h4>{item.name}</h4>
+                      </td>
+                    
                     </tr>
                   ))}
               </Table>
             </Card.Body>
-          </Card> 
+          </Card>
         </div>
       </div>
     </div>

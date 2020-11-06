@@ -7,6 +7,7 @@ function ControlPanelButton({changeStatus,controlPanel,isInstituteUser}) {
     var ActiveControlPanel=()=>{
         debugger;
         changeStatus(!controlPanel);
+        history.push("/dashboard");
         // history.push("controlpanel/dashboard")
     }
     
