@@ -20,7 +20,8 @@ import userActionFormatter from  "../components/userActionFormatter"
 function UserList (props) {
   const [Users, setUsers] = useState([])
   let history = useHistory()
-  useEffect(() => {
+
+  const update = (() =>{
     debugger;
     axios
       .get('/api/staff/InstituteUser')
@@ -31,6 +32,9 @@ function UserList (props) {
       .catch(err => {
         console.log(err)
       })
+  })
+  useEffect(() => {
+    update()
   },[])
 
 
@@ -41,10 +45,12 @@ function UserList (props) {
 
     debugger;
     if (window.confirm('do you really want to delete')) {
+      alert("deleted");
       axios.delete("/api/staff/staff/"+id).then((res)=>{
         alert("deleted");
 
       })
+      update()
     }
   }
 

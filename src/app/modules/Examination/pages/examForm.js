@@ -130,7 +130,7 @@ const handleDescripiton = e => {
                         setExam({ ...Exam, class: event.target.value })
                       }
                     >
-                      <option>select class</option>
+                      <option value="">select class</option>
                       {Classes.map(item => (
                         <option value={item._id} key={item._id}>
                           {item.name}

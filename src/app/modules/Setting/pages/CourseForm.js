@@ -24,6 +24,7 @@ export default function CourseForm () {
   })
   const [ClassList , setClassList] = useState()
   const [ClassId , setClassId] = useState()
+  const [ClassSelected , setClassSelected] = useState()
   const { id } = useParams()
   const { cid } = useParams()
   const history = useHistory()
@@ -66,6 +67,9 @@ export default function CourseForm () {
     }
     // console.log(ImageUrl)
     debugger
+    if(ClassId == undefined){
+      return alert("Please Select Class")
+    }
     await axios
       .post('/api/course/course/' + ClassId, courseObject)
       .then(result => {
@@ -75,6 +79,7 @@ export default function CourseForm () {
           history.push('/ecourse/Courses')
         }
         else{
+          
           history.push('/setting/courses/' + id)
         }
         
@@ -126,7 +131,7 @@ export default function CourseForm () {
                         setClassId(event.target.value)
                       }
                     >
-                      <option>select class</option>
+                      <option value="">select class</option>
                       {ClassList && ClassList.length && ClassList.map(item => (
                         <option value={item._id} key={item._id}>
                           {item.name}

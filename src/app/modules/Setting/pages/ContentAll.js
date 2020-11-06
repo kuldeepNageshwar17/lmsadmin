@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom'
-import { Button, Form, Col } from 'react-bootstrap'
+import { Button, Form, Col , Row } from 'react-bootstrap'
 import {
   Card,
   CardBody,
@@ -9,13 +9,16 @@ import {
   CardHeaderToolbar
 } from '../../../../_metronic/_partials/controls'
 
-import { Tabs, Tab } from 'react-bootstrap'
+import { Tabs, Tab , ProgressBar } from 'react-bootstrap'
 import JoditEditor from 'jodit-react'
+import Progress from '../components/progressbar';
+import { red } from '@material-ui/core/colors'
 
 export default function VideoContent () {
   const [Content, setContent] = useState({
     title: '',
     videoUrl : '' ,
+    videoLength : "",
     videoDescription : '', 
     imageUrl : '' , 
     imageDescription : '',
@@ -26,6 +29,11 @@ export default function VideoContent () {
     audioDescription : ''
 
   })
+
+  const [videoUploadPercentage, setVideoUploadPercentage] = useState(0);
+  const [pdfUploadPercentage, setPdfUploadPercentage] = useState(0);
+
+
   const { id, cid } = useParams()
   const history = useHistory()
 
@@ -63,12 +71,20 @@ export default function VideoContent () {
       .post('api/course/savefile/' + id, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: progressEvent => {
+          setVideoUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
         }
       })
       .then(res => {
         setContent({
           ...Content,
-          videoUrl : res.data
+          videoUrl : res.data.filepath,
+          videoLength : res.data.duration
         })
         // history.goBack()
       })
@@ -90,7 +106,7 @@ export default function VideoContent () {
       .then(res => {
         setContent({
           ...Content,
-          imageUrl : res.data
+          imageUrl : res.data.filepath
         })
         
         // history.goBack()
@@ -108,12 +124,19 @@ export default function VideoContent () {
       .post('api/course/savefile/' + id, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: progressEvent => {
+          setPdfUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
         }
       })
       .then(res => {
         setContent({
           ...Content,
-          pdfUrl : res.data
+          pdfUrl : res.data.filepath
         })
         
         // history.goBack()
@@ -136,7 +159,7 @@ export default function VideoContent () {
       .then(res => {
         setContent({
           ...Content,
-          audioUrl : res.data
+          audioUrl : res.data.filepath
         })
         
         // history.goBack()
@@ -218,7 +241,9 @@ export default function VideoContent () {
                 <Tabs defaultActiveKey='video' id='uncontrolled-tab-example'>
                   <Tab eventKey='video' title='video'>
                     <Form.Group>
+                    <Row>
                       <Col className='mt-10'>
+                      
                         <Form.Label>File upload </Form.Label>
                         <Form.Control
                           type='file'
@@ -231,8 +256,25 @@ export default function VideoContent () {
                             // })
                           }
                         />
-                      </Col>
+                        </Col>
+                        </Row>
+
+
+                          <hr></hr>
+
+
+                        <Row>
+                          <Col>
+                        <ProgressBar now={videoUploadPercentage} label={`${videoUploadPercentage}%`} />
+                        </Col>
+                        </Row>
+                        
+                        
+                      
+                      
+                      
                     </Form.Group>
+                    
                     <Form.Group>
                       <Col className=''>
                         <Form.Label>Description</Form.Label>
@@ -324,6 +366,7 @@ export default function VideoContent () {
                   </Tab>
                   <Tab eventKey='PDF' title='PDF'>
                     <Form.Group>
+                    <Row>
                       <Col className='mt-10'>
                         <Form.Label>File upload </Form.Label>
                         <Form.Control
@@ -334,6 +377,15 @@ export default function VideoContent () {
                           }
                         />
                       </Col>
+                      </Row>
+                      <hr></hr>
+
+
+                        <Row>
+                          <Col>
+                        <ProgressBar now={pdfUploadPercentage} label={`${pdfUploadPercentage}%`} />
+                        </Col>
+                        </Row>
                     </Form.Group>
 
                     <Form.Group>
