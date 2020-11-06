@@ -20,7 +20,7 @@ export default function Student () {
       <Route exact path='/permission/Roles'>
         <PermissionRoles />
       </Route>
-      <Route exact path='/permission/'>
+      <Route exact path='/permission/Role/:id'>
         <Permission />
       </Route>
       {/* <Route exact path='/permission/permissionForm'>
