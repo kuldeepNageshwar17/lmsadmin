@@ -74,6 +74,7 @@ export default function CourseForm () {
       .post('/api/course/course/' + ClassId, courseObject)
       .then(result => {
         debugger
+        history.goBack()
         if(id == undefined){
 
           history.push('/ecourse/Courses')

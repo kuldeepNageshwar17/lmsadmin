@@ -18,6 +18,10 @@ export default function CoursesDetails () {
   const [noOfStudent , setnoOfStudent] = useState()
 
   const {courseId} = useParams()
+  const history = useHistory()
+  const EditHandler = () => {
+    history.push('/setting/CourseForm/' + coursedetails[0].class + '/' + courseId)
+  }
   useEffect(() => {
     debugger
     axios.get('/api/course/courseDetailByCourseId/' + courseId).then((res)=>{
@@ -82,7 +86,7 @@ export default function CoursesDetails () {
               <div>
                 <Tabs defaultActiveKey='overview' id='uncontrolled-tab-example'>
                   <Tab eventKey='overview' title='Overview'>
-                    <Overview overview={coursedetails.overview}/>
+                    <Overview overview={coursedetails[0].overview}/>
                   </Tab>
                   <Tab eventKey='curriculam' title='Curriculam'>
                     <Curriculam data={coursedetails}/>
@@ -94,7 +98,7 @@ export default function CoursesDetails () {
                     <Reviews id={courseId} />
                   </Tab>
                   <Tab eventKey='Announcement' title='Announcement'>
-                    <Announcement data={coursedetails.announcement} id={coursedetails[0].createdBy[0]._id}/>
+                    <Announcement  id={coursedetails[0].createdBy[0]._id}/>
                   </Tab>
                 </Tabs>
               </div>
@@ -104,7 +108,7 @@ export default function CoursesDetails () {
         <Col>
 
 
-        <CardSideStickey data={coursedetails}/>
+        <CardSideStickey EditHandler={EditHandler} data={coursedetails}/>
 
         
         </Col>

@@ -8,9 +8,10 @@ export default function Overview ({overview}) {
     <Card.Body>
       <Row>
         <Col>
-          <div style={{ width: '80%' }}>
-            {overview && overview}
-          </div>
+          
+           
+        <div style={{ width: '80%' }}  dangerouslySetInnerHTML={{    __html: overview  }}></div>
+          
           
         </Col>
       </Row>
