@@ -98,7 +98,7 @@ const handleDescripiton = e => {
                         setCourseId(event.target.value)
                       }
                     >
-                      <option>select class</option>
+                      <option value="" >select class</option>
                       {CourseList && CourseList.length && CourseList.map(item => (
                         <option value={item.courses._id} key={item.courses._id}>
                           {item.courses.title}
@@ -172,27 +172,17 @@ const handleDescripiton = e => {
                     />
                   </div>
                   <div className='col-md-4'>
-                   
-                    <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Level Of Test</Form.Label>
-                      <Form.Control as="select" defaultValue="Choose..." onChange={(event) =>
+                    <Form.Label>Test Level</Form.Label>
+                      
+                      <Form.Control as="select" defaultValue="Choose..." required={true} onChange={(event) =>
                         setTest({ ...Test, testLevel: event.target.value})}>
+                          <option value="">Test Level</option>
                         <option>Easy</option>
                         <option>Intermediate</option>
                         <option>Hard</option>
                       </Form.Control>
-                    </Form.Group>
-                    {/* <Form.Control
-                      required='true'
-                      type='number'
-                      placeholder='level of test'
-                      value={Test.testLevel}
-                      onChange={event =>
-                        setTest({ ...Test, testLevel: event.target.value})
-                      }
-                    /> */}
                   </div>
-
+                  
                   <div className='col-md-12'>
                     <Form.Label>Test description</Form.Label>
                     < JoditEditor

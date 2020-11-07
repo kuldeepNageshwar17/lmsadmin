@@ -61,6 +61,7 @@ export default function BranchForm () {
                   <Form.Control
                     type='text'
                     placeholder='Branch Name'
+                    required
                     value={Branch.name}
                     onChange={event =>
                       setBranch({ ...Branch, name: event.target.value })

@@ -1,25 +1,45 @@
-import React from 'react'
+import React , {useEffect ,useState } from 'react'
 import { Row, Col,Card } from 'react-bootstrap'
-
+import axios from 'axios'
+import {
+  useParams,
+  useHistory
+} from 'react-router'
 export default function Reviews(){
+  const [reviews , setReviews]  = useState()
+
+  const {courseId} = useParams()
+  useEffect(() => {
+    update()
+  }, [])
+  const update =() => {
+    axios.get('/api/course/getReviews/' + courseId).then((res)=>{
+      setReviews(res.data)
+    }).catch((res)=>{
+
+    })
+  }
+  
+   
     return (
         <Card classNameName='col-md-12'>
-        <Card.Header as='h5'>Course</Card.Header>
+        <Card.Header as='h5'>Student Reviews</Card.Header>
         <Card.Body>
           <Row>
             <Col>
-              <div style={{ width: '80%' }}>
-                <h3>Learn JavaScript From Scratch</h3>
+            {reviews && reviews.length && reviews.map((element) => 
+              <div style={{ width: '80%' }} key={element._id} >
+                <b><h3>{element.reviews.reviewBy[0].name}</h3></b>
                 <p>
-                  Master JavaScript with the most complete course! Projects
-                  Excellent course. we explain the core concepts in javascript
-                  that are usually glossed over in other courses
+                  {element.reviews.review}
                 </p>
                
                 <p>
-                  Created by <b>kuldeep Nageshwar</b> Last updated 10/2019
+                  Created At : {element.reviews.createdAt.slice(0, 10)}
                 </p>
               </div>
+            )
+            }
             </Col>
           </Row>
         </Card.Body>

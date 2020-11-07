@@ -14,6 +14,10 @@ function StudentForm () {
     confirmPasswors: '',
     currentBatch: ''
   })
+  const [confirm, setconfirm] = useState({
+    confirmPassword : "",
+    checkMobileNo : ""
+  })
   const [Batches, setBatches] = useState([])
 
   let { id } = useParams()
@@ -68,6 +72,7 @@ function StudentForm () {
                     <Form.Control
                       type='text'
                       placeholder=' Full  Name'
+                      required
                       value={Student.name}
                       onChange={event =>
                         setStudent({ ...Student, name: event.target.value })
@@ -81,6 +86,7 @@ function StudentForm () {
                       placeholder=''
                       // disabled={setStudent._id?"true":"false"}
                       value={Student.currentBatch}
+                      required
                       onChange={event =>
                         setStudent({
                           ...Student,
@@ -88,7 +94,7 @@ function StudentForm () {
                         })
                       }
                     >
-                      <option>select Batch</option>
+                      <option value="">select Batch</option>
                       {Batches.map(item => (
                         <option value={item._id} key={item._id}>
                           {item.name}
@@ -102,6 +108,7 @@ function StudentForm () {
                       type='text'
                       placeholder='user email'
                       value={Student.email}
+                      required
                       onChange={event =>
                         setStudent({ ...Student, email: event.target.value })
                       }
@@ -114,11 +121,19 @@ function StudentForm () {
                     <Form.Control
                       type='phone'
                       placeholder='user mobile'
+                      required
                       value={Student.mobile}
-                      onChange={event =>
+                      onChange={event => {
+                        if(event.target.value.length < 10){
+                          setconfirm({...confirm ,checkMobileNo : "Please must be of 10 digits" })
+                        }
+                        else{
+                          setconfirm({...confirm ,checkMobileNo : "" })
+                        }
                         setStudent({ ...Student, mobile: event.target.value })
-                      }
+                      }}
                     />
+                         {confirm.checkMobileNo && <div className="text-danger">{confirm.checkMobileNo}</div> }
                   </div>
                   { !id && (
                     <>
@@ -127,6 +142,7 @@ function StudentForm () {
                         <Form.Control
                           type='password'
                           placeholder='user pasword'
+                          required
                           value={Student.pasword}
                           onChange={event =>
                             setStudent({
@@ -142,16 +158,34 @@ function StudentForm () {
                           type='password'
                           placeholder='Confirm  pasword'
                           value={Student.confirmPassword}
-                          onChange={event =>
+                          required
+                          onChange={event => 
                             setStudent({
                               ...Student,
                               confirmPassword: event.target.value
                             })
                           }
+                          onBlur={event => {
+                            if(Student.password !== event.target.value){
+                              return setconfirm({
+                                ...confirm,
+                                confirmPassword : "Password DoesNot Match"
+                              })
+                            }
+                            else{
+                              setconfirm({
+                                ...confirm,
+                                confirmPassword : ""
+                              })
+                            }
+                          }}
                         />
-                      </div>                    
+                         {confirm.confirmPassword && <div className="text-danger">{confirm.confirmPassword}</div> }
+                      </div> 
+                                        
                     </>)
                   }
+                  
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

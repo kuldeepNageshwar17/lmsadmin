@@ -83,6 +83,7 @@ export default function BatchForm () {
                   <Form.Control
                     type='text'
                     placeholder='Batch Name'
+                    required
                     value={Batch.name}
                     onChange={event =>
                       setBatch({ ...Batch, name: event.target.value })
@@ -94,11 +95,12 @@ export default function BatchForm () {
                     placeholder=''
                     // disabled={Batch._id?"true":"false"}
                     value={Batch.class}
+                    required
                     onChange={event =>
                       setBatch({ ...Batch, class: event.target.value })
                     }
                   >
-                    <option>select class</option>
+                    <option value="">select class</option>
                     {Classes.map(item => (
                       <option value={item._id} key={item._id}>
                         {item.name}

@@ -20,6 +20,10 @@ export default function BranchUserform () {
   const [Roles, setRoles] = useState([])
   const [RolesDdr, setRolesDdr] = useState([])
   const [RoleState, setRoleState] = useState(false)
+  const [confirm, setconfirm] = useState({
+    confirmPassword : "",
+    checkMobileNo : ""
+  })
 
   console.log(id)
   let history = useHistory()
@@ -97,6 +101,7 @@ export default function BranchUserform () {
                     <Form.Control
                       type='text'
                       placeholder=' Full  Name'
+                      required
                       value={User.name}
                       onChange={event =>
                         setUser({ ...User, name: event.target.value })
@@ -146,6 +151,7 @@ export default function BranchUserform () {
                     <Form.Control
                       type='text'
                       placeholder='user email'
+                      required
                       value={User.email}
                       onChange={event =>
                         setUser({ ...User, email: event.target.value })
@@ -161,16 +167,25 @@ export default function BranchUserform () {
                       type='text'
                       placeholder='user mobile'
                       value={User.mobile}
-                      onChange={event =>
+                      required
+                      onChange={event => {
+                        if(event.target.value.length < 10){
+                          setconfirm({...confirm ,checkMobileNo : "Please must be of 10 digits" })
+                        }
+                        else{
+                          setconfirm({...confirm ,checkMobileNo : "" })
+                        }
                         setUser({ ...User, mobile: event.target.value })
-                      }
+                      }}
                     />
+                         {confirm.checkMobileNo && <div className="text-danger">{confirm.checkMobileNo}</div> }
                   </Col>
                   <Col>
                     <Form.Label> Password </Form.Label>
                     <Form.Control
                       type='password'
                       placeholder='user pasword'
+                      required
                       value={User.pasword}
                       onChange={event =>
                         setUser({ ...User, password: event.target.value })
@@ -183,14 +198,30 @@ export default function BranchUserform () {
                       type='password'
                       placeholder='Confirm  pasword'
                       value={User.confirmPassword}
+                      required
                       onChange={event =>
                         setUser({
                           ...User,
                           confirmPassword: event.target.value
                         })
                       }
+                      onBlur={event => {
+                        if(User.password !== event.target.value){
+                          return setconfirm({
+                            ...confirm,
+                            confirmPassword : "Password DoesNot Match"
+                          })
+                        }
+                        else{
+                          setconfirm({
+                            ...confirm,
+                            confirmPassword : ""
+                          })
+                        }
+                      }}
                     />
                   </Col>
+                  {confirm.confirmPassword && <div className="text-danger">{confirm.confirmPassword}</div> }
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

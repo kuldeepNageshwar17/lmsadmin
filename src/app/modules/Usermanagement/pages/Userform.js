@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card, Col, Row } from 'react-bootstrap'
+import { Button, Form, Card, Col, Row  , Toast} from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
 
 function Userform () {
   const [User, setUser] = useState({
@@ -16,6 +17,7 @@ function Userform () {
     branch: '',
     roles: []
   })
+  const [MatchPassword , setMatchPassword] = useState([])
   const [Roles, setRoles] = useState([])
   const [RolesDdr, setRolesDdr] = useState([])
   const [ShowBranch, setShowBranch] = useState(false)
@@ -45,7 +47,6 @@ function Userform () {
         var roles = res.data.map(item => {
           return { key: item.id, label: item.name }
         })
-        
         setRolesDdr(roles)
       })
       .catch(err => {
@@ -74,6 +75,9 @@ debugger;
 
   const saveUser = event => {
     event.preventDefault()
+    if(MatchPassword){
+      return alert(MatchPassword)
+    }
     
     axios
       .post('/api/staff/UserFormInstitute', User)
@@ -99,6 +103,7 @@ debugger;
                       type='text'
                       placeholder=' Full  Name'
                       value={User.name}
+                      required
                       onChange={event =>
                         setUser({ ...User, name: event.target.value })
                       }
@@ -113,9 +118,11 @@ debugger;
                       {/* {User.roles} */}
                       {RolesDdr.length && (
                         <DropdownMultiselect
+                       
                           options={RolesDdr}
                           name='roles'
                           selected={User.roles}
+                          required
                           handleOnChange={selected => {
                             setUser({ ...User, roles: selected })
                             // console.log(selected)
@@ -155,7 +162,7 @@ debugger;
                         setUser({ ...User, branch: event.target.value })
                       }
                     >
-                      <option>select Branch</option>
+                      <option value="">select Branch</option>
                       {Branches.map(item => (
                         <option value={item._id} key={item._id}>
                           {item.name}
@@ -172,9 +179,10 @@ debugger;
                   <Col>
                     <Form.Label> Email </Form.Label>
                     <Form.Control
-                      type='text'
+                      type="email"
                       placeholder='user email'
                       value={User.email}
+                      required
                       onChange={event =>
                         setUser({ ...User, email: event.target.value })
                       }
@@ -184,12 +192,19 @@ debugger;
                     {' '}
                     <Form.Label> Mobile </Form.Label>
                     <Form.Control
-                      type='text'
+                      type='number'
                       placeholder='user mobile'
                       value={User.mobile}
-                      onChange={event =>
+                      required
+                      onChange={event => {
+                        
                         setUser({ ...User, mobile: event.target.value })
-                      }
+                      }}
+                      onBlur = {event => {
+                        if( event.target.value.length < 10){
+                          return alert("Mobile number must be of 10 digit")
+                        }
+                      }}
                     />
                   </Col>
                   <Col>
@@ -198,6 +213,7 @@ debugger;
                       type='password'
                       placeholder='user pasword'
                       value={User.pasword}
+                      required
                       onChange={event =>
                         setUser({ ...User, password: event.target.value })
                       }
@@ -209,19 +225,32 @@ debugger;
                       type='password'
                       placeholder='Confirm  pasword'
                       value={User.confirmPassword}
+                      required
                       onChange={event =>
                         setUser({
                           ...User,
                           confirmPassword: event.target.value
                         })
                       }
+                      onBlur={event => {
+                        if(User.password === event.target.value){
+                          setMatchPassword("")
+                        }
+                        else{
+                          setMatchPassword("Password don't match.")
+                        }
+                       
+                      }}
+                      
                     />
+                    {MatchPassword && <div className="text-danger">{MatchPassword}</div> }
                   </Col>
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>
                   Submit
                 </Button>
+                <ToastContainer limit={5} style={{backgroundColor : "red"}}/>
               </Form>
             </Card.Body>
           </Card>

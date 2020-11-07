@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
-
-export default function cardSideStickey () {
+export default function cardSideStickey ({ data ,EditHandler }) {
+  
   return (
     <div
       style={{
@@ -11,19 +11,17 @@ export default function cardSideStickey () {
       }}
     >
       <Card>
-        <Card.Header as='h5'>Course</Card.Header>
+      <Card.Header as='h5'>{data[0].title}</Card.Header>
         <Card.Body>
+          <Row><img src={`${window.$apihost }/uploads/CourseProfile/`+data[0].posterImageUrl} alt ={data[0].title} width={"100%"} className="p-5"></img></Row>
           <Row>
-            <Col>Test:20</Col>
+            <Col>Test:&nbsp;{data[0].noOftests}</Col>
           </Row>
           <Row>
-            <Col>Sections: 5</Col>
+            <Col>Sections: &nbsp;{data.length}</Col>
           </Row>
           <Row>
-            <Col>Price : 200</Col>
-          </Row>
-          <Row>
-            <Col><button className="btn btn-danger">Update Course</button></Col>
+            <Col><button className="btn btn-danger" onClick={ EditHandler}>Update Course</button></Col>
           </Row>
         </Card.Body>
       </Card>
