@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Card, Col, Row  , Toast} from 'react-bootstrap'
+import { Button, Form, Card, Col, Row } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
-import { ToastContainer, toast } from 'react-toastify';
 
 function Userform () {
   const [User, setUser] = useState({
@@ -250,7 +249,6 @@ debugger;
                 <Button variant='primary' type='submit'>
                   Submit
                 </Button>
-                <ToastContainer limit={5} style={{backgroundColor : "red"}}/>
               </Form>
             </Card.Body>
           </Card>
