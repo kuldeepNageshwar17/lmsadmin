@@ -48,7 +48,7 @@ export const reducer = persistReducer(
         debugger;
       var  instituteAdmin= user.roles.filter(u=> u.type===1)
       var isInstituteUser=instituteAdmin.length?true:false;
-        return { ...state, user,branches:user.branches,currentBranch:user.branch,isInstituteUser};
+        return { ...state, user,userPermission:user.permission,branches:user.branches,currentBranch:user.branch,isInstituteUser};
       }
         case actionTypes.ChangeControlPanelStatus: {
           debugger;
