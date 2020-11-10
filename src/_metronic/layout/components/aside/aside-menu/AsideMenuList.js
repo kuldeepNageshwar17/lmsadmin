@@ -1,9 +1,11 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLocation } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 import { toAbsoluteUrl, checkIsActive } from '../../../../_helpers'
+// import { permissionsContext } from '../../permissionManager/permissionContext'
+import { permissionsContext } from '../../../../../app/modules/permissionManager/permissionContext'
 
 export function AsideMenuList ({ layoutProps }) {
   const location = useLocation()
@@ -12,6 +14,7 @@ export function AsideMenuList ({ layoutProps }) {
       ? ` ${!hasSubmenu && 'menu-item-active'} menu-item-open `
       : ''
   }
+  const { isUserAuthenticate } = useContext(permissionsContext)
 
   return (
     <>
@@ -65,12 +68,9 @@ export function AsideMenuList ({ layoutProps }) {
         </li> */}
 
 
-
-
-
         <li
-         className={`menu-item ${getMenuItemActive('/setting/Batch')}`}
-         aria-haspopup='true'
+          className={`menu-item ${getMenuItemActive('/setting/Batch')}`}
+          aria-haspopup='true'
           data-menu-toggle='hover'
         >
           <NavLink className='menu-link' to='/setting/Batch'>
@@ -91,9 +91,6 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li>
-
-
-
 
         <li
           className={`menu-item ${getMenuItemActive('/Student', false)}`}
@@ -118,30 +115,34 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li>
+        {isUserAuthenticate('M3', 1) && (
+          <li
+            className={`menu-item ${getMenuItemActive('/user', false)}`}
+            aria-haspopup='true'
+            data-menu-toggle='hover'
+          >
+            <NavLink className='menu-link' to='/user/BranchUser'>
+              <span className='svg-icon menu-icon'>
+                <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+              </span>
+              <span className='menu-text'>User</span>
+              <i className='menu-arrow' />
+            </NavLink>
 
-        <li
-          className={`menu-item ${getMenuItemActive('/user', false)}`}
-          aria-haspopup='true'
-          data-menu-toggle='hover'
-        >
-          <NavLink className='menu-link' to='/user/BranchUser'>
-            <span className='svg-icon menu-icon'>
-              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
-            </span>
-            <span className='menu-text'>User</span>
-            <i className='menu-arrow' />
-          </NavLink>
-
-          <div className='menu-submenu '>
-            <ul className='menu-subnav'>
-              <li className='menu-item  menu-item-parent' aria-haspopup='true'>
-                <span className='menu-link'>
-                  <span className='menu-text'>User</span>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </li>
+            <div className='menu-submenu '>
+              <ul className='menu-subnav'>
+                <li
+                  className='menu-item  menu-item-parent'
+                  aria-haspopup='true'
+                >
+                  <span className='menu-link'>
+                    <span className='menu-text'>User</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        )}
       </ul>
     </>
   )
