@@ -9,7 +9,7 @@ export default function ScheduleExamActionFormatter (
   cellContent,
   row,
   rowIndex,
-  {  DeleteAction  , EditAction }
+  {  DeleteAction  , EditAction , EditActive }
 ) {
   return (
     <>
@@ -17,12 +17,12 @@ export default function ScheduleExamActionFormatter (
     
 
     <a
-        title='ReSchedule'
+        title='ChangeActive'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => EditAction(row._id)}
+        onClick={() => EditActive(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG title=' ReSchedule'
+          <SVG title='ChangeActive'
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
@@ -30,7 +30,9 @@ export default function ScheduleExamActionFormatter (
       <a
         title='ReSchedule'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => EditAction(row._id)}
+        onClick={() => EditAction(row.classes.examSchedule._id ,row.classes.name,
+          row.classes.examSchedule.examId[0].name , row.classes.examSchedule.startDate ,
+           row.classes.examSchedule.endDate  , row.classes._id , row.classes.examSchedule.examId[0]._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
           <SVG title=' ReSchedule'
