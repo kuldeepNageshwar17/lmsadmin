@@ -5,51 +5,39 @@ import React from 'react'
 import SVG from 'react-inlinesvg'
 import { toAbsoluteUrl } from '../../../../_metronic/_helpers'
 
-export default function ExamActionFormatter (
+export default function ScheduleExamActionFormatter (
   cellContent,
   row,
   rowIndex,
-  { EditAction, DeleteAction,ShowQuestions ,scheduleIt }
+  {  DeleteAction  , EditAction }
 ) {
   return (
     <>
-    {row.isComplete === true && <a
-        title='Add Questions'
-        className='btn  btn-light btn-hover-success btn-sm mx-3'
-        onClick={() => scheduleIt(row._id , row.name)}
-    >
-       <span className="svg-icon svg-icon-md svg-icon-primary">          
-          <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Navigation/Plus.svg")}
-          />
-        </span>Schedule It
-    </a> }
+    
     
 
     <a
-        title='Add Questions'
-        className='btn  btn-light btn-hover-success btn-sm mx-3'
-        onClick={() => ShowQuestions(row._id)}
-      >
-       <span className="svg-icon svg-icon-md svg-icon-primary">          
-          <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Navigation/Plus.svg")}
-          />
-        </span>Questions
-      </a>
-
-      <a
-        title='Edit Exam'
+        title='ReSchedule'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => EditAction(row._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
-          <SVG title='Edit Exam'
+          <SVG title=' ReSchedule'
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
       </a>
-
+      <a
+        title='ReSchedule'
+        className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
+        onClick={() => EditAction(row._id)}
+      >
+        <span className='svg-icon svg-icon-md svg-icon-primary'>
+          <SVG title=' ReSchedule'
+            src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
+          />
+        </span>
+      </a>
       <a
         title='Delete Question'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
