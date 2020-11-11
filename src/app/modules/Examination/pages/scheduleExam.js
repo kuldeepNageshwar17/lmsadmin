@@ -16,16 +16,14 @@ import BootstrapTable from 'react-bootstrap-table-next'
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
-import ExamActionFormatter from '../components/ExamActionFormatter'
+import ScheduleExamActionFormatter from '../components/ScheduleExamActionFormatter'
 import DatePicker from "react-datepicker";
-export default function Exams (props) {
+export default function ScheduleExam (props) {
   const [Exams, setExams] = useState([])
   const [modalShow, setModalShow] = React.useState(false);
   const [Exam , setExam] = useState()
   let history = useHistory()
-  const EditHandler = (id) => {
-    history.push('/Exams/ExamForm/' + id)
-  }
+  
   const DeleteHandler = (id) => {
     if (window.confirm('do you really  want to delete')) {
       axios
@@ -34,13 +32,18 @@ export default function Exams (props) {
         .catch(() => {})
     }
   }
-  const GetQuestionHandler=(id)=>{
-    history.push('/Exams/'+ id+'/ExamQuestion/' )
+  const EditHandler = (id) => {
+    
   }
   const ChangeDescription = (cellContent) => {
     return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
   }
-
+  const ChangeDate = (cellContent) => {
+    return cellContent.slice(0,10)
+  }
+  const statusFormatter = (cellContent) => {
+    return cellContent == true ? "Active" : "InActve"
+  }
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
       console.log('Size per page change!!!')
@@ -59,19 +62,19 @@ export default function Exams (props) {
   }
   const columns = [
     {
-      dataField: '_id',
+      dataField: 'classes.examSchedule._id',
       text: 'ID',
       hidden: true
     },
     {
-      dataField: 'name',
+      dataField: 'classes.examSchedule.examId[0].name',
       text: 'Name',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'class',
+      dataField: 'classes.name',
       text: 'Class',
       sort: true,
       //cellClasses: 'bg-primary',
@@ -82,28 +85,31 @@ export default function Exams (props) {
     },
     
     {
-      dataField: 'passingMarks',
-      text: 'passing',
+      dataField: 'classes.examSchedule.startDate',
+      text: 'StartDate',
       sort: true,
+      formatter : ChangeDate,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'totalMarks',
-      text: 'Total',
+      dataField: 'classes.examSchedule.endDate',
+      text: 'EndDate',
       sort: true,
+      formatter :  ChangeDate ,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'isComplete',
+      dataField: 'classes.examSchedule.isActive',
       text: 'Status',
       sort: true,
+      formatter : statusFormatter ,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'description',
+      dataField: 'classes.examSchedule.examId[0].description',
       text: 'Description',
       sort: true,
       formatter : ChangeDescription,
@@ -113,11 +119,10 @@ export default function Exams (props) {
     {
       dataField: 'action',
       text: 'Actions',
-      formatter: ExamActionFormatter,
+      formatter: ScheduleExamActionFormatter,
       formatExtraData: {
-        EditAction: EditHandler,
+        EditAction : EditHandler , 
         DeleteAction: DeleteHandler,
-        ShowQuestions:GetQuestionHandler,
         scheduleIt : scheduleIt
       },
       classes: 'text-right pr-0',
@@ -130,15 +135,11 @@ export default function Exams (props) {
   ]
 const updateData=()=>{
   debugger
-  axios.get('/api/Examination/getAllExams')
+  axios.get('/api/examination/getExamSchedule')
     .then(res => {
-    debugger;  
-    var exams = res.data.classes.reduce((arr, item)=>{
-      var newitem = item.examinations.map(i=>{ return  {...i,"class":item.name}})
-      return arr.concat(newitem)
-    },[])
+    debugger; 
 
-        setExams(exams)
+        setExams(res.data)
     })
     .catch(err => {
       console.log(err)

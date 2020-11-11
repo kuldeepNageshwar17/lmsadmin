@@ -5,6 +5,8 @@ import ExamForm from './pages/examForm'
 import ExamQuestionList from './pages/examQuestions'
 import QuestionForm from './pages/questionForm'
 import QuestionProfile from './pages/question'
+import ScheduleExam from './pages/scheduleExam'
+
 
 export default function Student() {
   return (
@@ -29,7 +31,10 @@ export default function Student() {
       </Route>       
       <Route exact path='/Exams/Question/:id'>
         <QuestionProfile />
-      </Route>       
+      </Route> 
+      <Route exact path='/Exams/Scheduled/'>
+        <ScheduleExam />
+      </Route>      
     </Switch>
   )
 }
