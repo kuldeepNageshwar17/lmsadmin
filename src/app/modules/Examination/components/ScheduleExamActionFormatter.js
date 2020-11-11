@@ -9,11 +9,7 @@ export default function ScheduleExamActionFormatter (
   cellContent,
   row,
   rowIndex,
-<<<<<<< HEAD
-  {  DeleteAction  , EditAction , EditActive }
-=======
   {  DeleteAction  , EditAction ,ChangeState}
->>>>>>> b627a08a2ee3a814d22a1ab98d569a30dac6f9c1
 ) {
   return (
     <>
