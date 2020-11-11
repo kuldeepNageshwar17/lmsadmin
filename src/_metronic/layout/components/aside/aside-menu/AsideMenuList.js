@@ -67,7 +67,6 @@ export function AsideMenuList ({ layoutProps }) {
           </div>
         </li> */}
 
-
         <li
           className={`menu-item ${getMenuItemActive('/setting/Batch')}`}
           aria-haspopup='true'

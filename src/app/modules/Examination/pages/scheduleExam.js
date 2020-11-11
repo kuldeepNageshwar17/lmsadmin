@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
-import { Modal , Button} from 'react-bootstrap';
+import { useHistory } from 'react-router-dom'
+import { Modal, Button } from 'react-bootstrap'
 
 import {
   Card,
@@ -17,19 +17,22 @@ import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
 import ScheduleExamActionFormatter from '../components/ScheduleExamActionFormatter'
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker'
 export default function ScheduleExam (props) {
   const [Exams, setExams] = useState([])
   const [modalShow, setModalShow] = React.useState(false);
   const [Exam , setExam] = useState()
   const [ReExam , setReExam] = useState()
   let history = useHistory()
-  
-  const DeleteHandler = (id) => {
+
+  const DeleteHandler = id => {
     if (window.confirm('do you really  want to delete')) {
       axios
-        .delete('/api/Examination/deleteExam/'+id )
-        .then(res => {alert("Exam Deleted ");updateData() })
+        .delete('/api/Examination/deleteExam/' + id)
+        .then(res => {
+          alert('Exam Deleted ')
+          updateData()
+        })
         .catch(() => {})
     }
   }
@@ -49,6 +52,9 @@ export default function ScheduleExam (props) {
   }
   const editActive = (cellContent) => {
     return 
+  }
+  const ChangeState = val => {
+    alert(val)
   }
   
   const editHandler = (id , className , examName , startDate , endDate , classID , examId) => {
@@ -88,11 +94,11 @@ export default function ScheduleExam (props) {
       sort: true,
       //cellClasses: 'bg-primary',
       //headerClasses: 'bg-primary',
-      
-      sortCaret: sortCaret, 
+
+      sortCaret: sortCaret,
       headerSortingClasses
     },
-    
+
     {
       dataField: 'classes.examSchedule.startDate',
       text: 'StartDate',
@@ -113,7 +119,7 @@ export default function ScheduleExam (props) {
       dataField: 'classes.examSchedule.isActive',
       text: 'Status',
       sort: true,
-      formatter : statusFormatter ,
+      formatter: statusFormatter,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -121,7 +127,7 @@ export default function ScheduleExam (props) {
       dataField: 'classes.examSchedule.examId[0].description',
       text: 'Description',
       sort: true,
-      formatter : ChangeDescription,
+      formatter: ChangeDescription,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -140,20 +146,20 @@ export default function ScheduleExam (props) {
         minWidth: '100px'
       }
     }
-    
   ]
-const updateData=()=>{
-  debugger
-  axios.get('/api/examination/getExamSchedule')
-    .then(res => {
-    debugger; 
+  const updateData = () => {
+    debugger
+    axios
+      .get('/api/examination/getExamSchedule')
+      .then(res => {
+        debugger
 
         setExams(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
   useEffect(() => {
     updateData()
   }, [])
@@ -169,13 +175,13 @@ const updateData=()=>{
     
   }
 
-  function MyVerticallyCenteredModal(props) {      
+  function MyVerticallyCenteredModal (props) {
     return (
        
       <Modal
         {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
         centered
         key={props.data.id}
       >
@@ -217,7 +223,7 @@ const updateData=()=>{
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                  history.push('/Exams/ExamForm')
+                    history.push('/Exams/ExamForm')
                   }}
                 >
                   Create Exam
@@ -225,8 +231,7 @@ const updateData=()=>{
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-            
-              {Exams ?  (
+              {Exams ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
@@ -240,12 +245,11 @@ const updateData=()=>{
                         remote
                         bordered={false}
                         pagination={paginationFactory(options)}
-                        {...paginationTableProps} 
+                        {...paginationTableProps}
                       />
                     )
                   }}
                 </PaginationProvider>
-                
               ) : (
                 <div>loading</div>
               )}

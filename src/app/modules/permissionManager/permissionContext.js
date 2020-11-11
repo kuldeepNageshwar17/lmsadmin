@@ -7,7 +7,6 @@ const permissionsContext = createContext(initialState)
 const { Provider } = permissionsContext
 
 const PermissionsProvider = ({ children }) => {
- 
   const { permission } = useSelector(({ auth }) => {
     return { permission: auth.userPermission }
   }, shallowEqual)
@@ -20,10 +19,10 @@ const PermissionsProvider = ({ children }) => {
     debugger
     console.log(module, perm)
     console.log(permission)
-if(permission){
-return    permission.some(m=> m.module===module && m.permission===perm)
-}
-    
+    if (permission) {
+      return permission.some(m => m.module === module && m.permission === perm)
+    }
+
     return false
   }
   return <Provider value={{ isUserAuthenticate }}>{children}</Provider>
