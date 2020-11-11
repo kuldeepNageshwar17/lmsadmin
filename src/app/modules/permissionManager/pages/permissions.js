@@ -114,9 +114,9 @@ export default function Permissions () {
                       <td>
                         <input
                           type='checkbox'
-                          checked={CheckPermissionInputCheck(item.id, 3)}
+                          checked={CheckPermissionInputCheck(item.id, 4)}
                           onClick={event =>
-                            postPermission(item.id, 3, event.target.checked)
+                            postPermission(item.id, 4, event.target.checked)
                           }
                         ></input>
                       </td>
