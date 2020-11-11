@@ -371,3 +371,7 @@
 .aside-menu .menu-nav>.menu-item.menu-item-active>.menu-link {
     background-color: #1b1b28;
 }
+
+.custom-switch {
+    display: inline-block !important;
+}

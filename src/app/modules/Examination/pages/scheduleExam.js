@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
-import { Modal , Button} from 'react-bootstrap';
+import { useHistory } from 'react-router-dom'
+import { Modal, Button } from 'react-bootstrap'
 
 import {
   Card,
@@ -17,32 +17,36 @@ import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
 import ScheduleExamActionFormatter from '../components/ScheduleExamActionFormatter'
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker'
 export default function ScheduleExam (props) {
   const [Exams, setExams] = useState([])
-  const [modalShow, setModalShow] = React.useState(false);
-  const [Exam , setExam] = useState()
+  const [modalShow, setModalShow] = React.useState(false)
+  const [Exam, setExam] = useState()
   let history = useHistory()
-  
-  const DeleteHandler = (id) => {
+
+  const DeleteHandler = id => {
     if (window.confirm('do you really  want to delete')) {
       axios
-        .delete('/api/Examination/deleteExam/'+id )
-        .then(res => {alert("Exam Deleted ");updateData() })
+        .delete('/api/Examination/deleteExam/' + id)
+        .then(res => {
+          alert('Exam Deleted ')
+          updateData()
+        })
         .catch(() => {})
     }
   }
-  const EditHandler = (id) => {
-    
+  const EditHandler = id => {}
+  const ChangeDescription = cellContent => {
+    return <div dangerouslySetInnerHTML={{ __html: cellContent }}></div>
   }
-  const ChangeDescription = (cellContent) => {
-    return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
+  const ChangeDate = cellContent => {
+    return cellContent.slice(0, 10)
   }
-  const ChangeDate = (cellContent) => {
-    return cellContent.slice(0,10)
+  const ChangeState = val => {
+    alert(val)
   }
-  const statusFormatter = (cellContent) => {
-    return cellContent == true ? "Active" : "InActve"
+  const statusFormatter = cellContent => {
+    return cellContent == true ? 'Active' : 'InActve'
   }
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {
@@ -56,9 +60,9 @@ export default function ScheduleExam (props) {
       console.log('Newest page:' + page)
     }
   }
-  const scheduleIt = (id , name) => {
-     setModalShow(true)
-     setExam({id : id , name : name})
+  const scheduleIt = (id, name) => {
+    setModalShow(true)
+    setExam({ id: id, name: name })
   }
   const columns = [
     {
@@ -79,16 +83,16 @@ export default function ScheduleExam (props) {
       sort: true,
       //cellClasses: 'bg-primary',
       //headerClasses: 'bg-primary',
-      
-      sortCaret: sortCaret, 
+
+      sortCaret: sortCaret,
       headerSortingClasses
     },
-    
+
     {
       dataField: 'classes.examSchedule.startDate',
       text: 'StartDate',
       sort: true,
-      formatter : ChangeDate,
+      formatter: ChangeDate,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -96,7 +100,7 @@ export default function ScheduleExam (props) {
       dataField: 'classes.examSchedule.endDate',
       text: 'EndDate',
       sort: true,
-      formatter :  ChangeDate ,
+      formatter: ChangeDate,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -104,7 +108,7 @@ export default function ScheduleExam (props) {
       dataField: 'classes.examSchedule.isActive',
       text: 'Status',
       sort: true,
-      formatter : statusFormatter ,
+      formatter: statusFormatter,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -112,7 +116,7 @@ export default function ScheduleExam (props) {
       dataField: 'classes.examSchedule.examId[0].description',
       text: 'Description',
       sort: true,
-      formatter : ChangeDescription,
+      formatter: ChangeDescription,
       sortCaret: sortCaret,
       headerSortingClasses
     },
@@ -121,9 +125,9 @@ export default function ScheduleExam (props) {
       text: 'Actions',
       formatter: ScheduleExamActionFormatter,
       formatExtraData: {
-        EditAction : EditHandler , 
+        EditAction: EditHandler,
         DeleteAction: DeleteHandler,
-        scheduleIt : scheduleIt
+        ChangeState: ChangeState
       },
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
@@ -131,45 +135,45 @@ export default function ScheduleExam (props) {
         minWidth: '100px'
       }
     }
-    
   ]
-const updateData=()=>{
-  debugger
-  axios.get('/api/examination/getExamSchedule')
-    .then(res => {
-    debugger; 
+  const updateData = () => {
+    debugger
+    axios
+      .get('/api/examination/getExamSchedule')
+      .then(res => {
+        debugger
 
         setExams(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
   useEffect(() => {
     updateData()
   }, [])
-  const submitSchedule =  (id) => {
-    axios.post('/api/examination/examSchedule/' + id , Exam).then((res) => {
-      if(res.status === 200){
-        setModalShow(false)
-      }
-    }).catch((error) => {
-
-    })
-    
+  const submitSchedule = id => {
+    axios
+      .post('/api/examination/examSchedule/' + id, Exam)
+      .then(res => {
+        if (res.status === 200) {
+          setModalShow(false)
+        }
+      })
+      .catch(error => {})
   }
 
-  function MyVerticallyCenteredModal(props) {      
+  function MyVerticallyCenteredModal (props) {
     return (
       <Modal
         {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
         centered
         key={props.data.id}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title id='contained-modal-title-vcenter'>
             Schedule Exam
           </Modal.Title>
         </Modal.Header>
@@ -178,18 +182,25 @@ const updateData=()=>{
           <br></br>
           <br></br>
           <p>
-            Start Date :     <DatePicker selected={Exam.startDate} onChange={date => setExam({...Exam , startDate : date})} />
-
+            Start Date :{' '}
+            <DatePicker
+              selected={Exam.startDate}
+              onChange={date => setExam({ ...Exam, startDate: date })}
+            />
           </p>
           <p>
-            End Date :  <DatePicker selected={Exam.endDate} onChange={date => setExam({...Exam , endDate : date})} />
+            End Date :{' '}
+            <DatePicker
+              selected={Exam.endDate}
+              onChange={date => setExam({ ...Exam, endDate: date })}
+            />
           </p>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => submitSchedule(props.data.id)}>Submit</Button>
         </Modal.Footer>
       </Modal>
-    );
+    )
   }
 
   return (
@@ -203,7 +214,7 @@ const updateData=()=>{
                   type='button'
                   className='btn btn-primary'
                   onClick={() => {
-                  history.push('/Exams/ExamForm')
+                    history.push('/Exams/ExamForm')
                   }}
                 >
                   Create Exam
@@ -211,8 +222,7 @@ const updateData=()=>{
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-            
-              {Exams ?  (
+              {Exams ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
@@ -226,19 +236,17 @@ const updateData=()=>{
                         remote
                         bordered={false}
                         pagination={paginationFactory(options)}
-                        {...paginationTableProps} 
+                        {...paginationTableProps}
                       />
                     )
                   }}
                 </PaginationProvider>
-                
               ) : (
                 <div>loading</div>
               )}
-              {Exam && <MyVerticallyCenteredModal
-                show={modalShow}
-                data= {Exam}
-              />}
+              {Exam && (
+                <MyVerticallyCenteredModal show={modalShow} data={Exam} />
+              )}
             </CardBody>
           </Card>
         </div>

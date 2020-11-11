@@ -9,13 +9,13 @@ export default function ScheduleExamActionFormatter (
   cellContent,
   row,
   rowIndex,
-  {  DeleteAction  , EditAction }
+  {  DeleteAction  , EditAction ,ChangeState}
 ) {
   return (
     <>
     
     
-
+{/* 
     <a
         title='ReSchedule'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
@@ -26,7 +26,29 @@ export default function ScheduleExamActionFormatter (
             src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
           />
         </span>
-      </a>
+      </a> */}
+      <div className='custom-control custom-switch' >
+        <input
+          type='checkbox'
+          className='custom-control-input'
+          id='customSwitches'
+          checked={false}
+          onChange={(event)=>{ChangeState(event.target.checked)}}                   
+        />
+        <label className='custom-control-label' htmlFor='customSwitches'>
+        </label>
+      </div>
+      {/* <div className='custom-control custom-switch'>
+        <input
+          type='checkbox'
+          className='custom-control-input'
+          id='customSwitchesChecked'
+          //onChange={(event)=>{ChangeState(event.target.checked)}}          
+        />
+       
+      </div> */}
+
+
       <a
         title='ReSchedule'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
