@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import {
@@ -9,18 +9,21 @@ import {
 } from '../../../../_metronic/_partials/controls'
 import { sortCaret, headerSortingClasses } from '../../../../_metronic/_helpers'
 import BootstrapTable from 'react-bootstrap-table-next'
-import userActionFormatter from  "../components/userActionFormatter"
+import userActionFormatter from '../components/userActionFormatter'
 
 import paginationFactory, {
   PaginationProvider
 } from 'react-bootstrap-table2-paginator'
 //   import BranchActionFormatter from '../components/branchActionFormatter'
+import { permissionsContext } from '../../permissionManager/permissionContext'
 
 function UserList (props) {
+  const { isUserAuthenticate } = useContext(permissionsContext)
+
   const [Users, setUsers] = useState([])
   let history = useHistory()
   useEffect(() => {
-    debugger;
+    debugger
     axios
       .get('/api/staff/User')
       .then(res => {
@@ -29,17 +32,16 @@ function UserList (props) {
       .catch(err => {
         console.log(err)
       })
-  },[])
+  }, [])
 
   const EditUser = id => {
     history.push('/user/BranchUserForm/' + id)
   }
   const DeleteUser = id => {
-
-    debugger;
+    debugger
     if (window.confirm('do you really want to delete')) {
-      axios.delete("/api/staff/staff/"+id).then((res)=>{
-        alert("deleted");
+      axios.delete('/api/staff/staff/' + id).then(res => {
+        alert('deleted')
       })
     }
   }
@@ -94,7 +96,8 @@ function UserList (props) {
       formatter: userActionFormatter,
       formatExtraData: {
         EditUserAction: EditUser,
-        DeleteUserAction: DeleteUser
+        DeleteUserAction: DeleteUser,
+        isUserAuthenticate
       },
       classes: 'text-right pr-0',
       headerClasses: 'text-right pr-3',
@@ -111,15 +114,17 @@ function UserList (props) {
           <Card>
             <CardHeader title='Users'>
               <CardHeaderToolbar>
-                <button
-                  type='button'
-                  className='btn btn-primary'
-                  onClick={() => {
-                    props.history.push('/user/BranchUserForm')
-                  }}
-                >
-                  New User
-                </button>
+                {isUserAuthenticate('M3',2) && 
+                  <button
+                    type='button'
+                    className='btn btn-primary'
+                    onClick={() => {
+                      props.history.push('/user/BranchUserForm')
+                    }}
+                  >
+                    New User
+                  </button>
+                }
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>

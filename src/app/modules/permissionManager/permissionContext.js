@@ -1,21 +1,32 @@
 // store.js
-import React, { createContext, useReducer, useEffect } from 'react'
+import React, { createContext, useEffect } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 
-const initialState = { menus: [], permission: {} }
+const initialState = { permission: {} }
 const permissionsContext = createContext(initialState)
 const { Provider } = permissionsContext
 
 const PermissionsProvider = ({ children }) => {
-  const { menus,permission } = useSelector(({ auth }) => {
-    debugger
-    return { menus: auth.user.menus, permission: auth.user.permission }
+ 
+  const { permission } = useSelector(({ auth }) => {
+    return { permission: auth.userPermission }
   }, shallowEqual)
   useEffect(() => {
     // console.log('permissions :', user)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  return <Provider value={{ menus,permission }}>{children}</Provider>
+
+  const isUserAuthenticate = (module, perm) => {
+    debugger
+    console.log(module, perm)
+    console.log(permission)
+if(permission){
+return    permission.some(m=> m.module===module && m.permission===perm)
+}
+    
+    return false
+  }
+  return <Provider value={{ isUserAuthenticate }}>{children}</Provider>
 }
 
 export { permissionsContext, PermissionsProvider }

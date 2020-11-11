@@ -1,9 +1,10 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLocation } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import SVG from 'react-inlinesvg'
 import { toAbsoluteUrl, checkIsActive } from '../../../../_helpers'
+import { permissionsContext } from '../../../../../app/modules/permissionManager/permissionContext'
 
 export function AsideMenuListControlPanel ({ layoutProps }) {
   const location = useLocation()
@@ -12,6 +13,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
       ? ` ${!hasSubmenu && 'menu-item-active'} menu-item-open `
       : ''
   }
+  const { isUserAuthenticate } = useContext(permissionsContext)
 
   return (
     <>
@@ -104,24 +106,27 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
-
-        <li
-          className={`menu-item ${getMenuItemActive('/User', false)}`}
-          aria-haspopup='true'
-          data-menu-toggle='hover'
-        >
-          <NavLink className='menu-link' to='/User'>
-            <span className='svg-icon menu-icon'>
-              <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
-            </span>
-            <span className='menu-text'>Users</span>
-            {/* <i className='menu-arrow' /> */}
-          </NavLink>
-        </li>
+        {isUserAuthenticate("M3",1) && (
+          <li className={`menu-item ${getMenuItemActive('/User', false)}`}
+            aria-haspopup='true'
+            data-menu-toggle='hover'
+          >
+            <NavLink className='menu-link' to='/User'>
+              <span className='svg-icon menu-icon'>
+                <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+              </span>
+              <span className='menu-text'>Users</span>
+              {/* <i className='menu-arrow' /> */}
+            </NavLink>
+          </li>
+        )}
         {/* Components */}
 
         <li
-          className={`menu-item ${getMenuItemActive('/ecourse/Courses', false)}`}
+          className={`menu-item ${getMenuItemActive(
+            '/ecourse/Courses',
+            false
+          )}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
@@ -197,7 +202,10 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
         </li> */}
 
         <li
-          className={`menu-item ${getMenuItemActive('/permission/Roles', false)}`}
+          className={`menu-item ${getMenuItemActive(
+            '/permission/Roles',
+            false
+          )}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
@@ -219,8 +227,6 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             </ul>
           </div>
         </li>
-
-      
 
         {/* begin::section */}
         <li className='menu-section '>

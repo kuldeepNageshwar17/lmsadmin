@@ -92,7 +92,7 @@ export default function Permissions () {
                   Modules.length > 0 &&
                   Modules.map(item => (
                     <tr key={item.key}>
-                      <td>{item.module}</td>
+                      <td>{item.module} {`(${item.id})`}</td>
                       <td>
                         <input
                           type='checkbox'
