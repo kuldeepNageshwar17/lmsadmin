@@ -11,12 +11,16 @@ export default function ScheduleExamActionFormatter (
   rowIndex,
   {  DeleteAction  , EditAction ,ChangeState}
 ) {
+
+  // const  changeActiveState=(checked )=>{
+  //   ChangeState(checked ,row.classes.examSchedule._id  ,row.classes._id)
+  // }
   return (
     <>
     
     
-{/* 
-    <a
+
+    {/* <a
         title='ChangeActive'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
         onClick={() => EditActive(row._id)}
@@ -28,14 +32,16 @@ export default function ScheduleExamActionFormatter (
         </span>
       </a> */}
       <div className='custom-control custom-switch' >
+        {console.log("schedule",row.classes.examSchedule._id  , "class",row.classes._id)}
         <input
+          // key={row.classes.examSchedule._id}
           type='checkbox'
-          className='custom-control-input'
-          id='customSwitches'
-          checked={false}
-          onChange={(event)=>{ChangeState(event.target.checked)}}                   
+           className='custom-control-input'
+          id={row.classes.examSchedule._id }
+          checked={row.classes.examSchedule.isActive}
+          onClick={event=>ChangeState(event.target.checked ,row.classes.examSchedule._id  ,row.classes._id)}                   
         />
-        <label className='custom-control-label' htmlFor='customSwitches'>
+        <label className='custom-control-label' htmlFor={row.classes.examSchedule._id }>
         </label>
       </div>
       {/* <div className='custom-control custom-switch'>
@@ -65,7 +71,8 @@ export default function ScheduleExamActionFormatter (
       <a
         title='Delete Question'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
-        onClick={() => DeleteAction(row._id)}
+        onClick={() => DeleteAction(row.classes.examSchedule.isActive , row.classes.examSchedule._id ,row.classes.examSchedule.examId[0]._id, row.classes.examSchedule.startDate ,
+          row.classes.examSchedule.endDate ,row.classes._id  )}
       >
         <span className='svg-icon svg-icon-md svg-icon-danger'>
           <SVG  src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete 

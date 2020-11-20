@@ -18,6 +18,10 @@ import paginationFactory, {
 } from 'react-bootstrap-table2-paginator'
 import ExamActionFormatter from '../components/ExamActionFormatter'
 import DatePicker from "react-datepicker";
+import { registerLocale , setDefaultLocale } from "react-datepicker";
+import { enUS } from 'date-fns/locale'
+registerLocale("enUS", enUS); // register it with the name you want
+setDefaultLocale("enUS");
 export default function Exams (props) {
   const [Exams, setExams] = useState([])
   const [modalShow, setModalShow] = React.useState(false);
@@ -171,6 +175,7 @@ const updateData=()=>{
           <Modal.Title id="contained-modal-title-vcenter">
             Schedule Exam
           </Modal.Title>
+          <button onClick={() => setModalShow(false)}>close</button>
         </Modal.Header>
         <Modal.Body>
           <h4>Exam Name : &nbsp;{props.data.name}</h4>

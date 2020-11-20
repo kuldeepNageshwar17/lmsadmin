@@ -18,6 +18,10 @@ import paginationFactory, {
 } from 'react-bootstrap-table2-paginator'
 import ScheduleExamActionFormatter from '../components/ScheduleExamActionFormatter'
 import DatePicker from 'react-datepicker'
+import { registerLocale , setDefaultLocale } from "react-datepicker";
+import { enUS } from 'date-fns/locale'
+registerLocale("enUS", enUS); // register it with the name you want
+setDefaultLocale("enUS");
 export default function ScheduleExam (props) {
   const [Exams, setExams] = useState([])
   const [modalShow, setModalShow] = React.useState(false);
@@ -25,12 +29,13 @@ export default function ScheduleExam (props) {
   const [ReExam , setReExam] = useState()
   let history = useHistory()
 
-  const DeleteHandler = id => {
+  const DeleteHandler = (isActive, _id , examId ,  startDate ,endDate , classID ) => {
     if (window.confirm('do you really  want to delete')) {
+      var data = {isActive, _id , examId ,  startDate ,endDate , classID }
       axios
-        .delete('/api/Examination/deleteExam/' + id)
+        .post('/api/Examination/deleteScheduleExam/'  , data)
         .then(res => {
-          alert('Exam Deleted ')
+          alert('Exam Deleted')
           updateData()
         })
         .catch(() => {})
@@ -48,13 +53,23 @@ export default function ScheduleExam (props) {
     return cellContent ? cellContent.slice(0,10) : cellContent
   }
   const statusFormatter = (cellContent) => {
-    return cellContent == true ? "Active" : "InActve" 
+    return cellContent == true ? "Active" : "InActive" 
   }
   const editActive = (cellContent) => {
     return 
   }
-  const ChangeState = val => {
-    alert(val)
+  const ChangeState = (val , id , classID) => {
+
+    debugger;
+   var data = {isActive : val , id , classID}
+   console.log(data);
+
+    axios.post('/api/examination/updateActive' ,data ).then((res) => {
+console.log(res.data)
+    }).catch((error) => {
+      console.log(error)
+    })
+    updateData()
   }
   
   const editHandler = (id , className , examName , startDate , endDate , classID , examId) => {
@@ -136,7 +151,7 @@ export default function ScheduleExam (props) {
       text: 'Actions',
       formatter: ScheduleExamActionFormatter,
       formatExtraData: {
-        EditActive : editActive , 
+        ChangeState : ChangeState , 
         EditAction : editHandler , 
         DeleteAction: DeleteHandler
       },
@@ -153,7 +168,7 @@ export default function ScheduleExam (props) {
       .get('/api/examination/getExamSchedule')
       .then(res => {
         debugger
-
+        console.log("data" , res.data)
         setExams(res.data)
       })
       .catch(err => {
@@ -163,8 +178,11 @@ export default function ScheduleExam (props) {
   useEffect(() => {
     updateData()
   }, [])
-  const submitReSchedule =  (id) => {
-    axios.post('/api/examination/reSchedule' , ReExam).then((res) => {
+  const submitReSchedule =  (id) => { 
+    
+    console.log(ReExam)
+    
+    axios.post('/api/examination/reSchedule' ,ReExam ).then((res) => {
       if(res.status === 200){
         setModalShow(false)
         updateData()
@@ -185,10 +203,11 @@ export default function ScheduleExam (props) {
         centered
         key={props.data.id}
       >
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title id="contained-modal-title-vcenter">
             ReSchedule Exam
           </Modal.Title>
+          <button onClick={() => setModalShow(false)}>close</button>
         </Modal.Header>
         <Modal.Body>
         <h4>Class Name : &nbsp;{props.data.className}</h4><br></br>
