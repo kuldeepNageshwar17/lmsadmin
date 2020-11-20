@@ -80,8 +80,7 @@ debugger;
       return alert(MatchPassword)
     }
     
-    axios
-      .post('/api/staff/UserFormInstitute', User)
+    axios.post('/api/staff/UserFormInstitute', User)
       .then(res => {
         history.push('/user')
       })
@@ -131,23 +130,7 @@ debugger;
                         />
                       )}
                     </div>
-                    {/* <Form.Label>User Role </Form.Label>
-                    <Form.Control
-                      as='select'
-                      placeholder=''
-                      // disabled={setUser._id?"true":"false"}
-                      value={User.role}
-                      onChange={event =>
-                        setUser({ ...User, role: event.target.value })
-                      }
-                    >
-                      <option>select Role</option>
-                      {Roles.map(item => (
-                        <option value={item.id} key={item._id}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Form.Control> */}
+                  
                   </Col>
                    <Col>
 

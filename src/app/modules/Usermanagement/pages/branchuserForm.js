@@ -7,73 +7,57 @@ import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
 
 export default function BranchUserform () {
   let { id } = useParams()
-
-  const [User, setUser] = useState({
-    name: '',
-    role: '',
-    password: '',
-    email: '',
-    mobile: '',
-    confirmPassword: '',
-    roles: []
-  })
-  const [Roles, setRoles] = useState([])
-  const [RolesDdr, setRolesDdr] = useState([])
-  const [RoleState, setRoleState] = useState(false)
-  const [confirm, setconfirm] = useState({
-    confirmPassword : "",
-    checkMobileNo : ""
-  })
-
-  console.log(id)
   let history = useHistory()
 
+  const [User, setUser] = useState({})
+  const [RolesDdr, setRolesDdr] = useState([])
+  const [confirm, setconfirm] = useState({
+    confirmPassword: '',
+    checkMobileNo: ''
+  })
   useEffect(() => {
     debugger
+    axios
+      .get('/api/staff/UserRolesBranch')
+      .then(res => {
+        var roles = res.data.map(item => {
+          return { key: item.id, label: item.name }
+        })
+        setRolesDdr(roles)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+  useEffect(() => {
     if (id) {
+      debugger
       axios
         .get('/api/staff/User/' + id)
         .then(res => {
-          if (res.data.roles.length) {
-            setUser({ ...res.data, role: res.data.roles[0] })
-          } else {
-            setUser(res.data)
-          }
+          setUser(res.data)
         })
         .catch(err => {
           console.log(err)
         })
     }
-    axios
-      .get('/api/staff/UserRolesBranch')
-      .then(res => {
-        setRoles(res.data)
-        var roles = res.data.map(item => {
-          return { key: item.id, label: item.name }
-        })
-        setRolesDdr(roles)
-        // setRoles(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }, [id])
 
-  useEffect(() => {
-    debugger
-    if (User.roles && User.roles.length) {
-      // Roles.forEach(item=>{
-      //   debugger;
-      //   if(item.id===User.role && item.type === 1){
-      //     setRoleState(true);
-      //   }
-      // })
-      if (!Roles.filter(m => m.id === User.role).length) {
-        setRoleState(true)
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [User.roles, Roles])
+  // useEffect(() => {
+  //   debugger
+  //   if (User.roles && User.roles.length) {
+  //     // Roles.forEach(item=>{
+  //     //   debugger;
+  //     //   if(item.id===User.role && item.type === 1){
+  //     //     setRoleState(true);
+  //     //   }
+  //     // })
+  //     if (!Roles.filter(m => m.id === User.role).length) {
+  //       setRoleState(true)
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [User.roles, Roles])
 
   const saveUser = event => {
     event.preventDefault()
@@ -95,7 +79,7 @@ export default function BranchUserform () {
           <Card>
             <Card.Body>
               <Form onSubmit={saveUser}>
-                <Form.Group >
+                <Form.Group>
                   <Col>
                     <Form.Label>User Name</Form.Label>
                     <Form.Control
@@ -108,44 +92,26 @@ export default function BranchUserform () {
                       }
                     />
                   </Col>
-                  <div className='app'>
-                    <div className='preview-values '>
-                      <Form.Label>User Role </Form.Label>
-                      {/* {User.roles} */}
-                    </div>
-                    {/* {User.roles} */}
-                    {RolesDdr.length && (
-                      <DropdownMultiselect
-                        options={RolesDdr}
-                        name='roles'
-                        selected={User.roles}
-                        handleOnChange={selected => {
-                          setUser({ ...User, roles: selected })
-                          // console.log(selected)
-                        }}
-                      />
-                    )}
-                  </div>
+                  <Col>
+                    <div className='app'>
+                      <div className='preview-values '>
+                        <Form.Label>User Role </Form.Label>
+                      </div>
 
-                  {/* <Col>
-                    <Form.Label>User Role </Form.Label>
-                    <Form.Control
-                      as='select'
-                      placeholder=''
-                      disabled={RoleState}
-                      value={User.role}
-                      onChange={event =>
-                        setUser({ ...User, role: event.target.value })
-                      }
-                    >
-                      <option>select Role</option>
-                      {Roles.map(item => (
-                        <option value={item.id} key={item._id}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Col> */}
+                      {RolesDdr.length && (
+                        <DropdownMultiselect
+                          options={RolesDdr}
+                          name='roles'
+                          selected={User.roles}
+                          handleOnChange={selected => {
+                            setUser({ ...User, roles: selected })
+                            // console.log(selected)
+                          }}
+                        />
+                      )}
+                    </div>
+                  </Col>
+
                   <Col>
                     <Form.Label> Email </Form.Label>
                     <Form.Control
@@ -160,33 +126,38 @@ export default function BranchUserform () {
                   </Col>
                 </Form.Group>
 
-                <Form.Group >
+                <Form.Group>
                   <Col>
                     <Form.Label> Mobile </Form.Label>
                     <Form.Control
                       type='text'
                       placeholder='user mobile'
                       value={User.mobile}
-                      required
+                      required={User._id ? true : false}
                       onChange={event => {
-                        if(event.target.value.length < 10){
-                          setconfirm({...confirm ,checkMobileNo : "Please must be of 10 digits" })
-                        }
-                        else{
-                          setconfirm({...confirm ,checkMobileNo : "" })
+                        if (event.target.value.length < 10) {
+                          setconfirm({
+                            ...confirm,
+                            checkMobileNo: 'Please must be of 10 digits'
+                          })
+                        } else {
+                          setconfirm({ ...confirm, checkMobileNo: '' })
                         }
                         setUser({ ...User, mobile: event.target.value })
                       }}
                     />
-                         {confirm.checkMobileNo && <div className="text-danger">{confirm.checkMobileNo}</div> }
+                    {confirm.checkMobileNo && (
+                      <div className='text-danger'>{confirm.checkMobileNo}</div>
+                    )}
                   </Col>
+
                   <Col>
                     <Form.Label> Password </Form.Label>
                     <Form.Control
                       type='password'
                       placeholder='user pasword'
                       required
-                      value={User.pasword}
+                      value={User.password}
                       onChange={event =>
                         setUser({ ...User, password: event.target.value })
                       }
@@ -206,22 +177,23 @@ export default function BranchUserform () {
                         })
                       }
                       onBlur={event => {
-                        if(User.password !== event.target.value){
+                        if (User.password !== event.target.value) {
                           return setconfirm({
                             ...confirm,
-                            confirmPassword : "Password DoesNot Match"
+                            confirmPassword: 'Password DoesNot Match'
                           })
-                        }
-                        else{
+                        } else {
                           setconfirm({
                             ...confirm,
-                            confirmPassword : ""
+                            confirmPassword: ''
                           })
                         }
                       }}
                     />
                   </Col>
-                  {confirm.confirmPassword && <div className="text-danger">{confirm.confirmPassword}</div> }
+                  {confirm.confirmPassword && (
+                    <div className='text-danger'>{confirm.confirmPassword}</div>
+                  )}
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

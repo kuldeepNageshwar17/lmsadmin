@@ -16,7 +16,6 @@ const PermissionsProvider = ({ children }) => {
   }, [])
 
   const isUserAuthenticate = (module, perm) => {
-    debugger
     console.log(module, perm)
     console.log(permission)
     if (permission) {
