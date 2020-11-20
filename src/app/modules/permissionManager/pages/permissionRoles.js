@@ -12,7 +12,7 @@ export default function PermissionRoles () {
     axios
       .get('/api/permission/roles')
       .then(result => {
-        console.log(result)
+        console.log("result here" , result , "end")
         setRoles(result.data)
       })
       .catch(err => {

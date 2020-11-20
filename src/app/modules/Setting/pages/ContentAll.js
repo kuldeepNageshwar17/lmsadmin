@@ -12,7 +12,7 @@ import {
 import { Tabs, Tab , ProgressBar } from 'react-bootstrap'
 import JoditEditor from 'jodit-react'
 import Progress from '../components/progressbar';
-import { red } from '@material-ui/core/colors'
+import { colors } from "@material-ui/core";
 
 export default function VideoContent () {
   const [Content, setContent] = useState({

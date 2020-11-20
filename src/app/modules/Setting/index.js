@@ -16,7 +16,7 @@ import ContentVideo from './pages/ContentVideo'
 import ContentAudio from './pages/ContentAudio'
 import ContentAll from './pages/ContentAll'
 import CoursePlayer from './pages/CoursePlayer'
-
+import ClassesForBranch from './pages/classesForBranch'
 
 
 export default function ECourse () {
@@ -78,6 +78,9 @@ export default function ECourse () {
       </Route>
       <Route exact path='/setting/course/section/:id/content/:cid'>
         <ContentAll/>
+      </Route>
+      <Route exact path='/setting/classList'>
+        <ClassesForBranch/>
       </Route>
       
 {/* 
