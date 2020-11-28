@@ -67,6 +67,14 @@ export default function CourseBlocks ({ item }) {
             >
               Tests
             </Button>
+            <Button
+              variant='primary'
+              onClick={() => {
+                history.push(`/setting/course/${item.courses._id}/showCourse`)
+              }}
+            >
+              Show
+            </Button>
           </Card.Body>
         </Card>
       </Col>

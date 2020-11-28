@@ -168,7 +168,6 @@ console.log(res.data)
       .get('/api/examination/getExamSchedule')
       .then(res => {
         debugger
-        console.log("data" , res.data)
         setExams(res.data)
       })
       .catch(err => {
@@ -178,9 +177,7 @@ console.log(res.data)
   useEffect(() => {
     updateData()
   }, [])
-  const submitReSchedule =  (id) => { 
-    
-    console.log(ReExam)
+  const submitReSchedule =  (id) => {
     
     axios.post('/api/examination/reSchedule' ,ReExam ).then((res) => {
       if(res.status === 200){

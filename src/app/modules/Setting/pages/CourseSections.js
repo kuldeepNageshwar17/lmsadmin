@@ -194,7 +194,7 @@ export default function CourseSections () {
                                 >
                                   <Col className='secTitle'>{c.title}</Col>
 
-                                  <Col className='secType'>{`${c.videoUrl || c.videoDescription ? "Video" : ""}  ${c.pdfUrl || c.pdfDescription? "| Pdf" : ""} ${c.imageUrl || c.imageDescription? "| Image" : ""} ${c.audioUrl ? "| Audio" : ""} `}</Col>
+                                  <Col className='secType'>{`${c.videoUrl || c.videoDescription ? "Video" : ""}  ${c.pdfUrl || c.pdfDescription? "| Pdf" : ""} ${c.imageUrl || c.imageDescription? "| Image" : ""} ${c.audioUrl ? "| Audio" : ""} ${c.textDescription ? "Text" : ""} `}</Col>
                                   {/* <Col className='secUrl'>
                                     {c.contentUrl ? 'true' : 'false'}
                                   </Col> */}

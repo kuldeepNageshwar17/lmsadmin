@@ -12,6 +12,7 @@ import { Layout } from '../_metronic/layout'
 import BasePage from './BasePage'
 import { Logout, AuthPage } from './modules/Auth'
 import ErrorsPage from './modules/ErrorsExamples/ErrorsPage'
+import CoursePlayer from './modules/Setting/pages/CoursePlayer'
 import {
   PermissionContenxt,
   PermissionsProvider
@@ -35,7 +36,9 @@ import {
       ) : (
         <Redirect from='/auth' to='/' />
       )}
-
+        <Route path='/coursePlayer/:id/:sectionId?/:contentId?/:time?/:type?'>
+        <CoursePlayer />
+      </Route>
       <Route path='/error' component={ErrorsPage} />
       <Route path='/logout' component={Logout} />
       {!isAuthorized ? (

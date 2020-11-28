@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import input from 'util'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form  } from 'react-bootstrap'
 import {
   Card,
   CardBody,
@@ -126,9 +126,14 @@ export default function ClassesForBranch (props) {
     updateData()
   }, [])
 
-  const updateFees = (classId,fees) => {
+  const updateFees = (classId,requestedFees ,className , fees) => {
+    var data = {entityId : classId , requestedFees : requestedFees , requestType : "ClassFee",
+    entityName : className , fees : fees}
+    if(requestedFees == fees){
+        return 
+    }
     axios
-      .post('/api/Branch/setClassFees/',{classId,fees})
+      .post('/api/Branch/setFees/',data )
       .then(res => {})
       .catch(error => {})
     updateData()

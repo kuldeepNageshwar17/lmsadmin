@@ -5,18 +5,19 @@ import { Button, Form, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 
-function StudentForm () {
+function StudentForm() {
   const [Student, setStudent] = useState({
     name: '',
     password: '',
     email: '',
     mobile: '',
     confirmPasswors: '',
-    currentBatch: ''
+    currentBatch: '',
+    fees: ''
   })
   const [confirm, setconfirm] = useState({
-    confirmPassword : "",
-    checkMobileNo : ""
+    confirmPassword: "",
+    checkMobileNo: ""
   })
   const [Batches, setBatches] = useState([])
 
@@ -45,10 +46,21 @@ function StudentForm () {
         })
     }
   }, [id])
+  const getFees = async (id) => {
+    var data = { id }
 
+    axios.post('/api/student/getFeesOfClass', data).then((res) => {
+      setStudent({ ...Student, fees: res.data.fees, currentBatch: id })
+    }).catch((error) => {
+      setStudent({ ...Student, currentBatch: id })
+    })
+
+
+  }
   const saveStudent = event => {
     event.preventDefault()
     debugger
+    console.log("student", Student)
     axios
       .post('/api/student/student', Student)
       .then(res => {
@@ -87,11 +99,13 @@ function StudentForm () {
                       // disabled={setStudent._id?"true":"false"}
                       value={Student.currentBatch}
                       required
-                      onChange={event =>
-                        setStudent({
-                          ...Student,
-                          currentBatch: event.target.value
-                        })
+                      onChange={event => {
+                        // setStudent({
+                        //   ...Student,
+                        //   currentBatch: event.target.value
+                        // })
+                        getFees(event.target.value);
+                      }
                       }
                     >
                       <option value="">select Batch</option>
@@ -101,6 +115,18 @@ function StudentForm () {
                         </option>
                       ))}
                     </Form.Control>
+                  </div>
+                  <div className='col-md-4' controlId='formFees'>
+                    <Form.Label> Fees </Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Fees'
+                      value={Student.fees}
+                      required
+                      onChange={event =>
+                        setStudent({ ...Student, fees: event.target.value })
+                      }
+                    />
                   </div>
                   <div className='col-md-4' controlId='formEmail'>
                     <Form.Label> Email </Form.Label>
@@ -114,8 +140,6 @@ function StudentForm () {
                       }
                     />
                   </div>
-                </Form.Group>
-                <Form.Group className='row'>
                   <div className='col-md-4' controlId='formmobile'>
                     <Form.Label> Mobile </Form.Label>
                     <Form.Control
@@ -124,18 +148,18 @@ function StudentForm () {
                       required
                       value={Student.mobile}
                       onChange={event => {
-                        if(event.target.value.length < 10){
-                          setconfirm({...confirm ,checkMobileNo : "Please must be of 10 digits" })
+                        if (event.target.value.length < 10) {
+                          setconfirm({ ...confirm, checkMobileNo: "Please must be of 10 digits" })
                         }
-                        else{
-                          setconfirm({...confirm ,checkMobileNo : "" })
+                        else {
+                          setconfirm({ ...confirm, checkMobileNo: "" })
                         }
                         setStudent({ ...Student, mobile: event.target.value })
                       }}
                     />
-                         {confirm.checkMobileNo && <div className="text-danger">{confirm.checkMobileNo}</div> }
+                    {confirm.checkMobileNo && <div className="text-danger">{confirm.checkMobileNo}</div>}
                   </div>
-                  { !id && (
+                  {!id && (
                     <>
                       <div className='col-md-4' controlId='form'>
                         <Form.Label> Password </Form.Label>
@@ -159,33 +183,33 @@ function StudentForm () {
                           placeholder='Confirm  pasword'
                           value={Student.confirmPassword}
                           required
-                          onChange={event => 
+                          onChange={event =>
                             setStudent({
                               ...Student,
                               confirmPassword: event.target.value
                             })
                           }
                           onBlur={event => {
-                            if(Student.password !== event.target.value){
+                            if (Student.password !== event.target.value) {
                               return setconfirm({
                                 ...confirm,
-                                confirmPassword : "Password DoesNot Match"
+                                confirmPassword: "Password DoesNot Match"
                               })
                             }
-                            else{
+                            else {
                               setconfirm({
                                 ...confirm,
-                                confirmPassword : ""
+                                confirmPassword: ""
                               })
                             }
                           }}
                         />
-                         {confirm.confirmPassword && <div className="text-danger">{confirm.confirmPassword}</div> }
-                      </div> 
-                                        
+                        {confirm.confirmPassword && <div className="text-danger">{confirm.confirmPassword}</div>}
+                      </div>
+
                     </>)
                   }
-                  
+
                 </Form.Group>
 
                 <Button variant='primary' type='submit'>

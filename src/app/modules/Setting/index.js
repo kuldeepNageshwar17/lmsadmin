@@ -55,6 +55,7 @@ export default function ECourse () {
       <Route exact path='/setting/course/:id/showCourse'>
         < CoursePlayer />
       </Route>
+      
       <Route exact path='/setting/course/:cid/sectionForm'>
         < CourseSectionform />
       </Route>

@@ -1,7 +1,7 @@
 // please be familiar with react-bootstrap-table-next column formaters
 // https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react' 
 import SVG from 'react-inlinesvg'
 
 import { toAbsoluteUrl } from '../../../../_metronic/_helpers'
@@ -18,9 +18,15 @@ export default function FeesChangeActionFormatter ({
     setIsInput(true)
   }
   const save = () => {
-    updateFees(row._id, feesValue)
+    updateFees(row._id, feesValue , row.name , row.fees)
     setIsInput(false)
   }
+  
+    useEffect(() => {
+      debugger;
+    }, [feesValue])
+  
+  
 
   return (
     <>
@@ -30,9 +36,11 @@ export default function FeesChangeActionFormatter ({
             save
           </button>
           <input
-            value={feesValue}
+            // value= {feesValue}
+            placeholder={`${row.fees} Give New Amount`}
             onChange={event => {
               setFeesValue(event.target.value)
+              
             }}
           />
        
@@ -44,7 +52,7 @@ export default function FeesChangeActionFormatter ({
           <button onClick={Edit} className={'btn btn-primary '} style={{"display":"inline"}}>
               edit
             </button>
-            {feesValue}
+            {row.fees}
             
           </div>
         </>

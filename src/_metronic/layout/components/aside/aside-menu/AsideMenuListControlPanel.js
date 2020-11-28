@@ -187,19 +187,19 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
         </li>
 
 
-{/*         
+        
         <li
-          className={`menu-item ${getMenuItemActive('/Exams/Scheduled', false)}`}
+          className={`menu-item ${getMenuItemActive('/Notifications', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
         >
-          <NavLink className='menu-link' to='/Exams/Scheduled'>
+          <NavLink className='menu-link' to='/Notifications'>
             <span className='svg-icon menu-icon'>
               <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
             </span>
-            <span className='menu-text'>Scheduled Exams</span>
+            <span className='menu-text'>Notifications</span>
           </NavLink>
-        </li> */}
+        </li>
 
         <li
           className={`menu-item ${getMenuItemActive(
