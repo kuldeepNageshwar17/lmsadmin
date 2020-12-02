@@ -112,7 +112,7 @@ export default function BatchForm () {
                   <Form.Label>Batch description</Form.Label>
                   <JoditEditor
                     ref={editor}
-                    value={Batch.imageDescription}
+                    value={Batch.description}
                     config={config}
                     tabIndex={1} // tabIndex of textarea
                     onBlur={handleBatchDescription} // preferred to use only this option to update the content for performance reasons

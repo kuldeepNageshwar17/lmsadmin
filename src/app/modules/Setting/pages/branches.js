@@ -68,12 +68,28 @@ export default function Branches (props) {
       headerSortingClasses
     },
     {
+      dataField: 'address.division',
+      text: 'division',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    
+    {
       dataField: 'address.city',
       text: 'city',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
+    {
+      dataField: 'address.state',
+      text: 'state',
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses
+    },
+    
     {
       dataField: 'action',
       text: 'Actions',

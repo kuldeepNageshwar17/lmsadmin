@@ -21,9 +21,7 @@ export default function Notifications (props) {
   const [modelData , setModelData] = useState()
 
   const ChangeDescription = (cellContent) => {
-    return  <Button onClick={() =>showModel(cellContent)}>Show </Button> 
-    // 
-        // return <div  dangerouslySetInnerHTML={{    __html: cellContent }}></div>
+  return cellContent && <Button onClick={() => {setModelData(cellContent) ; setModalShow(true)}}>Show </Button> 
   }
   const ChangeDate = (cellContent) =>{ 
     return cellContent.slice(0 ,10)
@@ -104,16 +102,6 @@ export default function Notifications (props) {
         </Modal.Footer>
       </Modal>
     )}
-  const showModel = (cellContent) => {
-    if(!cellContent){
-      setModelData("No Description For this")
-    }
-    else{
-      setModelData(cellContent)
-    }
-    
-    setModalShow(true)
-  }
 
   const options = {
     onSizePerPageChange: (sizePerPage, page) => {

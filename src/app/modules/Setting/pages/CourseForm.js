@@ -190,7 +190,7 @@ export default function CourseForm () {
                 </Form.Group>
 
                 <Form.Group controlId='Image'>
-                  <Form.Label>Course Description</Form.Label>
+                  <Form.Label>Course Picture</Form.Label>
                   <Form.Control
                     type='file'
                     //   value={Course.Description}

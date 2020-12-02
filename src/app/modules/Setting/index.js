@@ -17,7 +17,7 @@ import ContentAudio from './pages/ContentAudio'
 import ContentAll from './pages/ContentAll'
 import CoursePlayer from './pages/CoursePlayer'
 import ClassesForBranch from './pages/classesForBranch'
-
+import ReactMap from './pages/location'
 
 export default function ECourse () {
   return (
@@ -83,6 +83,10 @@ export default function ECourse () {
       <Route exact path='/setting/classList'>
         <ClassesForBranch/>
       </Route>
+      <Route exact path='/setting/location'>
+        <ReactMap/>
+      </Route>
+      
       
 {/* 
       <Redirect to='/error/error-v1' /> */}

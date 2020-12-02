@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Button, Form, Col } from 'react-bootstrap'
+import { Button, Form, Col ,ListGroup ,Dropdown } from 'react-bootstrap'
 import {
   Card,
   CardBody,
@@ -11,9 +11,10 @@ import {
 import { useHistory } from 'react-router-dom'
 
 export default function BranchForm () {
-  const [Branch, setBranch] = useState( { id:null,name: '',  address: { address: '', city: '', state: '' } }
+  const [Branch, setBranch] = useState( { id:null,name: '',  address: { address: '',pincode : "" ,  city: '', state: '' } }
   )
-
+  const [postal , setPostal] = useState()
+  const [postalError , setPostalError] = useState()
   let { id } = useParams()
   let history = useHistory()
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function BranchForm () {
         return {}
       })
     }
-  }, [id])
+  }, [id , Branch.address.state])
 
   const saveBranchData = event => {
     event.preventDefault()
@@ -43,6 +44,31 @@ export default function BranchForm () {
       .catch(err => {
         console.log(err)
       })
+  }
+  const getAddress = (pincode) => {
+ 
+   
+    axios.get(`api/branch/getPostalAddress/${pincode}`).then((res)=>{
+     
+    if(res.data[0].Status == 'Error'){
+      setPostalError(`${res.data[0].Message} : Give Correct PinCode`)
+      setPostal("") 
+    }else{
+      setPostalError('')
+      setPostal(res.data[0].PostOffice)
+    }
+    }).catch((error) => {
+
+    })
+
+  }
+  
+  const selectPostalName = (name  , District , state) => {
+    setBranch({
+      ...Branch,
+      address: {...Branch.address, division : name ,  city: District  , state : state  }
+      
+    }) 
   }
   
 
@@ -67,6 +93,42 @@ export default function BranchForm () {
                       setBranch({ ...Branch, name: event.target.value })
                     }
                   /></Col>
+                  <Col><Form.Label>PinCode</Form.Label>
+                  <Form.Control
+                    type='number'
+                    placeholder='Postal Code'
+                    required
+                    value={Branch.address.pincode}
+                    onChange={event =>{
+                      setBranch({ ...Branch,
+                        address: {
+                        ...Branch.address,
+                        pincode: event.target.value
+                      } })
+                      if(event.target.value.length >= 6){
+                        getAddress(event.target.value)
+                      }
+                    }}
+                  />
+                  {postalError && <Form.Text style={{color : 'red'}}>{postalError}</Form.Text>}
+                  
+                 {postal && postal.length  && 
+                 <Dropdown>
+                 <Dropdown.Toggle variant="success" id="dropdown-basic">
+                   Select Division
+                 </Dropdown.Toggle>
+               
+                 <Dropdown.Menu>
+                  
+                 
+                 {postal && postal.length  && postal.map((single => {
+                   return <Dropdown.Item key={single.Name}  onClick ={() =>  selectPostalName(single.Name , single.District , single.State) }>{single.Name}</Dropdown.Item>
+                         
+                 })) 
+                  } 
+                   </Dropdown.Menu>
+               </Dropdown>}</Col>
+                  {postal && console.log(postal)}
                   <Col><Form.Label>Address</Form.Label>
                   <Form.Control
                     type='text'
@@ -83,34 +145,29 @@ export default function BranchForm () {
                     }
                   /></Col>
                 </Form.Group>
-
+                
+                <Form.Group controlId='city' className="row">
+                  <Col><Form.Label>Division </Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='city'
+                    value={Branch.address.division}
+                  /></Col>
+                  </Form.Group>
                 <Form.Group controlId='city' className="row">
                   <Col><Form.Label>city </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='city'
                     value={Branch.address.city}
-                    onChange={event =>
-                      setBranch({
-                        ...Branch,
-                        address: { ...Branch.address, city: event.target.value }
-                      })
-                    }
+                   
                   /></Col>
                   <Col><Form.Label>state </Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='state'
                     value={Branch.address.state}
-                    onChange={event =>
-                      setBranch({
-                        ...Branch,
-                        address: {
-                          ...Branch.address,
-                          state: event.target.value
-                        }
-                      })
-                    }
+                    
                   /></Col>
                 </Form.Group>
 

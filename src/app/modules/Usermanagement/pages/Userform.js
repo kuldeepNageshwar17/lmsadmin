@@ -124,6 +124,7 @@ debugger;
                           selected={User.roles}
                           required
                           handleOnChange={selected => {
+                            console.log(selected)
                             setUser({ ...User, roles: selected })
                             // console.log(selected)
                           }}
