@@ -21,6 +21,9 @@ const initialValues = {
 function Registration(props) {
   const { intl } = props;
   const [loading, setLoading] = useState(false);
+  const [RegisterDone , setRegisterDone] = useState({
+      done : false
+  })
   const RegistrationSchema = Yup.object().shape({
     fullname: Yup.string()
       .min(3, "Minimum 3 symbols")
@@ -67,9 +70,9 @@ function Registration(props) {
     mobile:Yup.number().required( intl.formatMessage({
       id: "AUTH.VALIDATION.REQUIRED_FIELD",
     })),
-    institute:Yup.string().required( intl.formatMessage({
-      id: "AUTH.VALIDATION.REQUIRED_FIELD",
-    }))
+    // institute:Yup.string().required( intl.formatMessage({
+    //   id: "AUTH.VALIDATION.REQUIRED_FIELD",
+    // }))
   });
 
   const enableLoading = () => {
@@ -97,11 +100,17 @@ function Registration(props) {
     validationSchema: RegistrationSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {
       enableLoading();
-      register(values.email, values.fullname,  values.password,values.mobile,values.institute)
-        .then(({ data: { token } }) => {
+      register(values.email, values.fullname,  values.password,values.mobile)
+        .then(({ data: {message} }) => {
           debugger;
-          props.register(token);
+          props.register(message);
+          setRegisterDone({
+            ...RegisterDone , 
+            done : true,
+            data : values.fullname
+          })
           disableLoading();
+          
         })
         .catch(() => {
           setSubmitting(false);
@@ -116,7 +125,10 @@ function Registration(props) {
   });
 
   return (
+   
     <div className="login-form login-signin" style={{ display: "block" }}>
+      {RegisterDone && RegisterDone.done && RegisterDone.data &&  <div>Welcome {RegisterDone.data} <br></br><hr></hr>Please Go and Verify Your Email </div>}
+      {RegisterDone && !RegisterDone.done && <div>
       <div className="text-center mb-10 mb-lg-20">
         <h3 className="font-size-h1">
           <FormattedMessage id="AUTH.REGISTER.TITLE" />
@@ -195,7 +207,7 @@ function Registration(props) {
           ) : null}
         </div>
 
-        <div className="form-group fv-plugins-icon-container">
+        {/* <div className="form-group fv-plugins-icon-container">
           <input
             placeholder="institute"
             type="text"
@@ -210,7 +222,7 @@ function Registration(props) {
               <div className="fv-help-block">{formik.errors.institute}</div>
             </div>
           ) : null}
-        </div>
+        </div> */}
 
 
 
@@ -314,6 +326,7 @@ function Registration(props) {
           </Link>
         </div>
       </form>
+    </div>}
     </div>
   );
 }

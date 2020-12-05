@@ -7,6 +7,7 @@ export const actionTypes = {
   Login: "[Login] Action",
   Logout: "[Logout] Action",
   Register: "[Register] Action",
+  registerReducer: "[registerReducer] Action",
   UserRequested: "[Request User] Action",
   UserLoaded: "[Load User] Auth API",
   LogoutRequested:"[Logout User] Auth API",
@@ -33,9 +34,9 @@ export const reducer = persistReducer(
         return { ...state, authToken, user: undefined };
       }
 
-      case actionTypes.Register: {
-        const { authToken } = action.payload;
-        return {  ...state,authToken, user: undefined };
+      case actionTypes.registerReducer: {
+        const message = action.payload;
+        return {  ...state, user: undefined };
       }
 
       case actionTypes.Logout: {
@@ -67,12 +68,16 @@ export const reducer = persistReducer(
 
 export const actions = {
   login: authToken => ({ type: actionTypes.Login, payload: { authToken } }),
-  register: authToken => ({
+  register: message => ({
     type: actionTypes.Register,
-    payload: { authToken }
+    payload: { message }
+  }),
+  registerReducer: message => ({
+    type: actionTypes.Register1,
+    payload: { message }
   }),
   logout: () => ({ type: actionTypes.Logout }),
-  requestUser: user => ({ type: actionTypes.UserRequested, payload: { user } }),
+  requestUser: user =>({ type: actionTypes.UserRequested, payload: { user } }),
   fulfillUser: user => ({ type: actionTypes.UserLoaded, payload: { user } }),
   requestLogout: user => ({ type: actionTypes.LogoutRequested}),
   changeBranch: branchId=>({ type: actionTypes.ChangeBranch,payload:{branchId}}),
@@ -85,8 +90,9 @@ export function* saga() {
     yield put(actions.requestUser());
   });
 
-  yield takeLatest(actionTypes.Register, function* registerSaga() {
-    yield put(actions.requestUser());
+  yield takeLatest(actionTypes.Register, function* registerSaga(action) {
+    console.log("in the saga" , action.payload.message)
+    yield put(actions.registerReducer(action.payload.message))
   });
 
   yield takeLatest(actionTypes.UserRequested, function* userRequested() {

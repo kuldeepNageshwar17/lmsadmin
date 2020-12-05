@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState ,useEffect } from "react";
+import { Link , useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-import { login } from "../_redux/authCrud";
+import { login  , getUserByToken } from "../_redux/authCrud";
+import {actions ,actionTypes} from '../_redux/authRedux'
+import axios from "axios";
 
 /*
   INTL (i18n) docs:
@@ -17,14 +19,20 @@ import { login } from "../_redux/authCrud";
   https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
 */
 
+// const initialValues = {
+//   email: "test@admin.com",
+//   password: "pass123",
+// };
 const initialValues = {
   email: "test@admin.com",
-  password: "pass123",
+  password: "11111111",
 };
 
 function Login(props) {
   const { intl } = props;
   const [loading, setLoading] = useState(false);
+  const [Verification , setVerification] = useState(false)
+  const [data , setData] =useState()
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email("Wrong email format")
@@ -73,11 +81,14 @@ function Login(props) {
       setTimeout(() => {
         login(values.email, values.password)
           .then(({ data: { authToken } }) => {
+            console.log("here in then")
             debugger;
             disableLoading();
             props.login(authToken);
           })
-          .catch(() => {
+          .catch((error) => {
+            console.log("here in error")
+            console.log("error" , error)
             disableLoading();
             setSubmitting(false);
             setStatus(
@@ -90,6 +101,23 @@ function Login(props) {
     },
   });
 
+  
+  var {token} = useParams()
+
+  
+  useEffect(() => {
+    if(token){
+          axios.get('/api/auth/verifyUser/' +token ).then((res)=>{
+            setVerification(true)
+            setData(res.data.activeUser.name)
+          }).catch((res)=> {
+
+          })
+      
+      debugger;
+      }
+  } , [])
+  
   return (
     <div className="login-form login-signin" id="kt_login_signin_form">
       {/* begin::Head */}
@@ -108,18 +136,28 @@ function Login(props) {
         onSubmit={formik.handleSubmit}
         className="form fv-plugins-bootstrap fv-plugins-framework loginInput"
       >
-        {formik.status ? (
+       { console.log("tokem "  ,token )}
+       {Verification && (
+         <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
+         <div className="alert-text ">
+           Hello &nbsp; { data} Your Account Was SuccessFully Activated , Please Login Here !
+         </div>
+       </div>
+       ) || 
+         formik.status && (
           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
-        ) : (
+        ) || (
           <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
             <div className="alert-text ">
               Use account <strong>admin@demo.com</strong> and password{" "}
               <strong>demo</strong> to continue.
             </div>
           </div>
-        )}
+          
+        )
+      }
 
         <div className="form-group fv-plugins-icon-container">
           <input
