@@ -20,7 +20,10 @@ export default function Student() {
       {/* <Route exact path='/Student/Student/:id'>
         <StudentProfile />
       </Route> */}
-      <Route exact path='/Student' component={Students} />
+      <Route exact path='/Student'>
+        <Students />
+      </Route>
+      {/* <Route exact path='/Student' component={Students} /> */}
       <Route  exact path='/Student/StudentForm' component={StudentForm} />
       {/* <Route  exact path='/Student/testprofile' component={StudentProfile} /> */}
 

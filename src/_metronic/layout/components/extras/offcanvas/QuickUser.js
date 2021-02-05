@@ -52,7 +52,7 @@ import { useSelector } from 'react-redux'
                   href="#"
                   className="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
               >
-             {user.name}
+             {user && user.name && user.name}
               </a>
               {/* <div className="text-muted mt-1">Application Developer</div> */}
               <div className="navi mt-2">
@@ -68,7 +68,7 @@ import { useSelector } from 'react-redux'
                     </span>
                   </span>
                   <span className="navi-text text-muted text-hover-primary">
-                  {user.email}                  </span>
+                  {user && user.email && user.email}                  </span>
                 </span>
                 </a>
               </div>

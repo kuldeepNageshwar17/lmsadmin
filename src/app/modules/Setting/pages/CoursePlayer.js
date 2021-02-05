@@ -5,6 +5,7 @@ import React, {
 import '../../../../../node_modules/video-react/dist/video-react.css'
 import axios from 'axios'
 import {
+  useLocation,
   Link
 } from "react-router-dom";
 import PDF from 'react-pdf-js-infinite';
@@ -25,7 +26,6 @@ import {
   Image,
   Form
 } from 'react-bootstrap'
-
 import {
   useParams,
   useHistory
@@ -186,12 +186,13 @@ var i = 0
   //   if (currentItem && currentItem._id === contentsdata._id && contentsdata.seen == true)return  'watched active'
   //   if (contentsdata.seen === true) return 'watched'
   // }
+  const location = useLocation();
   return (
-    <>
+    <>{console.log("location" , location && location)}
       <Navbar bg='dark'>
         <Navbar.Brand
           className='text-warning'
-          onClick={() => history.push('/Courses')}
+          onClick={() => history.push('/')}
         >
           {' '}
           &#8592; Back{' '}

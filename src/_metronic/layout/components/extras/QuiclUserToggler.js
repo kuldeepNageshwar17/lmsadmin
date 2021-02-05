@@ -28,7 +28,7 @@ export function QuickUserToggler() {
 
                 <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                 <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-                  {user.name}
+                  {user && user.name && user.name}
                 </span>
                 <span className="symbol symbol-35 symbol-light-success">        
                 {/* <span className="symbol-label font-size-h5 font-weight-bold">full name half</span> */}

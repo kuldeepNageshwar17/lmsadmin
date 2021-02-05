@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { useLocation } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import SVG from 'react-inlinesvg'
+import { shallowEqual, useSelector } from 'react-redux'
 import { toAbsoluteUrl, checkIsActive } from '../../../../_helpers'
 import { permissionsContext } from '../../../../../app/modules/permissionManager/permissionContext'
 
@@ -13,6 +14,12 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
       ? ` ${!hasSubmenu && 'menu-item-active'} menu-item-open `
       : ''
   }
+  const  {auth}  = useSelector(
+    ({ auth }) => ({
+      auth: auth
+    }),
+    shallowEqual
+  )
   const { isUserAuthenticate } = useContext(permissionsContext)
 
   return (
@@ -20,6 +27,20 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
       {/* begin::Menu Nav */}
       <ul className={`menu-nav ${layoutProps.ulClasses}`}>
         {/*begin::1 Level*/}
+        <li
+          className={`menu-item ${getMenuItemActive('/home', false)}`}
+          aria-haspopup='true'
+        >
+          
+          <div className='menu-link' onClick={() => window.location.href = "http://localhost:3001/searchpage"} >
+              <span className='svg-icon menu-icon'>
+              <SVG src={toAbsoluteUrl('/media/svg/icons/Design/Layers.svg')} />
+            </span> 
+            <span className='menu-text' >Home</span>
+          </div>
+           
+        </li>
+        <hr></hr>
         <li
           className={`menu-item ${getMenuItemActive('/dashboard', false)}`}
           aria-haspopup='true'
@@ -80,7 +101,8 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
           </div>
         </li> */}
 
-        <li
+{(    auth.isInstituteUser || isUserAuthenticate('M1', 1))  && ( 
+<li
           className={`menu-item ${getMenuItemActive('/setting/Branch', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -93,6 +115,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
+)}
         <li
           className={`menu-item ${getMenuItemActive('/setting/class', false)}`}
           aria-haspopup='true'
@@ -106,7 +129,8 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
-        {isUserAuthenticate("M3",1) && (
+
+        {(    auth.isInstituteUser || isUserAuthenticate('M3', 1)) && (
           <li className={`menu-item ${getMenuItemActive('/User', false)}`}
             aria-haspopup='true'
             data-menu-toggle='hover'
@@ -122,7 +146,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
         )}
         {/* Components */}
 
-        <li
+        {(    auth.isInstituteUser || isUserAuthenticate('M6', 1)) && ( <li
           className={`menu-item ${getMenuItemActive(
             '/ecourse/Courses',
             false
@@ -138,7 +162,8 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
-        <li
+        )}
+        {(    auth.isInstituteUser || isUserAuthenticate('M7', 1)) && ( <li
           className={`menu-item ${getMenuItemActive('/Test/testlist', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -151,7 +176,8 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
-        <li
+        )}
+      {(    auth.isInstituteUser || isUserAuthenticate('M4', 1)) && (   <li
           className={`menu-item ${getMenuItemActive('/Exams', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -185,6 +211,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             </ul>
           </div>
         </li>
+      )}
 
 
         
@@ -201,7 +228,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
           </NavLink>
         </li>
 
-        <li
+        {    auth.isInstituteUser  && ( <li
           className={`menu-item ${getMenuItemActive(
             '/permission/Roles',
             false
@@ -227,6 +254,7 @@ export function AsideMenuListControlPanel ({ layoutProps }) {
             </ul>
           </div>
         </li>
+        )}
 
         {/* begin::section */}
         <li className='menu-section '>

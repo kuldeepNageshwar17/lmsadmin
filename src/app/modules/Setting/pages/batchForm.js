@@ -101,7 +101,7 @@ export default function BatchForm () {
                     }
                   >
                     <option value="">select class</option>
-                    {Classes.map(item => (
+                    {Classes && Classes.length > 0 && Classes.map(item => (
                       <option value={item._id} key={item._id}>
                         {item.name}
                       </option>

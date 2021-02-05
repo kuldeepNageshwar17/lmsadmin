@@ -7,7 +7,7 @@ import { useParams, useHistory } from 'react-router-dom'
 
 import AddContentButton from '../components/ContentAddButton'
 
-export default function CourseSections () {
+export default function UserCourseSections () {
   //id of Course
   const { id } = useParams()
   const history = useHistory()
@@ -19,18 +19,18 @@ export default function CourseSections () {
     if (expanded != panel) setExpanded(panel)
   }
   const CreateSection = () => {
-    history.push('/Setting/Course/' + id + '/sectionForm')
+    history.push('/setting/Usercourse/' + id + '/sectionForm')
   }
 
   const EditSection = secId => {
-    history.push('/Setting/Course/' + id + '/sectionForm/' + secId)
+    history.push('/Setting/Usercourse/' + id + '/sectionForm/' + secId)
   }
   const DeleteSection = id => {
     debugger
     if (window.confirm('Do you realy Want to delete Compelete Section ?')) {
       debugger
       axios
-        .delete('/api/course/courseSection/' + id)
+        .delete('/api/course/deleteUserCourseSection/' + id)
         .then(response => {
           loaddata()
         })
@@ -41,10 +41,11 @@ export default function CourseSections () {
   }
   const loaddata = () => {
     axios
-      .get('/api/course/course/' + id)
-      .then(response => {
+      .get('/api/course/getUserCourse/' + id)
+      .then(res => {
         debugger
-        setCourse({ ...response.data.course, class: response.data.class })
+        console.log('res' , res.data)
+        setCourse(res.data)
       })
       .catch(error => {
         console.log(error)
@@ -53,9 +54,8 @@ export default function CourseSections () {
   const editContent = (id, sectionId) => {
     history.push('/setting/course/section/' + sectionId + '/content/' + id)
   }
-  const showContent = (sectionId) => {
+  const showContent = ( sectionId) => {
     console.log(id , sectionId)
-    // history.push(`/setting/course/${id}/showCourse`)
     history.push(`/setting/course/${id}/showCourse`)
   }
 
@@ -143,7 +143,7 @@ export default function CourseSections () {
                                 <button
                                  className="btn btn-primary"
                                   onClick={() => {
-                                    history.push(`/setting/course/section/${item._id}/content/`)
+                                    history.push(`/setting/Usercourse/section/${item._id}/content/`)
                                   }}
                                 >
                                   Add Content

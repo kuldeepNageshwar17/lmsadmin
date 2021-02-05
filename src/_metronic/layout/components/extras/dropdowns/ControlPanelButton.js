@@ -14,7 +14,8 @@ function ControlPanelButton({changeStatus,controlPanel,isInstituteUser}) {
     return (
         < >
             {controlPanel&&<button className="btn btn-primary mt-3 mb-3" onClick={ActiveControlPanel}> Dashboard</button>}             
-            {isInstituteUser&&!controlPanel&&<button className="btn btn-primary mt-3 mb-3" onClick={ActiveControlPanel}>  Control Panel</button>} </>
+            {/* {isInstituteUser&&!controlPanel&&<button className="btn btn-primary mt-3 mb-3" onClick={ActiveControlPanel}>  Control Panel</button>} */}
+        </>
 
             
           

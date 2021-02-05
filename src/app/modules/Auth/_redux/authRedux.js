@@ -1,9 +1,12 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { put, takeLatest } from "redux-saga/effects";
-import { getUserByToken,logoutUser } from "./authCrud";
+import { getUserByToken,
+  // logoutUser
+ } from "./authCrud";
 
 export const actionTypes = {
+  getUserData : 'getUserData',
   Login: "[Login] Action",
   Logout: "[Logout] Action",
   Register: "[Register] Action",
@@ -45,11 +48,16 @@ export const reducer = persistReducer(
       }
 
       case actionTypes.UserLoaded: {
-        const { user } = action.payload;
+        const { user ,authToken} = action.payload;
         debugger;
-      var  instituteAdmin= user.roles.filter(u=> u.type===1)
-      var isInstituteUser=instituteAdmin.length?true:false;
-        return { ...state, user,userPermission:user.permission,branches:user.branches,currentBranch:user.branch,isInstituteUser};
+        if(user && user.roles){
+          console.log("in reduceer" , user)
+          var  instituteAdmin= user.roles.filter(u=> u.type===1)
+          console.log("in reduceer 1" , instituteAdmin)
+          var isInstituteUser=instituteAdmin.length?true:false;
+        }
+      
+        return { ...state,authToken , user,userPermission:user.permission,branches:user.branches,currentBranch:user.branch,isInstituteUser};
       }
         case actionTypes.ChangeControlPanelStatus: {
           debugger;
@@ -78,7 +86,7 @@ export const actions = {
   }),
   logout: () => ({ type: actionTypes.Logout }),
   requestUser: user =>({ type: actionTypes.UserRequested, payload: { user } }),
-  fulfillUser: user => ({ type: actionTypes.UserLoaded, payload: { user } }),
+  fulfillUser:( user ,authToken) => ({ type: actionTypes.UserLoaded, payload: { user ,authToken } }),
   requestLogout: user => ({ type: actionTypes.LogoutRequested}),
   changeBranch: branchId=>({ type: actionTypes.ChangeBranch,payload:{branchId}}),
   ChangeControlPanelStatus:status=>({type: actionTypes.ChangeControlPanelStatus,payload:{status}})
@@ -99,9 +107,20 @@ export function* saga() {
     const { data: user } = yield getUserByToken();
     yield put(actions.fulfillUser(user));
   });
-  yield takeLatest(actionTypes.LogoutRequested, function*  UserLogout() {
-    debugger;
-    logoutUser();
-    yield put(actions.logout());
+
+  // yield takeLatest(actionTypes.LogoutRequested, function*  UserLogout() {
+  //   debugger;
+  //   logoutUser();
+  //   yield put(actions.logout());
+  // });
+
+  yield takeLatest(actionTypes.getUserData, function* getUser(action) {
+    debugger
+    const {authToken }  = action.payload
+    console.log("auth here" , authToken)
+    const { data: user } = yield getUserByToken(authToken);
+    debugger
+    yield put(actions.fulfillUser(user ,authToken));
+    console.log("auth" , authToken , user)
   });
 }

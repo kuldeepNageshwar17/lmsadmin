@@ -18,6 +18,16 @@ import ContentAll from './pages/ContentAll'
 import CoursePlayer from './pages/CoursePlayer'
 import ClassesForBranch from './pages/classesForBranch'
 import ReactMap from './pages/location'
+import FeeManagement from './pages/FeeManagement'
+
+//user
+import UserCourses from './pages/UserCourses'
+import UserCourseForm from './pages/UserCourseForm'
+import UserCourseSections from './pages/UserCourseSections'
+import UserCourseSectionForm from './pages/UserCourseSectionform'
+import UserVideoContent from './pages/UserContentAll'
+
+
 
 export default function ECourse () {
   return (
@@ -86,7 +96,24 @@ export default function ECourse () {
       <Route exact path='/setting/location'>
         <ReactMap/>
       </Route>
-      
+
+
+       {/* User */}
+      <Route exact path='/setting/UserCourses'>
+        <UserCourses/>
+      </Route>
+      <Route exact path='/setting/UserCourseForm/:cid?'>
+        <UserCourseForm/>
+      </Route>
+      <Route exact path='/setting/Usercourse/:id/sections'>
+        < UserCourseSections />
+      </Route>
+      <Route exact path='/setting/Usercourse/:cid/sectionForm/:id?'>
+        < UserCourseSectionForm />
+      </Route>
+      <Route exact path='/setting/Usercourse/section/:id/content'>
+        < UserVideoContent />
+      </Route>
       
 {/* 
       <Redirect to='/error/error-v1' /> */}

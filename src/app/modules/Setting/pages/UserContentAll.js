@@ -14,7 +14,7 @@ import JoditEditor from 'jodit-react'
 import Progress from '../components/progressbar';
 import { colors } from "@material-ui/core";
 
-export default function VideoContent () {
+export default function UserVideoContent () {
   const [Content, setContent] = useState({
     title: '',
     videoUrl : '' ,

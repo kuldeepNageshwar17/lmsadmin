@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
-
+import { useParams  } from 'react-router-dom'
+import Select from 'react-select';
 // import { ToastContainer, toast } from 'react-toastify';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap'
+import { Button, Form, Card, Col, Row  } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
 
@@ -75,6 +75,7 @@ debugger;
   }, [User])
 
   const saveUser = event => {
+   
     event.preventDefault()
     if(MatchPassword){
       return alert(MatchPassword)
@@ -117,15 +118,33 @@ debugger;
                       </div>
                       {/* {User.roles} */}
                       {RolesDdr.length && (
+                        // <Select
+                        // IsMulti
+                        // name='roles'
+                        // menuPosition='fixed'
+                        // options={RolesDdr}
+                        // value={User.roles}
+                        // placeholder='Select Roles'
+                        // onChange={selected => {
+                        //   console.log("selected" , selected)
+                        //   // setUser({ ...User, roles: selected })
+                        //   // console.log(selected)
+                        // }} />
+                    
                         <DropdownMultiselect
-                       
+                        isMultiSelectable
                           options={RolesDdr}
                           name='roles'
                           selected={User.roles}
                           required
-                          handleOnChange={selected => {
-                            console.log(selected)
-                            setUser({ ...User, roles: selected })
+                          onChange={selected => {
+                            console.log("selected" , selected)
+                            var newRoles = []
+                            selected.map((single) => {
+                              newRoles.push(single.key)
+                              setUser({ ...User, roles:  newRoles})
+                            })
+                            
                             // console.log(selected)
                           }}
                         />

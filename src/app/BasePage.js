@@ -4,8 +4,12 @@ import {LayoutSplashScreen, ContentRoute} from "../_metronic/layout";
 import {BuilderPage} from "./pages/BuilderPage";
 import {MyPage} from "./pages/MyPage";
 import {DashboardPage} from "./pages/DashboardPage";
+import {
+  PermissionContenxt,
+  PermissionsProvider
+} from './modules/permissionManager/permissionContext'
 // import {ControlePaneDahsBoard} from "./pages/ControlePaneDahsBoard";
-
+import { Layout } from '../_metronic/layout'
 // const GoogleMaterialPage = lazy(() =>
 //   import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
 // );
@@ -40,6 +44,9 @@ const Permission = lazy(() =>
 const Notifications = lazy(() =>
   import("./modules/Notifications")
 );
+const FeeManagementIndex = lazy(() =>
+  import("./modules/FeeManagement")
+);
 
 export default function BasePage() {
     // useEffect(() => {
@@ -49,6 +56,9 @@ export default function BasePage() {
 
     return (
         <Suspense fallback={<LayoutSplashScreen/>}>
+           <PermissionsProvider >
+        
+          <Layout>
             <Switch>
                 {
                     /* Redirect from root URL to /dashboard. */
@@ -66,9 +76,12 @@ export default function BasePage() {
                 <ContentRoute path="/Test" component={Tests}/>    
                 <ContentRoute path="/permission" component={Permission}/>  
                 <ContentRoute path="/Notifications" component={Notifications}/>   
+                <ContentRoute path="/fee" component={FeeManagementIndex}/>   
                 
                 {/* <Redirect to="/error/error-v1"/> */}
             </Switch>
+            </Layout>
+            </PermissionsProvider>
         </Suspense>
     );
 }
