@@ -78,14 +78,14 @@ function UserList (props) {
     },
     {
       dataField: 'email',
-      text: 'Name',
+      text: 'Email',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
       dataField: 'mobile',
-      text: 'Name',
+      text: 'Mobile',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses

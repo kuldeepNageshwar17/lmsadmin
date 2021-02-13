@@ -19,6 +19,7 @@ useEffect(()=>{
   if(id){
     axios.get("/api/Course/courseSection/"+id).then((res)=>{
       debugger;
+      console.log(res.data)
       setSection(res.data)
     }).catch((err)=>{
 console.log(err);

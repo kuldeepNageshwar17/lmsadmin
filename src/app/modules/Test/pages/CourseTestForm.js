@@ -49,6 +49,7 @@ const handleDescripiton = e => {
       axios.get(`/api/Test/getTestById/${TId}`)
     .then(res => {
     debugger;
+    console.log(res.data)
     setTest(res.data)
     })
     .catch(err => {

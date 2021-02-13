@@ -17,14 +17,13 @@ export default function Courses (props) {
 
   // const [Courses, setCourse] = useState([])
   const [Class, setClass] = useState([])
-  const [BranchesName, setBranchesName] = useState('')
   const updateData = () => {
     debugger
     axios
       .get('/api/course/getAllCoursesOfAllClasses')
       .then(res => {
         debugger
-        setBranchesName(res.data[0].branches)
+        console.log("data 1" , res.data)
         setClass(res.data)
       })
       .catch(err => {

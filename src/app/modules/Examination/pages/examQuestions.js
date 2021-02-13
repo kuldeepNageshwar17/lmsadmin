@@ -104,6 +104,7 @@ export default function ExamQuestions (props) {
     axios.get('/api/Examination/getQuestionListExam/'+id)
       .then(res => {
       debugger;         
+      console.log(res.data)
       setQuestions(res.data)
       })
       .catch(err => {

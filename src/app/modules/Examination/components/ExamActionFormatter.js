@@ -13,10 +13,10 @@ export default function ExamActionFormatter (
 ) {
   return (
     <>
-    {row.isComplete === true && <a
+    {row.examinations.isComplete === true && <a
         title='Add Questions'
         className='btn  btn-light btn-hover-success btn-sm mx-3'
-        onClick={() => scheduleIt(row._id , row.name)}
+        onClick={() => scheduleIt(row.examinations._id , row.examinations.name)}
     >
        <span className="svg-icon svg-icon-md svg-icon-primary">          
           <SVG
@@ -29,7 +29,7 @@ export default function ExamActionFormatter (
     <a
         title='Add Questions'
         className='btn  btn-light btn-hover-success btn-sm mx-3'
-        onClick={() => ShowQuestions(row._id)}
+        onClick={() => ShowQuestions(row.examinations._id)}
       >
        <span className="svg-icon svg-icon-md svg-icon-primary">          
           <SVG
@@ -41,7 +41,7 @@ export default function ExamActionFormatter (
       <a
         title='Edit Exam'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => EditAction(row._id)}
+        onClick={() => EditAction(row.examinations._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
           <SVG title='Edit Exam'
@@ -53,7 +53,7 @@ export default function ExamActionFormatter (
       <a
         title='Delete Question'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
-        onClick={() => DeleteAction(row._id)}
+        onClick={() => DeleteAction(row.examinations._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-danger'>
           <SVG  src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete 

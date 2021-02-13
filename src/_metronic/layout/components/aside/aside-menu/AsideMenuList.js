@@ -41,10 +41,13 @@ export function AsideMenuList ({ layoutProps }) {
           </div>
            
         </li>
+        
         <hr></hr>
+        {/* <hr></hr>
        
-        <hr></hr>
-        {auth.isInstituteUser && ( <li
+        <hr></hr>{console.log("auth" ,auth)} */}
+        {auth.isInstituteUser && ( 
+        <li
           className={`menu-item `}
           aria-haspopup='true'
         >
@@ -55,11 +58,11 @@ export function AsideMenuList ({ layoutProps }) {
             <span className='menu-text'>Institute Controls</span>
           </NavLink>
         </li>
- )}
-       {auth.isInstituteUser && ( <hr></hr> )}
+        )}
+       {/* {auth.isInstituteUser && ( <hr></hr> )} */}
        
         {(    auth.isInstituteUser || isUserAuthenticate('M1', 1))  && ( 
-<li
+        <li
           className={`menu-item ${getMenuItemActive('/setting/Branch', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -72,7 +75,7 @@ export function AsideMenuList ({ layoutProps }) {
             {/* <i className='menu-arrow' /> */}
           </NavLink>
         </li>
-)}
+        )}
          {(    auth.isInstituteUser || isUserAuthenticate('M2', 1))  && ( <li
           className={`menu-item ${getMenuItemActive('/setting/class', false)}`}
           aria-haspopup='true'
@@ -136,7 +139,7 @@ export function AsideMenuList ({ layoutProps }) {
           </NavLink>
         </li>
         )}
-      {(    auth.isInstituteUser || isUserAuthenticate('M4', 1)) && (   <li
+        {(    auth.isInstituteUser || isUserAuthenticate('M4', 1)) && (   <li
           className={`menu-item ${getMenuItemActive('/Exams', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -170,11 +173,11 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li>
-      )}
+          )}
 
 
         
-        <li
+        {   auth.isInstituteUser &&  (<li
           className={`menu-item ${getMenuItemActive('/Notifications', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -185,7 +188,7 @@ export function AsideMenuList ({ layoutProps }) {
             </span>
             <span className='menu-text'>Notifications</span>
           </NavLink>
-        </li>
+        </li>)}
 
         {    auth.isInstituteUser  && ( <li
           className={`menu-item ${getMenuItemActive(
@@ -215,21 +218,22 @@ export function AsideMenuList ({ layoutProps }) {
         </li>
         )}
 
-{auth.isInstituteUser && ( <hr></hr> )}
-      {auth.isInstituteUser && ( <hr></hr> )}
-      {auth.isInstituteUser && ( <li
-          className={`menu-item `}
-          aria-haspopup='true'
-        >
-          <NavLink className='menu-link' to='#'>
-            <span className='svg-icon menu-icon'>
-              <SVG src={toAbsoluteUrl('/media/svg/icons/Design/Layers.svg')} />
-            </span>
-            <span className='menu-text'>Branch Controls</span>
-          </NavLink>
-        </li>
-      )}
-       {auth.isInstituteUser && ( <hr></hr> )}
+        {auth.isInstituteUser && ( <hr></hr> )}
+        {auth.isInstituteUser && ( <hr></hr> )}
+        {auth.isInstituteUser && ( 
+          <li
+            className={`menu-item `}
+            aria-haspopup='true'
+          >
+            <NavLink className='menu-link' to='#'>
+              <span className='svg-icon menu-icon'>
+                <SVG src={toAbsoluteUrl('/media/svg/icons/Design/Layers.svg')} />
+              </span>
+              <span className='menu-text'>Branch Controls</span>
+            </NavLink>
+          </li>
+        )}
+       {/* {auth.isInstituteUser && ( <hr></hr> )} */}
         {/*end::1 Level*/}
 
         {/*begin::1 Level*/}
@@ -264,7 +268,7 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li> */}
- {(    auth.isInstituteUser || isUserAuthenticate('M8', 1))  && ( <li
+        {(auth.isInstituteUser || isUserAuthenticate('M8', 1))  && ( <li
           className={`menu-item ${getMenuItemActive('/setting/Batch')}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -287,9 +291,9 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li>
- )}
+        )}
 
-{(    auth.isInstituteUser || isUserAuthenticate('M9', 1))  && ( <li
+        {(auth.isInstituteUser || isUserAuthenticate('M9', 1))  && ( <li
           className={`menu-item ${getMenuItemActive('/Student', false)}`}
           aria-haspopup='true'
           data-menu-toggle='hover'
@@ -312,7 +316,7 @@ export function AsideMenuList ({ layoutProps }) {
             </ul>
           </div>
         </li>
-)}
+        )}
         {/* {isUserAuthenticate('M3', 1) && ( */}
           {(    auth.isInstituteUser || isUserAuthenticate('M3', 1))  && (  <li
             className={`menu-item ${getMenuItemActive('/user', false)}`}
@@ -370,36 +374,9 @@ export function AsideMenuList ({ layoutProps }) {
               </ul>
             </div>
           </li>
-         ) 
-         }
-        <li
-            className={`menu-item ${getMenuItemActive('/setting/location', false)}`}
-            aria-haspopup='true'
-            data-menu-toggle='hover'
-          >
-            <NavLink className='menu-link' to='/setting/location'>
-              <span className='svg-icon menu-icon'>
-                <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
-              </span>
-              <span className='menu-text'>Location</span>
-              <i className='menu-arrow' />
-            </NavLink>
-
-            <div className='menu-submenu '>
-              <ul className='menu-subnav'>
-                <li
-                  className='menu-item  menu-item-parent'
-                  aria-haspopup='true'
-                >
-                  <span className='menu-link'>
-                    <span className='menu-text'>Location</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </li>
-       
-          {(    auth.isInstituteUser || isUserAuthenticate('M10', 1) ) && (<li
+         )}
+         {(    auth.isInstituteUser || isUserAuthenticate('M10', 1) ) && (
+          <li
             className={`menu-item ${getMenuItemActive('/fee', false)}`}
             aria-haspopup='true'
             data-menu-toggle='hover'
@@ -425,7 +402,54 @@ export function AsideMenuList ({ layoutProps }) {
               </ul>
             </div>
           </li>
+         )} 
+
+         {/* {auth && auth.user && auth.user.roles &&  auth.user.roles.includes("222Brach_admin" ) && (  */}
+         <li
+            className={`menu-item ${getMenuItemActive('/setting/location', false)}`}
+            aria-haspopup='true'
+            data-menu-toggle='hover'
+          >
+            <NavLink className='menu-link' to='/setting/location'>
+              <span className='svg-icon menu-icon'>
+                <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+              </span>
+              <span className='menu-text'>Location</span>
+              <i className='menu-arrow' />
+            </NavLink>
+
+            <div className='menu-submenu '>
+              <ul className='menu-subnav'>
+                <li
+                  className='menu-item  menu-item-parent'
+                  aria-haspopup='true'
+                >
+                  <span className='menu-link'>
+                    <span className='menu-text'>Location</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+          {/* )} */}
+       
+          {    auth.isInstituteUser  && (
+          <li className={`menu-item ${getMenuItemActive('', false)}`}
+            aria-haspopup='true'
+            data-menu-toggle='hover'
+          >
+            <NavLink className='menu-link' to=''>
+              {/* <span className='svg-icon menu-icon'>
+                <SVG src={toAbsoluteUrl('/media/svg/icons/Home/Library.svg')} />
+              </span>
+              <span className='menu-text'></span> */}
+              {/* <i className='menu-arrow' /> */}
+            </NavLink>
+          </li>
         )}
+        
+        
+        
         {(auth && auth.user && !auth.user.branch) && ( <li
           className={`menu-item ${getMenuItemActive('/setting/UserCourses')}`}
           aria-haspopup='true'

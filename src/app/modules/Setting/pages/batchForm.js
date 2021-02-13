@@ -34,6 +34,7 @@ export default function BatchForm () {
       .get('/api/setting/getBatch/' + id)
       .then(res => {
         debugger;
+        console.log("data here" , res.data)
         if(res.data.length)
         setBatch(res.data[0])
       })

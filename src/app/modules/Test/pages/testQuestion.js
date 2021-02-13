@@ -104,7 +104,7 @@ export default function TestQuestions (props) {
     axios.get('/api/Test/'+id + '/getTestQuestions')
       .then(res => {
       debugger; 
-      console.log(res.data)        
+      console.log("data here3 " , res.data)        
       setQuestions(res.data)
       })
       .catch(err => {

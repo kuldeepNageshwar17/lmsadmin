@@ -58,26 +58,26 @@ export default function Courses (props) {
   }
   const columns = [
     {
-      dataField: '_id',
+      dataField: 'courses._id',
       text: 'ID',
       hidden: true
     },
     {
-      dataField: 'title',
+      dataField: 'courses.title',
       text: 'Course',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'Description',
+      dataField: 'courses.Description',
       text: 'Description',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'posterImageUrl',
+      dataField: 'courses.posterImageUrl',
       text: 'Image',
       formatter: CourseProfileFormater,     
       classes: 'text-right pr-0',
@@ -112,6 +112,7 @@ export default function Courses (props) {
       .get('/api/course/courseList/' + id)
       .then(res => {
         debugger
+        console.log('data here 1' , res.data)
         setClass(res.data)
       })
       .catch(err => {
@@ -126,7 +127,7 @@ export default function Courses (props) {
       <div className='row'>
         <div className='col-md-12'>
           <Card>
-            <CardHeader title={"Course list -> "+ Class.name}>
+            <CardHeader title={`Course list -> ${Class && Class.length > 0 && Class[0].name}`}>
               <CardHeaderToolbar>
                 <button
                   type='button'
@@ -140,13 +141,13 @@ export default function Courses (props) {
               </CardHeaderToolbar>
             </CardHeader>
             <CardBody>
-            {Class.courses ? (
+            {Class && Class.length ? (
                 <PaginationProvider pagination={paginationFactory(options)}>
                   {({ paginationProps, paginationTableProps }) => {
                     return (
                       <BootstrapTable
                         keyField='_id'
-                        data={Class.courses}
+                        data={Class}
                         columns={columns}
                         classes='table table-head-custom table-vertical-center overflow-hidden'
                         wrapperClasses='table-responsive'

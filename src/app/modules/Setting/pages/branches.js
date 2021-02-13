@@ -55,21 +55,21 @@ export default function Branches (props) {
     },
     {
       dataField: 'name',
-      text: 'Class',
+      text: 'Name',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
       dataField: 'address.address',
-      text: 'address',
+      text: 'Address',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
       dataField: 'address.division',
-      text: 'division',
+      text: 'Division',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
@@ -77,14 +77,14 @@ export default function Branches (props) {
     
     {
       dataField: 'address.city',
-      text: 'city',
+      text: 'City',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
       dataField: 'address.state',
-      text: 'state',
+      text: 'State',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses

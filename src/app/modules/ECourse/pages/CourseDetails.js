@@ -25,7 +25,7 @@ export default function CoursesDetails () {
   useEffect(() => {
     debugger
     axios.get('/api/course/courseDetailByCourseId/' + courseId).then((res)=>{
-      console.log(res.data)
+      console.log("data here" , res.data)
       setCoursesdetails(res.data)
     }).catch((res)=>{
 

@@ -16,7 +16,7 @@ export default function CourseActionFormatter (
     <a
         title='Add Test'
         className='btn  btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => AddCourseTestAction(row._id)}
+        onClick={() => AddCourseTestAction(row.courses._id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">          
           <SVG
@@ -27,7 +27,7 @@ export default function CourseActionFormatter (
       <a
         title='Add Content'
         className='btn  btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => GetSectionsAction(row._id)}
+        onClick={() => GetSectionsAction(row.courses._id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">          
           <SVG
@@ -39,7 +39,7 @@ export default function CourseActionFormatter (
       <a
         title='Edit Branch'
         className='btn btn-icon btn-light btn-hover-primary btn-sm mx-3'
-        onClick={() => EditAction(row._id)}
+        onClick={() => EditAction(row.courses._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-primary'>
           <SVG title='Edit Course'
@@ -51,7 +51,7 @@ export default function CourseActionFormatter (
       <a
         title='Delete Branch'
         className='btn btn-icon btn-light btn-hover-danger btn-sm'
-        onClick={() => DeleteAction(row._id)}
+        onClick={() => DeleteAction(row.courses._id)}
       >
         <span className='svg-icon svg-icon-md svg-icon-danger'>
           <SVG src={toAbsoluteUrl('/media/svg/icons/General/Trash.svg')} title='Delete Course' />

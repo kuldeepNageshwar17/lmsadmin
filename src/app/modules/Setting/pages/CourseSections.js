@@ -43,6 +43,7 @@ export default function CourseSections () {
     axios
       .get('/api/course/course/' + id)
       .then(response => {
+        console.log("in data here" , response.data)
         debugger
         setCourse({ ...response.data.course, class: response.data.class })
       })

@@ -63,19 +63,19 @@ export default function Exams (props) {
   }
   const columns = [
     {
-      dataField: '_id',
+      dataField: 'examinations._id',
       text: 'ID',
       hidden: true
     },
     {
-      dataField: 'name',
+      dataField: 'examinations.name',
       text: 'Name',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'class',
+      dataField: 'name',
       text: 'Class',
       sort: true,
       //cellClasses: 'bg-primary',
@@ -86,28 +86,28 @@ export default function Exams (props) {
     },
     
     {
-      dataField: 'passingMarks',
+      dataField: 'examinations.passingMarks',
       text: 'passing',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'totalMarks',
+      dataField: 'examinations.totalMarks',
       text: 'Total',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'isComplete',
+      dataField: 'examinations.isComplete',
       text: 'Status',
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses
     },
     {
-      dataField: 'description',
+      dataField: 'examinations.description',
       text: 'Description',
       sort: true,
       formatter : ChangeDescription,
@@ -137,12 +137,12 @@ const updateData=()=>{
   axios.get('/api/Examination/getAllExams')
     .then(res => {
     debugger;  
-    var exams = res.data.classes.reduce((arr, item)=>{
-      var newitem = item.examinations.map(i=>{ return  {...i,"class":item.name}})
-      return arr.concat(newitem)
-    },[])
+    // var exams = res.data.classes.reduce((arr, item)=>{
+    //   var newitem = item.examinations.map(i=>{ return  {...i,"class":item.name}})
+    //   return arr.concat(newitem)
+    // },[])
 
-        setExams(exams)
+        setExams(res.data)
     })
     .catch(err => {
       console.log(err)
