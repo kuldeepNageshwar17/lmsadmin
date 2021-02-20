@@ -23,8 +23,10 @@ export default function UserCourseForm () {
     file: '',
     price : 0,
     error : "",
-    courseLanguage : ""
+    courseLanguage : "",
+    categories : ''
   })
+  const [CourseCategory , setCourseCategory]  = useState([])
   const { cid } = useParams()
   const history = useHistory()
   const onChangeOverView = e => {
@@ -88,6 +90,22 @@ export default function UserCourseForm () {
       })
     debugger
   }
+
+  useEffect(() => {
+    debugger
+    
+      axios
+        .get('/api/course/getAllCourseCategory/')
+        .then(res => {
+          setCourseCategory(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    
+  }, [])
+
+
   useEffect(() => {
     debugger
     if (cid) {
@@ -172,7 +190,7 @@ export default function UserCourseForm () {
                         })
                       }
                     >
-                      <option value="">select class</option>
+                      <option value="">select langauge</option>
                       
                         <option value={"English"} key={"English"}>
                           English
@@ -186,6 +204,42 @@ export default function UserCourseForm () {
                   </div>
                 
                 </Form.Group>
+                <Form.Group className='row'>
+                   <div className='col-md-4'>
+                    <Form.Label>Select Category </Form.Label>
+                    <Form.Control
+                      required='true'
+                      as='select'
+                      placeholder=''
+                      // disabled={Exam._id?"true":"false"}
+                      value={Course.categories}
+                      onChange={event =>
+                        setCourse({
+                          ...Course,
+                          categories: event.target.value
+                        })
+                      }
+                    >
+                      <option value="">select Category</option>
+                      {CourseCategory && CourseCategory.length && CourseCategory.map(item => (
+                        <option value={item._id} key={item.name}>
+                          {item.name}
+                        </option>
+                      ))}
+
+                        {/* // <option value={"English"} key={"English"}>
+                        //   English
+                        // </option>
+                        // <option value={"Hindi"} key={"Hindi"}>
+                        //   Hindi
+                        // </option> */}
+                    
+                      
+                    </Form.Control>
+                  </div>
+                
+                </Form.Group>
+                
                 <Form.Group controlId='formOverview' className='row'>
                   <Form.Label className='col-md-12 text-left mb-5'>
                     Course Overview
